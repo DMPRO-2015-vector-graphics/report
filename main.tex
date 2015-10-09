@@ -52,16 +52,25 @@
 % The title page, edit if you want to customize it
 \input{title.tex}
 
-
 % Main matter - edit corresponding file under content/ to change
-\input{content/00-abstract.tex}
+\input{content/abstract.tex}
 \tableofcontents
-\input{content/01-introduction.tex}
-\input{content/02-background.tex}
-\input{content/03-methodology.tex}
-\input{content/04-results.tex}
-\input{content/05-conclusion.tex}
 
+% Part I
+\part{Introduction}
+\input{content/introduction/introduction.tex}
+\input{content/introduction/background.tex}
+
+% Part II
+\part{Implementation}
+\input{content/implementation/methodology.tex}
+
+% Part III
+\part{Results}
+\input{content/results/testing.tex}
+
+% Part IV
+\part{Appendices}
 
 % Bibliography - edit references.bib and use the \cite command in text
 \bibliographystyle{plain}
