@@ -1,0 +1,9 @@
+# Generated PDF
+*.pdf
+
+# Latex files
+*.bbl
+*.aux
+*.blg
+*.log
+*.toc
