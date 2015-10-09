@@ -1,0 +1,69 @@
+% A simple LaTeX template for lab reports in TDT4258 Energy Efficient Computer Design
+% by Yaman Umuroglu (yamanu@idi.ntnu.no)
+% Feel free to customize the style as you see fit, but the chapters/sections mentioned in the
+% template should be included with the appropriate content.
+
+\documentclass[abstract=on]{scrreprt}
+\usepackage[utf8]{inputenc}
+
+
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{url}
+\usepackage{color}
+\usepackage{float}
+\usepackage[titletoc]{appendix}
+\definecolor{lightgray}{rgb}{0.9,0.9,0.9}
+
+\lstset{
+    basicstyle=\footnotesize\ttfamily, % Standardschrift
+    numbers=left,               % Ort der Zeilennummern
+    numberstyle=\tiny,          % Stil der Zeilennummern
+    %stepnumber=2,               % Abstand zwischen den Zeilennummern
+    numbersep=5pt,              % Abstand der Nummern zum Text
+    tabsize=2,                  % Groesse von Tabs
+    extendedchars=true,         %
+    breaklines=true,            % Zeilen werden Umgebrochen
+    keywordstyle=\color{red},
+    frame=b,         
+ %  keywordstyle=[1]\textbf,    % Stil der Keywords
+ %  keywordstyle=[2]\textbf,    %
+ %  keywordstyle=[3]\textbf,    %
+ %  keywordstyle=[4]\textbf,   \sqrt{\sqrt{}} %
+    stringstyle=\color{blue}\ttfamily, % Farbe der String
+    showspaces=false,           % Leerzeichen anzeigen ?
+    showtabs=false,             % Tabs anzeigen ?
+    xleftmargin=17pt,
+    framexleftmargin=17pt,
+    framexrightmargin=5pt,
+    framexbottommargin=4pt,
+    backgroundcolor=\color{lightgray},
+    showstringspaces=false      % Leerzeichen in Strings anzeigen ?        
+}
+
+% Edit the meta.tex file to change title, group number and author names
+\input{meta.tex}
+
+
+\begin{document}
+% The title page, edit if you want to customize it
+\input{title.tex}
+
+
+% Main matter - edit corresponding file under content/ to change
+\input{content/00-abstract.tex}
+\tableofcontents
+\input{content/01-introduction.tex}
+\input{content/02-background.tex}
+\input{content/03-methodology.tex}
+\input{content/04-results.tex}
+\input{content/05-conclusion.tex}
+
+
+% Bibliography - edit references.bib and use the \cite command in text
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}
