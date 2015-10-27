@@ -7,3 +7,6 @@
 *.blg
 *.log
 *.toc
+*.fls
+*.fdb_latexmk
+
