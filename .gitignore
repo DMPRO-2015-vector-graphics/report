@@ -5,6 +5,7 @@
 *.bbl
 *.aux
 *.blg
+*.out
 *.log
 *.toc
 *.fls
@@ -13,3 +14,4 @@
 # Hidden files
 .*.swo
 .*.swp
+.DS_Store

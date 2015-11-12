@@ -19,9 +19,15 @@ Vector graphics represents images at a higher abstraction level than single-pixe
 A vector graphics processor can make use of drawing instructions to produce images, which is a task well suited for hardware acceleration [3 // TODO: add references].
 Parallelization with multiple cores and/or at the instruction level are architectural possibilities that can be exploited to design a specialized processor.
 The task is to design and implement a processor for producing vector graphics.
-Figure 2 illustrates a vector display which takes in vector drawing commands (instead of a stream of pixels) as input.
+Figure \ref{fig:vector-display-network-analyzer} illustrates a vector display which takes in vector drawing commands (instead of a stream of pixels) as input.
 
-//TODO: add image?
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{images/network-analyzer-vector-graphics-display.png}
+    \caption{A vector graphics display on a network analyzer. Source: \cite{assignment-text}}
+    \label{fig:vector-display-network-analyzer}
+\end{figure}
+
 
 \subsection{Additional requirements}
 
@@ -37,7 +43,7 @@ The budget is 10.000 NOK per group, which must cover components and PCB producti
 The unit design must adhere to the limits set by the course staff at any given time.
 Deadlines are given in a separate time schedule.
 
-\subsection{A Vector Graphics Computer Architecture}
+\section{A Vector Graphics Computer Architecture}
 
 // TODO: Bedre tittel?
 
@@ -51,6 +57,6 @@ As a whole, the system should be assembled on a custom PCB, with the microcontro
 The microcontroller would be tasked with loading a program into memory on boot, so that the processor has something to work with.
 
 
-\subsection{About this report}
+\section{About this report}
 
 
