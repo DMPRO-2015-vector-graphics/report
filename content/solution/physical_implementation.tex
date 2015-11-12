@@ -1,46 +1,71 @@
 \chapter{Physical Implementation}
 
+// TODO: add diagram of physical components and their connections
 
 \section{Architecture}
-The main specification we had to meet at all costs was to be able to take vector instructions as input, and output vector graphics on a screen. Roughly, our path through the process would go like this. 
+The main specification the group had to meet at all costs was to be able to take a program (a sequnce of instructions) as input, and output vector graphics on a screen.
+
+Tracing the envisioned execution path of a program through the system gives insight into some of the considerations that had to be taken when designing the PCB and selecting components.
+
 \begin{enumerate}
-\item Write the vector instructions in some self-defined format
-\item Compile this format down to a bit-file
-\item Feed the flash with this bit-file through the MCU, so we had the program stored in case of reboot. 
-\item The (FPGA or MCU?) would read from this bit-file and translate it to instructions and store them in the SRAM. This would only happen once to load the entire initial program.
-\item The FGPA would fetch these instructions from SRAM, execute them and the resulting graphic information would be stored in the frame buffer
-\item Another part of the FPGA would simply send the information from the frame buffer to the DACs and HDMI
-\item The output from the DACs would be displayed on an analogue oscilloscope and the output from the HDMI on a raster screen.
+\item Assembled \vthreek programs are loaded into instruction memory via the EFM32 microcontroller.
+\item The FGPA reads instructions from memory and performs execution.
+\item The FGPA sends output via two interfaces, two DACs and an HDMI port.
+\item The output from the DACs is displayed on an analogue oscilloscope and the output from the HDMI on a raster screen.
 \end{enumerate}
 
 \section{PCB Design}
-The architecture was realized on a printed circuit board (PCB) that we designed using Altium Designer 15.1. We had never used this program before, and had to overcome the usual challenges and difficulties related to learning new software.
+The architecture was realized on a printed circuit board (PCB) designed using Altium Designer 15.1.
+Having never used this program before, the group had to overcome the usual challenges and difficulties related to learning new software. // TODO: elaborate, which challenges?
 
 \subsection{Components}
-The goal was to place the components so that they preferably were in close range of all other components they had to connect with. This would shorten the routing, which is desirable in terms of of mitigating signal delay and maintaining signal integrity.
+The goal was to place the components so that they preferably were in close range of all other components they had to connect with. 
+This would shorten the routing, which is desirable in terms of of mitigating signal delay and maintaining signal integrity.
+
 \subsubsection{Main Components}
-Our FPGA, SRAMs and MCU were the most important components with a lot of different connections, so we placed them very central on the PCB. Typical input and output stuff, e.g. controller buttons, USB, HDMI and BNC receptacles, were placed along the edge, since these are typically connected to few other components. It would also be annoying and unnecessary to connect external peripheral plugs to sockets in the middle of the PCB. 
-\newline
-The rest of our components were placed according to common sense. The DACs ended up between the FPGA and BNC connectors, voltage regulators close to power supply (USB), and so on. 
+FPGA, SRAMs and MCU were the most important components with a lot of different connections, and were therefore placed very central on the PCB.
+I/O components, like controller buttons, USB, HDMI and BNC receptacles, were placed along the edge, since these are typically connected to few other components.
+It would also be annoying and unnecessary to connect external peripheral plugs to sockets in the middle of the PCB.
+
+The remaining components were placed according to common sense.
+The DACs ended up between the FPGA and BNC connectors, voltage regulators close to power supply (USB), and so on. 
+
 \subsubsection{Buttons and LEDS}
-Buttons and LEDs, for use by the FPGA and the MCU, were placed near these components for simplicity. All buttons include a resistor for current limitation (to avoid short circuits) and pull-up (to avoid logical floating state). The exception is the button connected to the MCU, where the pin had internal pull-up. All LEDs also include a current limiting resistor. We calculated the required resistance using Ohm's law [insert citation].
+Buttons and LEDs, for use by the FPGA and the MCU, were placed near these components for simplicity.
+All buttons include a resistor for current limitation (to avoid short circuits) and pull-up (to avoid logical floating state).
+The exception is the button connected to the MCU, where the pin had internal pull-up.
+All LEDs also include a current limiting resistor.
+Ohms law was used to calculate the required resistance [insert citation].
 
 \subsubsection{Decoupling Capacitors}
-Several major components required decoupling, e.g. the MCU, FPGA, voltage regulators, and DACs. Decoupling means connecting power supplies through a capacitor network to ground, where power moving to ground can be temporarily stored. This was necessary because it sometimes occurs situations where there is suddenly high need for power. The power supply alone would not always be able to support these 'bursts'. A capacitor network was the solution to this problem, as the component could pull power from the capacitors instead.
-\newline
-It was important that this extra supply could reach the corresponding component as fast as possible. That's why all capacitors involved in the decoupling network for a certain component, were placed in close proximity to that component. All capacitors were placed on the bottom layer of the PCB to save space on an already crowded top layer.
+Several major components required decoupling, e.g. the MCU, FPGA, voltage regulators, and DACs.
+Decoupling means connecting power supplies through a capacitor network to ground, where power moving to ground can be temporarily stored.
+This was necessary because it sometimes occurs situations where there is suddenly high need for power.
+The power supply alone would not always be able to support these 'bursts'.
+A capacitor network was the solution to this problem, as the component could pull power from the capacitors instead.
+
+It was important that this extra supply could reach the corresponding component as fast as possible.
+That's why all capacitors involved in the decoupling network for a certain component, were placed in close proximity to that component.
+All capacitors were placed on the bottom layer of the PCB to save space on an already crowded top layer.
 
 \subsubsection{Component Footprints}
-In the beginning, component footprints from the standard Altium library were used. After previewing the board, we saw that these footprints were in fact gigantic, and thus utilized Altium vaults to find smaller footprint sizes. We tried using the small 0603 (1608 metric) footprint for most of our passive components, especially the capacitors and resistors. By sticking to the same footprint, we could easily change our bill of materials without changing the PCB design, as long as the new component could be found in this package size. While a trade-off by using this small size package is that the components might be trickier to solder onto the board, the gain in size reduction for the board as a whole were valued higher by the group. Some components could not be found in this footprint, but luckily we had tons of other footprint sizes to choose from.
+In the beginning, component footprints from the standard Altium library were used.
+After previewing the board, it became clear that these footprints were in fact gigantic, and footprints of suitable size had to be found using Altium vaults.
+Smaller 0603 (1608 metric) footprints were used for most passive components, especially the capacitors and resistors.
+By standardizing footprint sizes, the bill of materials could easily be updated without changing the PCB design, as long as the new component could be found in the same package size.
+While a trade-off by using this small size package is that the components might be trickier to solder onto the board, the gain in size reduction for the board as a whole were valued higher by the group.
+Some components could not be found in this footprint, but luckily there was no shortage of footprint sizes to choose from.
 
 
 \subsection{Layers}
-Our PCB consisted of six signal layers: Top layer, bottom layer and four in between. We had two power layers: VCC and ground.
-\newline
-Between every signal and power layer was a dielectric layer to make sure there was proper isolation between these conducting layers, so they didn't interfere with each other.
-\newline
-The bottom and top layer also had an overlay each. The overlay was there purely to contain silk-screen for marking components, thus making it easier for us to work with the PCB.
-\newline
+The PCB consisted of six signal layers: Top layer, bottom layer and four in between.
+Two power layers were utilized: VCC and ground.
+
+Between every signal and power layer a dielectric layer was added to make sure there was proper isolation between these conducting layers, so they wouldn't interfere with each other.
+
+The bottom and top layer also had an overlay each.
+The overlay was added to contain silk-screen for marking components, thus making it to work with the PCB.
+
 The complete layer stack is shown in figure \ref{fig:Layers}
 
 \begin{figure}[h!]
