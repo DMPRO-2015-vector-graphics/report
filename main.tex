@@ -2,11 +2,8 @@
 
 \documentclass[abstract=on]{scrreprt}
 \usepackage[utf8]{inputenc}
-
-
 \usepackage[backend=bibtex]{biblatex}
 \addbibresource{references.bib}
-
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{amsmath}
@@ -14,6 +11,7 @@
 \usepackage{url}
 \usepackage{color}
 \usepackage{float}
+\usepackage{longtable}
 \usepackage[hidelinks]{hyperref}
 \usepackage[titletoc]{appendix}
 \setkomafont{disposition}{\normalfont\bfseries}
@@ -50,6 +48,9 @@
 
 
 \begin{document}
+
+
+\newcommand{\vthreek}{V.E.C.T.O.R. 3000 }
 % The title page, edit if you want to customize it
 \input{title.tex}
 
@@ -65,7 +66,8 @@
 
 % Part II
 \part{Solution}
-\input{content/solution/methodology.tex}
+\input{content/solution/overview.tex}
+\input{content/solution/output.tex}
 \input{content/solution/physical_implementation.tex}
 
 % Part III
@@ -74,6 +76,10 @@
 
 % Part IV
 \part{Appendices}
+\begin{appendices}
+\input{content/appendix/bom}
+
+\end{appendices}
 
 % Bibliography - edit references.bib and use the \cite command in text
 \printbibliography
