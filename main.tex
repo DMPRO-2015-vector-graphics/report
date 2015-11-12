@@ -2,8 +2,8 @@
 
 \documentclass[abstract=on]{scrreprt}
 \usepackage[utf8]{inputenc}
-
-\usepackage{natbib}
+\usepackage[backend=bibtex]{biblatex}
+\addbibresource{references.bib}
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{amsmath}
@@ -11,7 +11,7 @@
 \usepackage{url}
 \usepackage{color}
 \usepackage{float}
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 \usepackage[titletoc]{appendix}
 \setkomafont{disposition}{\normalfont\bfseries}
 \definecolor{lightgray}{rgb}{0.9,0.9,0.9}
@@ -76,6 +76,5 @@
 \part{Appendices}
 
 % Bibliography - edit references.bib and use the \cite command in text
-\bibliographystyle{plain}
-\bibliography{references}
+\printbibliography
 \end{document}
