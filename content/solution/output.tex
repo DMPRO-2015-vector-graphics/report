@@ -1,0 +1,11 @@
+\chapter{Output modules}
+
+\section{Raster output}
+
+This output uses HDMI to output a rasterized image of the internal vector representation.
+
+\section{DAC output}
+
+The primary output of the processor is the analogue one. The DACs are driven from the FPGA over a serial interface. The DACs need a clock, data, and sync signal to operate. The clock and sync signal is shared between the DACs so they operate synchronously. 
+
+The parallel to serial converter takes a 32-bit signals as input which has 16 bit for x and y components of a point that should be sent to the DACs. The converter then splits this signal into its x and y components and clocks them out synchronously to their respective DACs.
