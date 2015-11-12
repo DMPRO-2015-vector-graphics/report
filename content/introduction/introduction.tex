@@ -9,7 +9,7 @@ This report details the work done and solution implemented by the vector graphic
 
 This years assignment focuses on graphics, exploring both of the traditional ways of representing and processing graphics; raster-based and vector-based.
 Two distinct assignment texts were presented by the course staff, one focusing on raster-based graphics, the other on vector graphics.
-The following is a verbatim copy of the vector graphics assignment text.
+The following is a verbatim copy of the vector graphics assignment text \cite{assignment-text}.
 
 \subsection{Assignment requirements - A Vector Graphics Processor}
 
@@ -35,3 +35,17 @@ The unit must utilize a Silicon Labs EFM32 series microcontroller (to act as an 
 The budget is 10.000 NOK per group, which must cover components and PCB production.
 The unit design must adhere to the limits set by the course staff at any given time.
 Deadlines are given in a separate time schedule.
+
+\subsection{A Vector Graphics Computer Architecture}
+
+// TODO: Bedre tittel?
+
+The group chose to make a general purpose computer with support for producing vector graphics.
+The computer would read instructions from memory, execute them on a processor core and render vector based scenes to different outputs.
+Since most commonly available display devices expect raster based input, an oscilloscope was chosen as the primary output device, HDMI as a secondary.
+This means that in addition to a processor core and SRAM interfaces, output preprocessors for both output modes would have to be implemented.
+In the case of HDMI, a rasterizer, and for oscilloscope output, a serializer feeding data to DACs.
+
+As a whole, the system should be assembled on a custom PCB, with the microcontroller serving as an I/O-unit while the main processor architecture and output-modules should be implemented on the FPGA.
+The microcontroller would be tasked with loading a program into memory on boot, so that the processor has something to work with.
+
