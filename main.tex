@@ -11,29 +11,33 @@
 \usepackage{url}
 \usepackage{color}
 \usepackage{float}
+\usepackage{longtable}
 \usepackage[hidelinks]{hyperref}
 \usepackage[titletoc]{appendix}
 \setkomafont{disposition}{\normalfont\bfseries}
 \definecolor{lightgray}{rgb}{0.9,0.9,0.9}
 
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
+
 \lstset{
-    basicstyle=\footnotesize\ttfamily, % Standardschrift
-    numbers=left,               % Ort der Zeilennummern
-    numberstyle=\tiny,          % Stil der Zeilennummern
-    %stepnumber=2,               % Abstand zwischen den Zeilennummern
-    numbersep=5pt,              % Abstand der Nummern zum Text
-    tabsize=2,                  % Groesse von Tabs
-    extendedchars=true,         %
-    breaklines=true,            % Zeilen werden Umgebrochen
+    basicstyle=\footnotesize\ttfamily,
+    numbers=left,            
+    numberstyle=\tiny,          
+    %stepnumber=2,               
+    numbersep=5pt,              
+    tabsize=2,                  
+    extendedchars=true,         
+    breaklines=true,            
     keywordstyle=\color{red},
     frame=b,         
- %  keywordstyle=[1]\textbf,    % Stil der Keywords
- %  keywordstyle=[2]\textbf,    %
- %  keywordstyle=[3]\textbf,    %
+ %  keywordstyle=[1]\textbf,    
+ %  keywordstyle=[2]\textbf,    
+ %  keywordstyle=[3]\textbf,    
  %  keywordstyle=[4]\textbf,   \sqrt{\sqrt{}} %
-    stringstyle=\color{blue}\ttfamily, % Farbe der String
-    showspaces=false,           % Leerzeichen anzeigen ?
-    showtabs=false,             % Tabs anzeigen ?
+    stringstyle=\color{blue}\ttfamily, 
+    showspaces=false,           
+    showtabs=false,             
     xleftmargin=17pt,
     framexleftmargin=17pt,
     framexrightmargin=5pt,
@@ -66,6 +70,7 @@
 % Part II
 \part{Solution}
 \input{content/solution/overview.tex}
+\input{content/solution/output.tex}
 \input{content/solution/physical_implementation.tex}
 
 % Part III
@@ -74,6 +79,10 @@
 
 % Part IV
 \part{Appendices}
+\begin{appendices}
+\input{content/appendix/bom}
+
+\end{appendices}
 
 % Bibliography - edit references.bib and use the \cite command in text
 \printbibliography
