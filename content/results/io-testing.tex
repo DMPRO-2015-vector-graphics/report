@@ -1,0 +1,37 @@
+\section{IO Tests}
+Before our PCB board arrived we tested each subsystem separately.
+During testing the group gained valuable experience about all the subcomponents and how they interacted with each others.
+
+\subsection{DAC}
+The dac was tested prior to PCB arrival, to ensure correct operation from an FPGA.
+Eight wires were soldered onto the DAC, and connected to a breadboard.
+The FPGA was flashed with and simple architecture, which repeatedly read the status of 14? general I/O pins, and shifted each bit out sequentially on another pin.
+Both the DAC and FPGA clock input was driven by an external frequency generator, producing 3.3VPP at 10MHz.
+
+To validate the signal output from the FPGA a logical analyser was used.
+
+With VRef and VDD at 5.0V, the analog DAC output was measured to 0.69V when no data signal was asserted, and 2.8V when the MSB was asserted. This small offset, is the result of some of the lower order bits beeing left unconnected.
+
+\subsection{Oscilloscope}
+As a proof of concept to draw on an oscilloscope, we created a 4-bit resistor ladder DAC.
+An Arduino was used to control the DAC.
+
+To test drawing on both x-axis and y-axis, the circuit consisted of 2 4-bit DACs.
+With a small Arduino program we were able to draw a square, depicted in Figure \ref{fig:osc_poc}.
+When the Arduino changed the voltage on its GPIO pins, there was a voltage drop across all pins.
+Results of the voltage drop can be seen in the figure \ref{fig:r2r-ladder}.
+
+
+\begin{figure}[h]
+\includegraphics[width=\columnwidth]{images/r2r-ladder}
+\centering
+\caption{Schematics of resistor ladder schematics from Wikipedia article \cite{r2r-ladder-schematics}}
+\label{fig:r2r-ladder}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=\columnwidth]{images/osc_square_close}
+\centering
+\caption{A square drawn on the oscilloscope using an Arduino and two resistor-ladder DACs}
+\label{fig:osc_poc}
+\end{figure}
