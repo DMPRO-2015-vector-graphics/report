@@ -10,7 +10,8 @@
 *.toc
 *.fls
 *.fdb_latexmk
-
+main-blx.bib
+*run.xml
 # Hidden files
 .*.swo
 .*.swp
