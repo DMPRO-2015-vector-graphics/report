@@ -10,6 +10,8 @@
 *.toc
 *.fls
 *.fdb_latexmk
+*.bib
+*.xml
 
 # Hidden files
 .*.swo
