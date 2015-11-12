@@ -13,13 +13,13 @@ To validate the signal output from the FPGA a logical analyser was used.
 With VRef and VDD at 5.0V, the analog DAC output was measured to 0.69V when no data signal was asserted, and 2.8V when the MSB was asserted. This small offset, is the result of some of the lower order bits beeing left unconnected.
 
 \subsection{Oscilloscope}
-As a proof of concept to draw on an oscilloscope, we created a 4-bit resistor ladder DAC.
+As a proof of concept to draw on an oscilloscope, we created a 4-bit resistor ladder DAC. The schematic of the DAC is displayed in Figure \ref{fig:r2r-ladder}.
 An Arduino was used to control the DAC.
 
 To test drawing on both x-axis and y-axis, the circuit consisted of 2 4-bit DACs.
 With a small Arduino program we were able to draw a square, depicted in Figure \ref{fig:osc_poc}.
 When the Arduino changed the voltage on its GPIO pins, there was a voltage drop across all pins.
-Results of the voltage drop can be seen in the figure \ref{fig:osc_poc}.
+The consequence of the voltage drop is clearly visible (see Figure \ref{fig:osc_poc}).
 
 
 \begin{figure}[h]
