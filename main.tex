@@ -4,7 +4,9 @@
 \usepackage[utf8]{inputenc}
 
 
-\usepackage{natbib}
+\usepackage[backend=bibtex]{biblatex}
+\addbibresource{references.bib}
+
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{amsmath}
@@ -72,6 +74,5 @@
 \part{Appendices}
 
 % Bibliography - edit references.bib and use the \cite command in text
-\bibliographystyle{plain}
-\bibliography{references}
+\printbibliography
 \end{document}
