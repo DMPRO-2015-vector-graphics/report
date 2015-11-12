@@ -50,3 +50,8 @@ To utilize registers effectively, each 32-bit register is loaded with one x,y co
 The first three lines put the coordinates $0,0$ in register \texttt{r1}, the next three puts $65535$ in register \texttt{r2}.
 The values in the registers are then used to create a line starting at \texttt{r1} and ending at \texttt{r2}.
 Finally, the line is written to the scene memory using \texttt{strp}.
+
+Upon creating a primitive with \texttt{line}, \texttt{bezquad} or \texttt{bezqube}, the resulting primitive is stored in a special purpose register in the processor.
+To actually add the primitive to the scene, it has to be written to the scene memory using \texttt{strp}.
+Primitives can also be loaded from the scene to be modified or processed using \texttt{ldrp}.
+Only one primitive can be active in the processor at a time.
