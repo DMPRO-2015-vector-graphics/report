@@ -1,0 +1,33 @@
+\section{Visual Display}
+
+\subsection{Vector Display}
+A vector display or monitor, is a device that draws graphics from point to point.
+// TODO: As opposed to?
+A vector monitor utilizes CRT (Cathode Ray Tube) technology, which contain one or more electron guns and a phosphorescent screen to view images.
+The electron beam is deflected horizontally and vertically using electrostatic deflection. \cite{vector-monitor}
+
+Unlike the CRT raster displays (old television sets or computer monitors), a vector monitor does not scan repeatedly in a fixed pattern.
+Instead it draws a point based on two voltages, one for horizontal placement and one for vertical.
+
+One of the major advantages with vector monitors,
+is that since they are able to draw directly from one point to another,
+they do not suffer from artefacts like aliasing and pixelation.
+The drawback however is its inability to fill shapes in an efficient way.
+Therefore, vector monitors usually only draw the outline of shapes.
+
+\subsubsection{Drawing to an Oscilloscope}
+As vector monitors are no longer a easily available, the group needed to find an alternative method of displaying vector graphics, preferrably without rasterization involved.
+It is possible to modify a CRT monitor, so that one can manually control the deflectors, but this is quite cumbersome.
+The other method is using an oscilloscope, which gives an easy interface to these deflectors.
+This section will explain how to use the oscilloscope as a vector monitor.
+
+
+To be able to draw to a oscilloscope, the oscilloscope must support at least two input channels, and the ability to draw in X-Y mode.
+In X-Y mode, two of the input channels (usually Ch1 and Ch2) governs the electron ray deflectors.
+If the channels are provided a constant voltage, a dot will be displayed on the screen, in contrast to normal mode, where  a line would be drawn.
+
+The voltage on channel 1 will normally decide the beam's horizontal position, and channel two, its vertical position.
+To draw a line on the oscilloscope, one would need to repeatedly change the voltage of one or both channels back and forth.
+Changing the voltage on only one channel will produce a horizontal or vertical line.
+
+\subsection{Raster Display}
