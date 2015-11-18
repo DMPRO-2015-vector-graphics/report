@@ -24,11 +24,18 @@ This would shorten the routing, which is desirable in terms of of mitigating sig
 
 \subsubsection{Main Components}
 FPGA, SRAMs and MCU were the most important components with a lot of different connections, and were therefore placed very central on the PCB.
-I/O components, like controller buttons, USB, HDMI and BNC receptacles, were placed along the edge, since these are typically connected to few other components.
+I/O components, like controller buttons, USB, HDMI and BNC receptacles, were placed along the edge, since these were typically connected to few other components.
 It would also be annoying and unnecessary to connect external peripheral plugs to sockets in the middle of the PCB.
 
 The remaining components were placed according to common sense.
 The DACs ended up between the FPGA and BNC connectors, voltage regulators close to power supply (USB), and so on.
+
+\subsubsection{DACs and BNCs}
+Since the purpose of our computer was to output vector graphics on an analogue vector screen, DACs were essential.
+They would convert digital signals from the FPGA destined for the output screen, to corresponding analogue signals.
+The BNCs connectors would receive the analogue signals and send them to the oscilloscope.
+There was one DAC and one BNC for the x-coordinate and one for the y-coordinate on the oscilloscope.
+Both DACs were placed next to each other between the FPGA and the output BNCs.
 
 \subsubsection{Oscillators}
 We connected two external oscillators to the MCU, one low frequency at 32,768kHz and one high frequency at 48MHz.
@@ -42,6 +49,27 @@ Hence, we chose oscillators for both the FPGA and MCU for simplicity.
 The FPGA oscillator had a frequency of 100MHz.
 Even though this was a high frequency, this signal could be scaled inside the FPGA to desirable frequencies.
 All three oscillators were placed close to the component they supplied.
+
+\subsubsection{Buses}
+Our system used one parallell bus (EBI) and one serial bus (SPI).
+
+\paragraph{EBI}
+The FPGA, MCU and SRAM were connected via the EBI bus, with the MCU as the bus master. 
+These connections were made properly by using the specified EBI-pins on the MCU. [citation to MCU datasheet]
+The EBI bus allowed high-speed communication to the SRAM.
+In our implementation, the following bus lines were used:
+\begin{itemize}
+\item 23 Address bits. It was more than we initially needed, but we couldn't be too sure.
+\item 16 Data bits, since our SRAM consisted of 16-bit words.
+\item 2 Chip select bits, one for the FPGA and one for the SRAM.
+\item 1 Write enable bit, active low.
+\item 1 Read enable bit, active low.
+end{itemize}
+
+\paragraph{SPI}
+The SPI served as a three-way communication between the MCU, FPGA and Flash memory.
+Its main purpose was to make our FPGA be configured from a bit-file stored in the flash memory.
+The MCU was the bus master in this case also, since it supplied the SPI technology.
 
 \subsubsection{Buttons and LEDS}
 Buttons and LEDs, for use by the FPGA and the MCU, were placed near these components for simplicity.
