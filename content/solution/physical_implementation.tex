@@ -28,7 +28,20 @@ I/O components, like controller buttons, USB, HDMI and BNC receptacles, were pla
 It would also be annoying and unnecessary to connect external peripheral plugs to sockets in the middle of the PCB.
 
 The remaining components were placed according to common sense.
-The DACs ended up between the FPGA and BNC connectors, voltage regulators close to power supply (USB), and so on. 
+The DACs ended up between the FPGA and BNC connectors, voltage regulators close to power supply (USB), and so on.
+
+\subsubsection{Oscillators}
+We connected two external oscillators to the MCU, one low frequency at 32,768kHz and one high frequency at 48MHz.
+The MCU already contained internal RC-oscillators, but external oscillators were much more accurate and stable than the internal ones, which was important for avoiding more sources of errors.
+Both crystals or full-fledged oscillators could be used, but our choice in the end was using oscillators.
+The reason behind our choice, was that an oscillator was only one fully built component with all the necessary circuitry inside, and the datasheet clearly specified how it should be connected.
+Crystals required load capacitors, whose values wasn't properly specified.
+Another reason was that our FPGA explicitly needed an external oscillator, a crystal could not be used.
+Hence, we chose oscillators for both the FPGA and MCU for simplicity.
+
+The FPGA oscillator had a frequency of 100MHz.
+Even though this was a high frequency, this signal could be scaled inside the FPGA to desirable frequencies.
+All three oscillators were placed close to the component they supplied.
 
 \subsubsection{Buttons and LEDS}
 Buttons and LEDs, for use by the FPGA and the MCU, were placed near these components for simplicity.
