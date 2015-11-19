@@ -22,28 +22,28 @@
 
 \lstset{
     basicstyle=\footnotesize\ttfamily,
-    numbers=left,            
-    numberstyle=\tiny,          
-    %stepnumber=2,               
-    numbersep=5pt,              
-    tabsize=2,                  
-    extendedchars=true,         
-    breaklines=true,            
+    numbers=left,
+    numberstyle=\tiny,
+    %stepnumber=2,
+    numbersep=5pt,
+    tabsize=2,
+    extendedchars=true,
+    breaklines=true,
     keywordstyle=\color{red},
-    frame=b,         
- %  keywordstyle=[1]\textbf,    
- %  keywordstyle=[2]\textbf,    
- %  keywordstyle=[3]\textbf,    
+    frame=b,
+ %  keywordstyle=[1]\textbf,
+ %  keywordstyle=[2]\textbf,
+ %  keywordstyle=[3]\textbf,
  %  keywordstyle=[4]\textbf,   \sqrt{\sqrt{}} %
-    stringstyle=\color{blue}\ttfamily, 
-    showspaces=false,           
-    showtabs=false,             
+    stringstyle=\color{blue}\ttfamily,
+    showspaces=false,
+    showtabs=false,
     xleftmargin=17pt,
     framexleftmargin=17pt,
     framexrightmargin=5pt,
     framexbottommargin=4pt,
     backgroundcolor=\color{lightgray},
-    showstringspaces=false      % Leerzeichen in Strings anzeigen ?        
+    showstringspaces=false      % Leerzeichen in Strings anzeigen ?
 }
 
 % Edit the meta.tex file to change title, group number and author names
@@ -64,11 +64,12 @@
 % Part I
 \part{Introduction}
 \input{content/introduction/introduction.tex}
-\input{content/introduction/background.tex}
 \input{content/introduction/vector3k.tex}
+\input{content/introduction/background.tex}
 
 % Part II
 \part{Solution}
+\input{content/solution/tools.tex}
 \input{content/solution/overview.tex}
 \input{content/solution/core.tex}
 \input{content/solution/output.tex}
@@ -77,11 +78,14 @@
 % Part III
 \part{Results}
 \input{content/results/testing.tex}
+\input{content/results/discussion.tex}
+\input{content/results/conclusion.tex}
 
 % Part IV
 \part{Appendices}
 \begin{appendices}
 \input{content/appendix/bom}
+\input{content/appendix/material-cost}
 
 \end{appendices}
 
