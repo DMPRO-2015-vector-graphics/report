@@ -1,0 +1,17 @@
+\section{Primitives}
+The computer arcitechture supports 3 different primitives, lines, quadratic Bézier curves and qubic Bézier curves.
+A line which is also the smallest primitive requires 72 bits, and the largest primitive requires 136 bits.
+The first 8 bits is used to identify the primitive.
+
+\begin{table}
+    \label{tbl:primitives}
+    \centering
+    \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+    \hline
+    8                & 16  & 16  & 16  & 16  & 16  & 16  & 16  & 16  & Total \\ \hline
+    Line             & \(x_0 \)  & \(y_0 \)  & \(x_1 \)  & \(y_0 \)  & ~   & ~   & ~   & ~   & 72    \\ \hline
+    Quadratic Bézier & \(p_0^x \) & \(p_0^y \) & \(p_1^x \) & \(p_1^y \) & \(p_2^x \) & \(p_2^y \) & ~   & ~   & 104   \\ \hline
+    Qubic Bézier     & \(p_0^x \) & \(p_0^y \) & \(p_1^x \) & \(p_1^y \) & \(p_2^x \) & \(p_2^y \) & \(p_3^x \) & \(p_3^y \) & 136   \\ \hline
+    \end{tabular}
+    \caption{Primitive bit partition}
+\end{table}
