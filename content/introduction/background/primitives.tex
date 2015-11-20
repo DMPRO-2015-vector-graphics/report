@@ -1,9 +1,18 @@
 \section{Primitives}
-The computer arcitechture supports 3 different primitives, lines, quadratic Bézier curves and qubic Bézier curves.
-A line which is also the smallest primitive requires 72 bits, and the largest primitive requires 136 bits.
-The first 8 bits is used to identify the primitive.
+The computer arcitechture supports 3 different primitives, lines, quadratic Bézier curves and qubic Bézier curves
+Each primitive type are identified by the 8 first bits.
+To store a position on the screen 32 bits is required, 16 bit for x and 16 bit for y.
+A line is represented by a start point and an end point.
+To represent a Quadratic Bézier curve a total of three points are needed, a start point, a control point and an end point.
+The last primitive a Qubic Bézier curve, is equal to a Quadratic Bézier, but have one extra control point.
 
-\begin{table}
+Table \ref{tbl:primitives} shows how each primitive is stored in memory.
+A line start point is \(x_0 \) and \(y_0 \), and end point is \(x_1 \) \(y_1 \)
+
+With the basic primitives line, quadratic Bézier and qubic Bézier all other shapes can be constructed.
+E.g a rectangle is constructed by adding four lines together.
+
+\begin{table}[h]
     \label{tbl:primitives}
     \centering
     \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
@@ -13,5 +22,5 @@ The first 8 bits is used to identify the primitive.
     Quadratic Bézier & \(p_0^x \) & \(p_0^y \) & \(p_1^x \) & \(p_1^y \) & \(p_2^x \) & \(p_2^y \) & ~   & ~   & 104   \\ \hline
     Qubic Bézier     & \(p_0^x \) & \(p_0^y \) & \(p_1^x \) & \(p_1^y \) & \(p_2^x \) & \(p_2^y \) & \(p_3^x \) & \(p_3^y \) & 136   \\ \hline
     \end{tabular}
-    \caption{Primitive bit partition}
+    \caption{The table above shows how each primitive is stored in memory}
 \end{table}
