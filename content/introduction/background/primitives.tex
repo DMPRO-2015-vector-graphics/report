@@ -1,26 +1,30 @@
 \section{Primitives}
-The computer arcitechture supports 3 different primitives, lines, quadratic Bézier curves and qubic Bézier curves
-Each primitive type are identified by the 8 first bits.
-To store a position on the screen 32 bits is required, 16 bit for x and 16 bit for y.
-A line is represented by a start point and an end point.
-To represent a Quadratic Bézier curve a total of three points are needed, a start point, a control point and an end point.
-The last primitive a Qubic Bézier curve, is equal to a Quadratic Bézier, but have one extra control point.
 
-Table \ref{tbl:primitives} shows how each primitive is stored in memory.
-A line start point is \(x_0 \) and \(y_0 \), and end point is \(x_1 \) \(y_1 \)
+// TODO: Introduce Bézier curves. Move whole section to solution.
+
+The computer arcitechture supports 3 basic primitives: lines, quadratic Bézier curves and cubic Bézier curves.
+Each primitive's type is identified by the 8 first bits.
+To store a position on the screen, 32 bits is required: 16 bit for X and 16 bit for Y.
+A line is represented by a start point and an end point.
+To represent a quadratic Bézier curve a total of three points are needed, a start point, a control point and an end point.
+The cubic Bézier curve includes one extra control point compared to the quadratic curve.
+Table \ref{tbl:primitives} illustrates how each primitive is stored in the primitive buffer.
+%A line start point is \(x_0 \) and \(y_0 \), and end point is \(x_1 \) \(y_1 \)
 
 With the basic primitives line, quadratic Bézier and qubic Bézier all other shapes can be constructed.
 E.g a rectangle is constructed by adding four lines together.
 
+%\begin{center}
 \begin{table}[h]
-    \label{tbl:primitives}
     \centering
+    \label{tbl:primitives}
     \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
     \hline
-    8                & 16  & 16  & 16  & 16  & 16  & 16  & 16  & 16  & Total \\ \hline
+    Primitive type (8) & x (16) & y (16) & x (16) & y (16) & x (16) & y (16) & x (16) & y (16) & Total bits \\ \hline
     Line             & \(x_0 \)  & \(y_0 \)  & \(x_1 \)  & \(y_0 \)  & ~   & ~   & ~   & ~   & 72    \\ \hline
     Quadratic Bézier & \(p_0^x \) & \(p_0^y \) & \(p_1^x \) & \(p_1^y \) & \(p_2^x \) & \(p_2^y \) & ~   & ~   & 104   \\ \hline
     Qubic Bézier     & \(p_0^x \) & \(p_0^y \) & \(p_1^x \) & \(p_1^y \) & \(p_2^x \) & \(p_2^y \) & \(p_3^x \) & \(p_3^y \) & 136   \\ \hline
     \end{tabular}
-    \caption{The table above shows how each primitive is stored in memory}
+    \caption{The table above shows how each primitive is stored in memory. Bit size in parenthesis.}
 \end{table}
+%\end{center}
