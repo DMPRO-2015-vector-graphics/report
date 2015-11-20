@@ -1,8 +1,9 @@
-\subsection{Raster Display}
-There exists a variety of raster display technologies, however they have a few common attributes.
+\subsection{Raster Displays}
+There exist a variety of raster display technologies.
+However, they have a few common attributes.
+Raster graphics use a technique called frame buffer, which is a register used to hold the current image (frame). // register correct?
+When a new image has been produced by the computer, it is promptly loaded into the frame buffer.
+The image is then scanned (drawn) from the rows of pixels (called scanlines) in the frame buffer, until it is displayed on the screen.
 
-Raster graphics uses a tecnique called frame buffer.
-A frame buffer is used to hold the current image.
-When the screen is ready to read a new image, this is done from the frame buffer.
-After the image has arrived, the images scanned line by line.
-The scan is done from top to bottom of the image.
+The scan is often done from top to bottom of the image; this is called a progressive scan.
+An interlaced scan is another scan algorithm where the even and odd scanlines are scanned alternately, often resulting in higher frame rates but increased screen flicker.

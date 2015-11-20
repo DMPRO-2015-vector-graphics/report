@@ -2,23 +2,28 @@
 
 Vector graphics have been popular in the computer industry for many years,
 seeing frequent use in analogue oscilloscopes, video arcade games \cite{astroids},
-and as display devices for computers \cite{ibm2250}.
+and as display devices for computers \cite{ibm2250}. 
+This chapter introduces the concept of vector graphics, and compares it to it's counterpart, the raster graphic.
 
 \section{Computer Graphics}
-There are two different types of representing computer graphics today, vector graphics and raster graphics.
+Computer graphics, introduced around 1960\cite[sec. 1.1.1]{graphics-visualization-algorithms}, is the huge branch in today's computing world that deals with imagery and animations produced by a computer.
+At it's core, this project deals with the type of computer graphics defined as vector graphics, which is detailed further in this section. 
+Since the project also involves what is known as raster graphics, the team has decided to detail this in the section as well.
 
-\input{content/introduction/background/vector-graphics}
-\input{content/introduction/background/raster-graphics}
+\input{content/introduction/background/2D-raster-graphics}
+\input{content/introduction/background/2D-vector-graphics}
+\input{content/introduction/background/3D-graphics}
 
-\section{Visual Display}
+\section{Visual Displays}
 In the early days of computer display, vector displays were mainly used.
 The use of frame buffers started when transistor-based RAM was introduced.
-As a result raster graphics and displays were created \cite{graphics-visualization-algorithms}.
-There exists vast variety of display technologies, a few examples are: CRT, LCD, LED and OLED.
-Without going into detail about each technology,
-a few of the basic principles will be described in the following subsections.
+As a result, raster graphics and displays were created. \cite[sec. 1.1]{graphics-visualization-algorithms}.
 
-\input{content/introduction/background/vector-display}
+Today, there exists a vast variety of display technologies - a few examples are CRT, LCD, LED and OLED.
+This section discusses vector displays and raster displays, and follows with a comparison between the two. It ends with an introduction to an oscilloscope, which was used in the project to output the vector graphics.
+
 \input{content/introduction/background/raster-display}
+\input{content/introduction/background/vector-display}
+\input{content/introduction/background/display-comparison}
+\input{content/introduction/background/oscilloscope}
 
-\input{content/introduction/background/primitives}
