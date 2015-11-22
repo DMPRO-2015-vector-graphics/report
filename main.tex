@@ -16,6 +16,11 @@
 \usepackage[titletoc]{appendix}
 \setkomafont{disposition}{\normalfont\bfseries}
 \definecolor{lightgray}{rgb}{0.9,0.9,0.9}
+\usepackage{amsmath}
+\usepackage{caption}
+
+\DeclareCaptionType{cequation}[][List of equations]
+\captionsetup[cequation]{labelformat=empty}
 
 \setlength{\parindent}{0em}
 \setlength{\parskip}{1em}
@@ -98,6 +103,7 @@
 \begin{appendices}
 \input{content/appendix/bom}
 \input{content/appendix/material-cost}
+\input{content/appendix/isa}
 
 \end{appendices}
 
