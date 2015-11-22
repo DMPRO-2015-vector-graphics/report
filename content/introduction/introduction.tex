@@ -12,7 +12,7 @@ This years assignment focuses on graphics, exploring both of the traditional way
 Two distinct assignment texts were presented by the course staff, one focusing on raster-based graphics, the other on vector graphics.
 The following is a verbatim copy of the vector graphics assignment text \cite{assignment-text}.
 
-\subsection{Assignment requirements - A Vector Graphics Processor}
+\subsection{Assignment Text - A Vector Graphics Processor}
 
 Image generation using vector graphics as the core method is a powerful and scalable way of generating image data.
 Vector graphics represents images at a higher abstraction level than single-pixels.
@@ -28,24 +28,11 @@ Figure \ref{fig:vector-display-network-analyzer} illustrates a vector display wh
     \label{fig:vector-display-network-analyzer}
 \end{figure}
 
-
-\subsection{Additional requirements}
-
-Your processor will be implemented on an FPGA, and you are free to choose how to realize your computer architecture.
-Studying the architecture of general multi-core processors [6], and parallel machines options [4, 5, 6, 7] can be a good starting point.
+\section{Vector Graphics - A Short Introduction}
 
 
-The task should also include a suitable application that can process/produce graphical data.
-The output is to be displayed in order to demonstrate the processor.
-
-The unit must utilize a Silicon Labs EFM32 series microcontroller (to act as an I/O processor) and a Xilinx FPGA (to implement your architecture on).
-The budget is 10.000 NOK per group, which must cover components and PCB production.
-The unit design must adhere to the limits set by the course staff at any given time.
-Deadlines are given in a separate time schedule.
 
 \section{A Vector Graphics Computer Architecture}
-
-// TODO: Bedre tittel?
 
 The group chose to make a general purpose computer with support for producing vector graphics.
 The computer would read instructions from memory, execute them on a processor core and render vector based scenes to different outputs.
@@ -56,6 +43,9 @@ In the case of HDMI, a rasterizer, and for oscilloscope output, a serializer fee
 As a whole, the system should be assembled on a custom PCB, with the microcontroller serving as an I/O-unit while the main processor architecture and output-modules should be implemented on the FPGA.
 The microcontroller would be tasked with loading a program into memory on boot, so that the processor has something to work with.
 
+\section{Requirements}
+
+// TODO: Add all requirements in list/table here
 
 \section{About this report}
 
