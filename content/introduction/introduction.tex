@@ -42,19 +42,48 @@ A vector based solution is inherently resolution independent, allowing for asset
 
 \section{A Vector Graphics Computer Architecture}
 
-The group chose to make a general purpose computer with support for producing vector graphics.
+The group chose to make a general purpose computer with support for producing and processing vector graphics.
 The computer would read instructions from memory, execute them on a processor core and render vector based scenes to different outputs.
 Since most commonly available display devices expect raster based input, an oscilloscope was chosen as the primary output device, HDMI as a secondary.
-This means that in addition to a processor core and memory interfaces, output preprocessors for both output modes would have to be implemented.
-In the case of HDMI, a rasterizer, and for oscilloscope output, a serializer feeding data to DACs.
-
 As a whole, the system should be assembled on a custom PCB, with the microcontroller serving as an I/O-unit while the main processor architecture and output-modules should be implemented on the FPGA.
-The microcontroller would be tasked with loading a program into memory on boot, so that the processor has something to work with.
 
 \section{Requirements}
 
-// TODO: Add all requirements in list/table here
+The group decided on a set of functional requirements based on our initial research. These are listed in table \ref{tbl:func_req}.
+Non-functional requirements given in the assignment text are listed in list \ref{lst:non_func_req}.
+
+\begin{table}[h!]
+    \begin{tabular}{|l|l|}
+        \hline
+        Requirement                                                             & Priority \\ \hline
+        The system should be able to produce and process vector primitives      & High     \\ \hline
+        The system should display primitives on an oscilloscope                 & High     \\ \hline
+        The system should support both straight lines and general bezier curves & High     \\ \hline
+        The processor should be general                                         & High     \\ \hline
+        The system should support modification of primitives                    & Medium   \\ \hline
+        The system should rasterize primitives and support HDMI as an output    & Medium   \\ \hline
+        A toolchain supporting the system should be available                   & Low      \\ \hline
+    \end{tabular}
+    \caption{Functional requirements.}
+    \label{tbl:func_req}
+\end{table}
+
+\begin{figure}[h!]
+\begin{itemize}
+        \item The processor should be implemented on a Xilinx FPGA.
+        \item The unit must utilize a Silicon Labs EFM32 microcontroller as an I/O processor.
+        \item The budget of 10 000 NOK should cover components and PCB production.
+\end{itemize}
+        \label{lst:non_func_req}
+        \caption{Non-functional requirements.}
+\end{figure}
 
 \section{About this report}
 
-// TODO: Outline report contents.
+This report is meant to give a thorough understanding of the architecture designed by the group,
+Having introduced the assignment, the next chapters will introduce the system created by the group as well as give some background on computer graphics and a theoretical overview of vector graphics.
+
+
+Part two presents the designed architecture in detail, outlines the programming model and elaborates on the implementation of specific subparts of the system.
+Finally, part three presents performed tests, results, discussion and a conclusion.
+
