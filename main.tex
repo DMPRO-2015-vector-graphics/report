@@ -57,9 +57,19 @@
 % The title page, edit if you want to customize it
 \input{title.tex}
 
+
 % Main matter - edit corresponding file under content/ to change
 \input{content/abstract.tex}
+
+\pagenumbering{Roman}
+\setcounter{page}{1}
+
 \tableofcontents
+
+\newpage
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
 
 % Part I
 \part{Introduction}
