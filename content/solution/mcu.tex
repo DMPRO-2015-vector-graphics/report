@@ -1,0 +1,42 @@
+\chapter{Microcontroller}
+
+To handle I/O (not including output explained in Chapter \ref{chap:Output}), \vthreek is equipped with a microcontroller uint (MCU).
+This chapter will explain the reason for including this part, and its responsibilities. 
+
+\section{Silicon Labs EFM32 Giant Gecko}
+A requirement for the assignment was to utilize a Silicon Labs EFM32 MCU to act as an I/O processor \cite{assignment-text}.
+The EFM is a System on a Chip, and contains a 32-bit ARM Cortex-M3 processor, 1024kB flash memory and 128kB RAM \cite{efm32referencemanual}.
+
+The Giant Gecko version was chosen for \vthreek.
+The primary reason for choosing this variant of the EFM32 Gecko series, is that the EFM32GG DK3750 development kit was available for the team to test on from the beginning of the project.
+It is the most powerful MCU in the series, and thus provides the most possibilities \cite{}.
+
+\section{Responsibilities}
+The MCU does not have many responsibilities, and will in fact idle most of the time. 
+The primary tasks are: 
+\begin{itemize}
+\item Load program instructions into SRAM
+\item Wait for button or joystick presses and react to these.
+\item Controlling the status of the processor
+\end{itemize}
+
+\subsection{Loading program}
+In order for the processor to do anything useful, we of course need to tell it what to do.
+The program is contained within a header file in the MCU flash.
+After the MCU has booted and initialized the subsystems it utilizes, it will wait for a \texttt{Done} signal from the processor.
+This signal tells the MCU that JTAG has completed the FPGA flash process. 
+It is important to wait for this signal, because the state of any signal connected to the FPGA is undefined prior to flashing.
+This could possibly interfere with the MCU writing to SRAM.
+
+Once the FPGA is flashed and ready, the MCU deasserts the Processor enable signal, to prevent it from start reading from SRAM prematurely.
+The MCU now write the program to SRAM, starting at address \texttt{0x0000}, writing 16 bits at a time.
+When complete, the Processor enable signal is asserted, and the processor will begin fetching instructions
+
+\subsection{Buttons and joystick}
+The board is equipped with two push buttons and a 5-way joystick, connected to the MCU's general purpose input/output pins (GPIO).
+These inputs can be programmed to do anything, but was initially designed for controlling pan and zoom of the primitives.
+A more useful functionality for one button was discovered to be soft resetting the processor.
+
+When the processor is in normal operation, the MCU does nothing, and enters Energy Mode 2, to save power.
+When a button is pressed, an interrupt is generated, and the MCU woken to handle the interrupt.
+
