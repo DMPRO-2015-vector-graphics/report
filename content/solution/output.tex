@@ -18,27 +18,9 @@ After this, the sync signal need to be pulled high again in order to set the out
 The sync signal can be pulled high before this in order to abort the operation.
 Clock and sync signal are shared between the DACs in this system in order to make them change their output synchronously.
 
-\begin{cequation}[H]
-	\begin{equation*}
-		\mathbf{B}(t)=\mathbf{P}_0 + t(\mathbf{P}_1-\mathbf{P}_0)=(1-t)\mathbf{P}_0 + t\mathbf{P}_1 \mbox{ , } 0 \le t \le 1
-	\end{equation*}
-	\caption{Linear Bezier curve}
-\end{cequation}
-
-\begin{cequation}[H]
-	\begin{equation*}
-		\mathbf{B}(t) = (1 - t)^{2}\mathbf{P}_0 + 2(1 - t)t\mathbf{P}_1 + t^{2}\mathbf{P}_2 \mbox{ , } 0 \le t \le 1
-	\end{equation*}
-	\caption{Quadratic Bezier curve}
-\end{cequation}
-
-\begin{cequation}[H]
-	\begin{equation*}
-		\mathbf{B}(t)=(1-t)^3\mathbf{P}_0+3(1-t)^2t\mathbf{P}_1+3(1-t)t^2\mathbf{P}_2+t^3\mathbf{P}_3 \mbox{ , } 0 \le t \le 1
-	\end{equation*}
-	\caption{Cubic Bezier curve}
-\end{cequation}
-
+The maximum clock frequency of the DACs is 30MHz. 
+Since it needs to clock on 24 values per output change as well as the sync signal toggle the effective output maximum will be 30MHz/25=1.2MHz.
+However in the implementation the DACs were unstable if clocked any faster than 20MHz which limits the output rate to around 800KHz.
 
 \section{Raster output}
 
