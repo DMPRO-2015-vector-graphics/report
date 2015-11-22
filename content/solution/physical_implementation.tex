@@ -3,41 +3,47 @@
 // TODO: add diagram of physical components and their connections
 
 \section{Architecture}
-The main specification the group had to meet at all costs was to be able to take a program (a sequnce of instructions) as input, and output vector graphics on a screen.
+The main specification the group had to meet at all costs was to be able to take a program (a sequence of instructions) as input, and output vector graphics on a screen.
 
 Tracing the envisioned execution path of a program through the system gives insight into some of the considerations that had to be taken when designing the PCB and selecting components.
 
 \begin{enumerate}
 \item Assembled \vthreek programs are loaded into instruction memory via the EFM32 microcontroller.
-\item The FGPA reads instructions from memory and performs execution.
-\item The FGPA sends output via two interfaces, two DACs and an HDMI port.
+\item The FPGA reads instructions from memory and performs execution.
+\item The FPGA sends output via two interfaces, two DACs and an HDMI port.
 \item The output from the DACs is displayed on an analogue oscilloscope and the output from the HDMI on a raster screen.
 \end{enumerate}
 
-\section{PCB Design}
-The architecture was realized on a printed circuit board (PCB) designed using Altium Designer 15.1.
-Having never used this program before, the group had to overcome the usual challenges and difficulties related to learning new software. // TODO: elaborate, which challenges?
+\section{Components}
+This section describes our choices of components.
 
-\subsection{Components}
-The goal was to place the components so that they preferably were in close range of all other components they had to connect with. 
-This would shorten the routing, which is desirable in terms of of mitigating signal delay and maintaining signal integrity.
+The components had to meet our technical demands. Examples were number of pins, voltage level support, satisfying outputs, etc. We found this information, by inspecting the component datasheets.
 
-\subsubsection{Main Components}
-FPGA, SRAMs and MCU were the most important components with a lot of different connections, and were therefore placed very central on the PCB.
-I/O components, like controller buttons, USB, HDMI and BNC receptacles, were placed along the edge, since these were typically connected to few other components.
-It would also be annoying and unnecessary to connect external peripheral plugs to sockets in the middle of the PCB.
+The most important components are described in the next sections.
 
-The remaining components were placed according to common sense.
-The DACs ended up between the FPGA and BNC connectors, voltage regulators close to power supply (USB), and so on.
+\subsection{MCU}
+The MCU was an EFM32GG microcontroller from Silicon Labs. It served as an input processor for our system, handling input before and during run-time. Some of the technologies included with it, were also exploited, for instance buses.
 
-\subsubsection{DACs and BNCs}
+\subsection{FPGA}
+The FPGA was a Xilinx Spartan-6, with 401 kb block RAM. It served as the main processor in our design, fetching and executing instructions from instruction memory.
+
+A JTAG header was connected to the FPGA for good accessibility to FPGA debugging and programming.
+//TODO : elaborate
+
+\subsection{SRAM}
+Two SRAMs were put on our PCB. One of them worked as an instruction memory for the FPGA, while the other was a dedicated frame buffer for our output signals. The instructions executed in the FPGA would update the frame buffer, and data from the frame buffer could be read and transferred to the output units. 
+Both SRAMs had an address space of 512k 16-bit words. 
+
+\subsection{DACs and BNCs}
 Since the purpose of our computer was to output vector graphics on an analogue vector screen, DACs were essential.
 They would convert digital signals from the FPGA destined for the output screen, to corresponding analogue signals.
-The BNCs connectors would receive the analogue signals and send them to the oscilloscope.
-There was one DAC and one BNC for the x-coordinate and one for the y-coordinate on the oscilloscope.
-Both DACs were placed next to each other between the FPGA and the output BNCs.
 
-\subsubsection{Oscillators}
+It was important that our DACs could output signals fast enough, to minimize flickering. Therefore, we chose DACs that could support clock rates up to 30MHz.
+
+The BNCs connectors would receive the analogue signals and send them to the oscilloscope.
+There was one DAC and one BNC for the x-coordinate and the same for the y-coordinate on the oscilloscope.
+
+\subsection{Oscillators}
 We connected two external oscillators to the MCU, one low frequency at 32,768kHz and one high frequency at 48MHz.
 The MCU already contained internal RC-oscillators, but external oscillators were much more accurate and stable than the internal ones, which was important for avoiding more sources of errors.
 Both crystals or full-fledged oscillators could be used, but our choice in the end was using oscillators.
@@ -48,16 +54,16 @@ Hence, we chose oscillators for both the FPGA and MCU for simplicity.
 
 The FPGA oscillator had a frequency of 100MHz.
 Even though this was a high frequency, this signal could be scaled inside the FPGA to desirable frequencies.
-All three oscillators were placed close to the component they supplied.
 
-\subsubsection{Buses}
+\subsection{Buses}
 Our system used one parallell bus (EBI) and one serial bus (SPI).
+The MCU were bus master for both of them, since it supplied the bus technologies.
 
-\paragraph{EBI}
-The FPGA, MCU and SRAM were connected via the EBI bus, with the MCU as the bus master. 
+\subsubsection{EBI}
+The FPGA, MCU and SRAM were connected via the EBI bus.
 These connections were made properly by using the specified EBI-pins on the MCU. [citation to MCU datasheet]
 The EBI bus allowed high-speed communication to the SRAM.
-In our implementation, the following bus lines were used:
+The EBI bus is a parallell bus, and we included the following bus lines in our implementation:
 \begin{itemize}
 \item 23 Address bits. It was more than we initially needed, but we couldn't be too sure.
 \item 16 Data bits, since our SRAM consisted of 16-bit words.
@@ -66,37 +72,60 @@ In our implementation, the following bus lines were used:
 \item 1 Read enable bit, active low.
 \end{itemize}
 
-\paragraph{SPI}
+\subsubsection{SPI}
 The SPI served as a three-way communication between the MCU, FPGA and Flash memory.
 Its main purpose was to make our FPGA be configured from a bit-file stored in the flash memory.
-The MCU was the bus master in this case also, since it supplied the SPI technology.
+As opposed to the EBI bus, SPI is a serial bus, transferring one bit of data at a time.
 
-\subsubsection{Buttons and LEDS}
-Buttons and LEDs, for use by the FPGA and the MCU, were placed near these components for simplicity.
-All buttons include a resistor for current limitation (to avoid short circuits) and pull-up (to avoid logical floating state).
-The exception is the button connected to the MCU, where the pin had internal pull-up.
-All LEDs also include a current limiting resistor.
+\subsection{Buttons and LEDS}
+All buttons included a resistor for current limitation (to avoid short circuits) and pull-up (to avoid logical floating state).
+The exception was the button connected to the MCU, where the pin had an internal pull-up.
+All LEDs also included a current limiting resistor. 
 Ohms law was used to calculate the required resistance [insert citation].
 
-\subsubsection{Decoupling Capacitors}
+LEDs were handy for giving us an indication that something was turned on. For instance we had one LED which would light up, when the FPGA was configured.
+Buttons were used for triggering events, like reset.
+
+\subsection{Power Supply}
+Our PCB would receive power from a micro-USB. A voltage level of 5V was sufficient, since we had no components which required more than 5V. However, we had plenty of components which required less than 5V, for instance 3.3V. To lower the voltage to a specific level, we used voltage regulators. Power is discussed in more detail in section \ref{Power}.
+
+\subsection{Decoupling Capacitors}
 Several major components required decoupling, e.g. the MCU, FPGA, voltage regulators, and DACs.
 Decoupling means connecting power supplies through a capacitor network to ground, where power moving to ground can be temporarily stored.
 This was necessary because it sometimes occurs situations where there is suddenly high need for power.
 The power supply alone would not always be able to support these 'bursts'.
 A capacitor network was the solution to this problem, as the component could pull power from the capacitors instead.
 
-It was important that this extra supply could reach the corresponding component as fast as possible.
-That's why all capacitors involved in the decoupling network for a certain component, were placed in close proximity to that component.
-All capacitors were placed on the bottom layer of the PCB to save space on an already crowded top layer.
+\section{PCB Design}
+The architecture was realized on a printed circuit board (PCB) designed using Altium Designer 15.1.
+Having never used this program before, the group had to overcome  challenges and difficulties related to not only learning new software, but also learning concepts of creating a PCB from scratch. 
+
+\subsection{Schematics}
+The entire logic of our PCB was designed with schematics. Altium allowed us to connect components together, pin by pin. Making the right connections was the only thing that mattered in the schematics. There was no focus on physical PCB-specific things like routing, component placement, etc.
+
+When our schematics were completed, we moved on to design the physical PCB.
+
+\subsection{Component Placement}
+The goal was to place the components on the PCB, so that they preferably were in close range of all other components they had to connect with. 
+This would shorten the routing, which was desirable in terms of mitigating signal delay and maintaining signal integrity.
+
+The FPGA, SRAMs and MCU were the most important components with a lot of different connections, and were therefore placed central on the PCB.
+I/O components, like controller buttons, USB, HDMI and BNC receptacles, were placed along the edge, since these were typically connected to few other components.
+It would be annoying to connect external peripheral plugs to sockets in the middle of the PCB.
+
+All decoupling capacitors involved in the decoupling network for a certain component, were placed in close proximity to that component.
+This minimized the risk of that the component wouldn't get the extra power supply it needed during bursts.
+
+All capacitors and resistors were placed on the bottom layer of the PCB to save space on an already crowded top layer.
 
 \subsubsection{Component Footprints}
+A component footprint is how the trace of a component looks like on the PCB.
 In the beginning, component footprints from the standard Altium library were used.
 After previewing the board, it became clear that these footprints were in fact gigantic, and footprints of suitable size had to be found using Altium vaults.
 Smaller 0603 (1608 metric) footprints were used for most passive components, especially the capacitors and resistors.
 By standardizing footprint sizes, the bill of materials could easily be updated without changing the PCB design, as long as the new component could be found in the same package size.
 While a trade-off by using this small size package is that the components might be trickier to solder onto the board, the gain in size reduction for the board as a whole were valued higher by the group.
 Some components could not be found in this footprint, but luckily there was no shortage of footprint sizes to choose from.
-
 
 \subsection{Layers}
 The PCB consisted of six signal layers: Top layer, bottom layer and four in between.
@@ -117,6 +146,7 @@ The complete layer stack is shown in figure \ref{fig:Layers}
 \end{figure}
 
 \subsubsection{Power and ground}
+\label{Power}
 The PCB was designed with three power domains, each with their corresponding voltage regulator: 3.3V, 1.2V and a 5V reserved for analogue signals.
 Most components were supplied by the 3.3V regulator, except for some internal parts of the FPGA that required 1.2V.
 
@@ -138,7 +168,7 @@ Our solution was to split the power and ground plane, shown in figure \ref{fig:S
 \end{itemize}
 All analogue components were placed in the analogue plane and the opposite with digital components. The exception was the DACs, which acts as a bridge between the digital part and the analogue part. These were placed on the actual split, with the affected pins on the correct side.
 \newline
-To remove any digital noise that could potentially accumulate on the analog ground plane, a diode was placed between the two ground planes, letting current flow from the analogue part to the digital part, but not vice versa.
+To remove any digital noise that could potentially accumulate on the analog ground plane, a diode was placed between the two ground planes, letting current flow from the analogue ground to the digital ground, but not vice versa.
 
 \begin{figure}[h!]
 \centering
@@ -148,6 +178,9 @@ To remove any digital noise that could potentially accumulate on the analog grou
 \end{figure}
 
 \section{Routing}
+The components had to be physically connected according to the schematics.
+Connections could be manually routed or Altium's auto router could be used. The auto router would automatically route as many connections as possible.  
+
 Routing was a much more time-consuming process than we expected. We had put too much trust into the built-in auto router in Altium. The router did not, as we naively thought, magically solve the routing. 
 \subsection{Design Rules}
 Before routing, necessary rules had to be defined to make sure the PCB was routed properly. The following listing explains the most important rules for our design.
@@ -163,63 +196,32 @@ Minimum width for traces. Power traces had bigger minimum widths, than signal tr
 Minimum diameter and hole size for multi-layer vias.
 \item Short-circuits and net antennas not allowed
 \end{itemize}
-The rules was set like this to make sure there wouldn't be any interference between traces, while the traces were still wide enough to not be damaged by the signal itself. Power traces were wider to make sure they could handle the voltage. 
+The rules were set like this to make sure there wouldn't be any interference between traces, while the traces were still wide enough to not be damaged by the signal itself. Power traces were wider to make sure they could handle the voltage. 
 \newline
 Net antennas were traces that lead to dead-ends. This could harm the design, since these dead-ends could work as unwanted signal receivers from nearby sources.
 \newline
 \subsubsection{Design Rule Check}
 Altium had its own tool for testing how many violations our current design created, called Design Rule Check. It displayed the amount of errors occurred from each type, and the coordinates on the PCB for every error. 
-Typical errors during our design procedure was short-circuits, net antennas, clearance constraint violations, and so on.
+Typical errors during our design procedure were short-circuits, net antennas and clearance constraint violations.
 \subsection{Routing Procedure}
-First we started routing some components manually. We quickly discovered that doing this for the entire board would take a very long time, so we began to check out the built-in auto router in Altium. 
+The task of routing the PCB was started by routing some components manually. We quickly discovered that doing this for the entire board would take a very long time, and so began to check out Altium's built-in auto router. 
 \newline
 \newline
 Roughly, we followed this routing procedure:
 \begin{enumerate}
 \item Run the auto router.
-\item Run Design Rule Check, and see how many errors we get. 
-\item If there are too many errors, like more than 200, there is most likely something wrong with our design rules, or the auto router settings. If not, go to step 6.
+\item Run Design Rule Check, and see how many errors that occured. 
+\item If there are too many errors (e.g. more than 200), there is most likely something wrong with the design rules or the auto router settings. If not, go to step 6.
 \item Check and modify settings and rules.
 \item Go back to step 1.
 \item Go through the remaining errors and fix them. 
 \item ...
 \item PROFIT!
 \end{enumerate}
-\subsection{Routing Problems}
-We ran into many different routing problems, and we think it's important to address the major ones here for better understanding of how such problems arise.
+We ran into many different routing problems, which is discussed in detail in section \ref{Routing Problems}
 
-\subsubsection{Bad Auto Router Settings}
-After auto routing the whole thing the first time, the result was disappointing. It contained over 100 still unrouted connections, which means the auto router didn't manage to connect these.
-\newline
-\newline
-We discovered that choosing different routing options for the auto router made a big difference. The default setting was \emph{Default 2 Layer Board}. Hence, the auto router focused on mainly using the top and bottom layer, and avoiding layer-switching. This resulted in the auto router not being able to route all the necessary connections.
-\newline
-\newline
-After making the auto-router focus more on switching layers for every signals, to avoid complex routing on fewer layers, it managed to route all the connections. This was achieved by changing routing strategy from \emph{Default 2 Layer Board} to \emph{Default Multi Layer Board} in Altium.
-
-\subsubsection{Clearance Constraint Issue}
-After the first auto routing attempts, we got tons of short-circuits. We found out that our clearance constraint rule didn't apply for all components. The reason for this was a HDMI rule we had self-defined. The pads on the HDMI were placed so close together that we had to lower the clearance constraint for this component. To bypass this, we removed the general clearance constraint rule and instead made a new one to count for all traces, except for HDMI ones. This turned out to be a huge mistake, because now Altium couldn't find this general clearance constraint. This mistake lead to Altium not caring at all about clearances, thus routing as it pleased, which resulted in a short-circuit nightmare.
-\newline
-\newline
-Adding the general clearance constraint rule back again, we faced the same issue in another form. The auto router wouldn't route at all, because it complained about clearance constraints violations. As frustrated as we were, since we thought we had just solved this, we had to start digging again. 
-\newline
-The clearance constraint rule was still the issue. The settings said that Altium would check for clearance violation with \emph{Any Net}. Thanks to some help from Odd Rune, we discovered that \emph{Any Net} also included the net that it was currently comparing. Thus, it checked if the current trace meets the clearance constraint with itself, which of course it does not. By changing this setting to \emph{Different Nets Only}, the entire short-circuit problem was solved. 
-
-\subsubsection{Dead Copper}
-Dead copper is parts of the copper on a power plane that's isolated from the rest of the copper on that plane. 
-Dead copper appeared several places on our PCB. Normally it wasn't a problem, but some places a GND via or 3.3V via was connected to dead copper on the corresponding power plane. This wasn't desirable for the PCB, since we weren't sure what could happen then. 
-\newline
-We had to avoid power vias connected to dead copper, so we located every position where this situation occurred, and repositioned neighboring vias to rejoin the copper area with the main copper plane. The issue and solution are described in figure \ref{fig:Dead copper}.
-
-\begin{figure}[h!]
-\centering
-\includegraphics[scale = 0.4]{images/Dead_Copper.png}
-\caption{Dead Copper. To the right, dead copper is avoided by moving one via}
-\label{fig:Dead copper}
-\end{figure}
-
-\section{Redundancy}
-We were inexperienced with PCB design and often uncertain if we had done something the right way, or misunderstood something. Our top priority was to make something that did work properly. A failing component was not unusual, and forgetting something was almost guaranteed to happen, considering the vast amount of factors involved. Hence, having back-up features was critical to us.
+\section{Fault Handling}
+The team were all inexperienced with PCB design and often uncertain if actions or decisions could cause problems down the line. The top priority was to make something that worked properly. A failing component was not unusual, and forgetting something was almost guaranteed to happen, considering the vast amount of factors involved. Hence, having back-up features was critical to us.
 \subsection{Headers}
 Our primary strategy of redundancy was including headers. A lot of headers. Our final amount of headers ended up at 34, including the JTAG and the ARM programming header. This would make us able to measure most signals with a multimeter and verify them. 
 \newline
@@ -232,10 +234,12 @@ Pretty much every header was between components. If wrong connections existed, o
 \label{fig:Header fix}
 \end{figure}
 
-Headers was also useful as switches. By manually connecting header pins with jumpers, we could activate and deactivate certain parts of the PCB. This would be useful when focusing on lesser parts of the circuit. For instance, we used 3-pin headers to give us the ability of manually turning on and off different voltage levels. We could also deliver power to the components directly through the headers, should any of the wiring be wrong.
+Headers was also useful as switches. By manually connecting header pins with jumpers, we could activate and deactivate certain parts of the PCB. This would be useful when focusing on lesser parts of the circuit. For instance, we used 3-pin headers to give us the ability of manually turning on and off different voltage levels. 
+
+We could also deliver power to the components directly through the headers, if any issue with the power supply would occur.
 
 \subsection{DACs}
-Even though we had our own DACs for outputting analog voltage out to the BNC plug, there was still a risk that we could not get them to work at all. We had a back-up solution by also connecting the internal DACs in the MCU to the BNCs. One header for each BNC input was used, to manually control if we wanted to use the main DACs or the MCU DACs. This is described in figure \ref{fig:DAC headers}. There's one header each for the X and the Y signal to the oscilloscope. 
+Even though we had our own DACs for outputting analog voltage out to the BNC plug, there was still a risk that we could not get them to work at all. We had a back-up solution by also connecting the internal DACs in the MCU to the BNCs. One 2x2 header for each BNC input was used, to manually control if we wanted to use the main DACs or the MCU DACs. This is described in figure \ref{fig:DAC headers}. There's one header each for the X and the Y signal to the oscilloscope. 
 
 \begin{figure}[h!]
 \centering
