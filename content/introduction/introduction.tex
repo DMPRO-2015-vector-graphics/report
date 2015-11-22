@@ -16,7 +16,7 @@ The following is a verbatim copy of the vector graphics assignment text \cite{as
 
 Image generation using vector graphics as the core method is a powerful and scalable way of generating image data.
 Vector graphics represents images at a higher abstraction level than single-pixels.
-A vector graphics processor can make use of drawing instructions to produce images, which is a task well suited for hardware acceleration [3 // TODO: add references].
+A vector graphics processor can make use of drawing instructions to produce images, which is a task well suited for hardware acceleration \cite{openvg}.
 Parallelization with multiple cores and/or at the instruction level are architectural possibilities that can be exploited to design a specialized processor.
 The task is to design and implement a processor for producing vector graphics.
 Figure \ref{fig:vector-display-network-analyzer} illustrates a vector display which takes in vector drawing commands (instead of a stream of pixels) as input.
@@ -30,7 +30,15 @@ Figure \ref{fig:vector-display-network-analyzer} illustrates a vector display wh
 
 \section{Vector Graphics - A Short Introduction}
 
+Vector graphics expresses the contents of an image mathematically.
+A line is defined by its endpoints, a square as the bounding box of two points and curves by the position of their controlpoints.
+These points are relative to the coordinate system of a scene, an abstract represantation of an image.
+A scene is not tied to any specific physical screen resolution, but can be scaled to fit any resolution without loss of detail.
 
+The major advantages of vector graphics are expressiveness and scalability.
+Modern computing devices come in many sizes and aspect ratios.
+With raster based solutions, graphics have to be regenerated for each new display size.
+A vector based solution is inherently resolution independent, allowing for asset reuse across devices.
 
 \section{A Vector Graphics Computer Architecture}
 
