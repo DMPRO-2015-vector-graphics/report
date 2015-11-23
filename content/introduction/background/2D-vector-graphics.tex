@@ -17,5 +17,35 @@ Computer generated text, drawings or imagery, for use in graphical design, are t
 Most professional image processing and design software, e.g. Adobe Illustrator, support vector graphics. 
 To store the graphics, file formats such as \texttt{.ai} (for use in Adobe Illustrator) or the open standard \texttt{.svg} (Scalable Vector Graphics) can be used. //TODO:Source?
 
+In vector graphics an image is created by assembling a set of figures into a more complex image.
+These base figures are for example lines, circles, ellipses or curves. //TODO: Maybe reformat this
 
-Some computer font types, like TrueType uses vector graphics and more specifically Bézier curves to represent glyphs\cite{truetype}. // Is this necessary?
+\subsubsection{Bézier curves}
+
+A very popular type of curve in vector graphics is Bézier curves.
+Bézier curves can represent everything from a straight line to very complex paths with a lot of turns and changes in direction.
+A Bézier curve is defined by a series of control point ranging from \(P_0\) to \(P_n\). 
+n is called the order of the curve and as such you end up with linear (n = 1), quadratic (n = 2), and cubic (n = 3) Bézier curves.
+Below the formulas for some frequently used Bézier curves are shown. B(t) is the point on the curve at t.
+As t can be incremented as little or as much as wanted points on the curve can be calculated as granularly as desired.
+
+\begin{cequation}[H]
+	\begin{equation*}
+		\mathbf{B}(t)=\mathbf{P}_0 + t(\mathbf{P}_1-\mathbf{P}_0)=(1-t)\mathbf{P}_0 + t\mathbf{P}_1 \mbox{ , } 0 \le t \le 1
+	\end{equation*}
+	\caption{Linear Bézier curve}
+\end{cequation}
+
+\begin{cequation}[H]
+	\begin{equation*}
+		\mathbf{B}(t) = (1 - t)^{2}\mathbf{P}_0 + 2(1 - t)t\mathbf{P}_1 + t^{2}\mathbf{P}_2 \mbox{ , } 0 \le t \le 1
+	\end{equation*}
+	\caption{Quadratic Bézier curve}
+\end{cequation}
+
+\begin{cequation}[H]
+	\begin{equation*}
+		\mathbf{B}(t)=(1-t)^3\mathbf{P}_0+3(1-t)^2t\mathbf{P}_1+3(1-t)t^2\mathbf{P}_2+t^3\mathbf{P}_3 \mbox{ , } 0 \le t \le 1
+	\end{equation*}
+	\caption{Cubic Bézier curve}
+\end{cequation}

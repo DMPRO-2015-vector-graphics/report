@@ -1,0 +1,27 @@
+\section{Primitives}
+
+The computer architecture supports 3 basic primitives: lines, quadratic Bézier curves and cubic Bézier curves.
+Lines are represented as linear Bézier curves.
+
+Each primitives type is identified by the 8 first bits.
+To store a position on the screen, 32 bits is required: 16 bit for X and 16 bit for Y.
+A line is represented by a start point and an end point.
+To represent a quadratic Bézier curve a total of three points are needed, a start point, a control point and an end point.
+The cubic Bézier curve includes one extra control point compared to the quadratic curve.
+Table \ref{tbl:primitives} illustrates how each primitive is stored in scene memory.
+
+With the basic primitives linear, quadratic, and cubic Bézier curves all other shapes can be constructed.
+E.g a rectangle is constructed by adding four lines together.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+    \hline
+    Primitive type (8) & x (16) & y (16) & x (16) & y (16) & x (16) & y (16) & x (16) & y (16) & Total bits \\ \hline
+    Linear Bézier    & \(p_0^x \) & \(p_0^y \) & \(p_1^x \) & \(p_1^y \) & ~   & ~   & ~   & ~   & 72    \\ \hline
+    Quadratic Bézier & \(p_0^x \) & \(p_0^y \) & \(p_1^x \) & \(p_1^y \) & \(p_2^x \) & \(p_2^y \) & ~   & ~   & 104   \\ \hline
+    Cubic Bézier     & \(p_0^x \) & \(p_0^y \) & \(p_1^x \) & \(p_1^y \) & \(p_2^x \) & \(p_2^y \) & \(p_3^x \) & \(p_3^y \) & 136   \\ \hline
+    \end{tabular}
+    \caption{Layout of primitives in scene memory. Bit size in parenthesis.}
+	\label{tbl:primitives}
+\end{table}
