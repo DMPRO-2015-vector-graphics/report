@@ -12,6 +12,8 @@ Before any actual coding and soldering the group spent time planning the archite
 TODO: Vi burde hatt floating point for å gjøre vektorutregninger.
 
 \section{Budget}
+TODO: update, wrong numbers
+
 In the assignment text the group was given a budget of 10,000 NOK.
 At the end of the project the total cost of materials was 9,770 NOK (without shipping costs), which is within the given budget.
 The full list of material expenses is listed in Appendix \ref{tbl:material-cost}.
@@ -20,3 +22,11 @@ A few of the component orders were wrong and the group had to order new componen
 With better component planning this could have been avoided.
 
 \input{content/results/oscillator}
+
+\section{Drawing Artifacts}
+\label{discussion:artifacts}
+The drawing artifacts explained in section \ref{results:artifacts} are possible to remove.
+A third value for intensity is required to remove the artifacts.
+When the electron beam is done drawing a primitive, the intensity can be turned off until the beam is above the next primitive.
+
+If \vthreek were to support an intensity value in addition to x and y, the arcitechture and PCB require changes.
