@@ -1,8 +1,6 @@
 \chapter{System Overview}
 
-\section{Vector graphics in hardware}
-
-Based on initial research into vector graphics, the group decided to implement support for three types of primitives; lines, quadratic and qubic bezier curves.
+\input{content/solution/primitives}
 
 \section{Architectual structure}
 
@@ -17,7 +15,6 @@ Separation of instruction and data memory makes it a Harvard-like architecture.
 The processor reads from instruction memory, executes instructions and adds/updates vector primitives in the scene memory.
 Preprocessing these primitives for output is done by the output modules.
 
-\input{content/solution/primitives}
 
 \section{Programming Model}
 
