@@ -16,4 +16,5 @@ main-blx.bib
 .*.swo
 .*.swp
 .DS_Store
-.gz
+*.gz
+*.bcf
