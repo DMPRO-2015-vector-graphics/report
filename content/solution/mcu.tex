@@ -9,11 +9,11 @@ The EFM is a System on a Chip, and contains a 32-bit ARM Cortex-M3 processor, 10
 
 The Giant Gecko version was chosen for \vthreek.
 The primary reason for choosing this variant of the EFM32 Gecko series, is that the EFM32GG DK3750 development kit was available for the team to test on from the beginning of the project.
-It is the most powerful MCU in the series, and thus provides the most possibilities \cite{}.
+It is the most powerful MCU in the series, and thus provides the most possibilities \cite{efm32}.
 
 \section{Responsibilities}
-The MCU does not have many responsibilities, and will in fact idle most of the time. 
-The primary tasks are: 
+The MCU does not have many responsibilities, and will in fact idle most of the time. The program flow is represented as a state diagram i Figure \ref{fig:mcu_state}.
+Its primary tasks are: 
 \begin{itemize}
 \item Load program instructions into SRAM
 \item Wait for button or joystick presses and react to these.
@@ -40,3 +40,8 @@ A more useful functionality for one button was discovered to be soft resetting t
 When the processor is in normal operation, the MCU does nothing, and enters Energy Mode 2, to save power.
 When a button is pressed, an interrupt is generated, and the MCU woken to handle the interrupt.
 
+\begin{figure}[h!]
+\centering \includegraphics[width = 0.75\linewidth]{images/MCU_state.png}
+\caption{The MCU program represented as a state diagram}
+\label{fig:mcu_state}
+\end{figure}

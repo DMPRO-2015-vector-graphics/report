@@ -1,7 +1,7 @@
 \chapter{Results}
 
 \begin{figure}[h!]
-	    \includegraphics[width=\linewidth]{images/board.jpg}
+	    \includegraphics[width=\linewidth, angle=180]{images/board.jpg}
 	    \caption{An image of the finished \vthreek board}
 	    \label{fig:board}
 \end{figure}
@@ -18,3 +18,18 @@ To update the DAC value a total of 25 clock cycles are required.
 As a result the theoretical effective maximum output will be \(30 MHz \div 25 = 1.2 MHz \).
 However during testing the group experience incorrect DAC values if the clock were set higher than 20 MHz.
 With a clock frequency of 20 MHz the maximum output is 800 KHz.
+
+\section{Drawing Artifacts}
+The oscillioscope used in this project supports x and y inputs.
+When the oscillioscope is done drawing one primitive and moves to the next the electron beam i still drawing,
+and weaker drawing lines may be visible.
+In other words all shapes are drawn without "litfing the hand."
+If one take a closer look at figure~\ref{fig:artifact}, the drawing artifacts are visible.
+There are solutions to avoid the drawing artifacts, which is exlained in section \ref{discussion:artifacts}.
+
+
+\begin{figure}[h]
+	    \includegraphics[width=\linewidth]{images/artifacts.jpg}
+	    \caption{Drawing v3k with artifacts}
+	    \label{fig:artifact}
+\end{figure}
