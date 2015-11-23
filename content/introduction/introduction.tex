@@ -31,8 +31,9 @@ Figure \ref{fig:vector-display-network-analyzer} illustrates a vector display wh
 \end{figure}
 
 \section{Vector Graphics - A Short Introduction}
-Vector graphics expresses the contents of an image mathematically.
-Lines are defined by their endpoints, squares as the bounding box of two points, and curves by the position of their control points.
+Vector graphics expresses the contents of an image by using primitives, which are defined mathematically.
+Primitives can be objects like lines (defined by their endpoints), squares (defined as a bounding box of two points) or curves (defined by the position of control points). 
+Special curves, called bézier curves, can be used to obtain complex, vectorized shapes.
 The points are relative to the coordinate system of a 'scene', which is an abstract representation of an image.
 Scenes are not tied to any specific physical screen resolution, but can be scaled to fit any resolution without loss of detail.
 
@@ -53,7 +54,7 @@ Non-functional requirements given in the assignment text are listed in list \ref
         \textbf{Requirement}                                                    & \textbf{Priority} \\ \hline
         The system should be able to produce and process vector primitives      & High     \\ \hline
         The system should display primitives on an vector display               & High     \\ \hline
-        The system should support both straight lines and general bezier curves & High     \\ \hline
+        The system should support both straight lines and general bézier curves & High     \\ \hline
         The processor should be general                                         & High     \\ \hline
         The system should support modification of primitives                    & Medium   \\ \hline
         The system should rasterize primitives and support HDMI as an output    & Medium   \\ \hline
