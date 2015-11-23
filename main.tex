@@ -2,7 +2,7 @@
 
 \documentclass[abstract=on]{scrreprt}
 \usepackage[utf8]{inputenc}
-\usepackage[backend=bibtex]{biblatex}
+\usepackage[backend=bibtex, sorting=none]{biblatex}
 \addbibresource{references.bib}
 \usepackage{graphicx}
 \usepackage{textcomp}
@@ -16,6 +16,11 @@
 \usepackage[titletoc]{appendix}
 \setkomafont{disposition}{\normalfont\bfseries}
 \definecolor{lightgray}{rgb}{0.9,0.9,0.9}
+\usepackage{amsmath}
+\usepackage{caption}
+
+\DeclareCaptionType{cequation}[][List of equations]
+\captionsetup[cequation]{labelformat=empty}
 
 \setlength{\parindent}{0em}
 \setlength{\parskip}{1em}
@@ -57,9 +62,19 @@
 % The title page, edit if you want to customize it
 \input{title.tex}
 
+
 % Main matter - edit corresponding file under content/ to change
 \input{content/abstract.tex}
+
+\pagenumbering{Roman}
+\setcounter{page}{1}
+
 \tableofcontents
+
+\newpage
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
 
 % Part I
 \part{Introduction}
@@ -70,15 +85,16 @@
 % Part II
 \part{Solution}
 \input{content/solution/tools.tex}
+\input{content/solution/assembler}
 \input{content/solution/overview.tex}
 \input{content/solution/core.tex}
 \input{content/solution/output.tex}
 \input{content/solution/mcu.tex}
 \input{content/solution/physical_implementation.tex}
-\input{content/solution/assembler}
 
 % Part III
 \part{Results}
+\input{content/results/results.tex}
 \input{content/results/testing.tex}
 \input{content/results/discussion.tex}
 \input{content/results/conclusion.tex}
@@ -88,6 +104,7 @@
 \begin{appendices}
 \input{content/appendix/bom}
 \input{content/appendix/material-cost}
+\input{content/appendix/isa}
 
 \end{appendices}
 
