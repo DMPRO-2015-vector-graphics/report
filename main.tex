@@ -1,7 +1,7 @@
 % V.E.C.T.O.R 3000 Report
 
 \documentclass[abstract=on]{scrreprt}
-%\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
 \usepackage[backend=bibtex, sorting=none]{biblatex}
 \addbibresource{references.bib}
 \usepackage{graphicx}
@@ -58,7 +58,7 @@
 \begin{document}
 
 
-\newcommand{\vthreek}{V.E.C.T.O.R. 3000 }
+\newcommand{\vthreek}{V.E.C.T.O.R. -3000 }
 % The title page, edit if you want to customize it
 \input{title.tex}
 
@@ -84,13 +84,13 @@
 
 % Part II
 \part{Solution}
-\input{content/solution/tools.tex}
-\input{content/solution/assembler}
 \input{content/solution/overview.tex}
 \input{content/solution/core.tex}
 \input{content/solution/output.tex}
 \input{content/solution/mcu.tex}
 \input{content/solution/physical_implementation.tex}
+\input{content/solution/tools.tex}
+\input{content/solution/assembler}
 
 % Part III
 \part{Results}
