@@ -11,7 +11,7 @@
 
 The primary output of the processor is the vector output.
 This output is driven by two DACs that converts digital data from the FPGA to voltages that represents x and y coordinates.
-The DACs used are 16-bit which gives us and effective resolution of 65536 by 65536 without taking into account the noise on the output voltage.
+The DACs used are 16-bit which results in an effective resolution of 65536 by 65536 without taking into account the noise on the output voltage.
 These DACs have a serial interface and needs 3 signals each to operate; data, clock, and a sync signal.
 In order to set an output value on a DAC the sync signal needs to be pulled from high to low then it needs 8 control bits followed by 16 data bits.
 After this, the sync signal need to be pulled high again in order to set the output value.
