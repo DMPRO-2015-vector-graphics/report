@@ -31,14 +31,14 @@ The respective serializer will then calculate a fixed number of points along the
 A fixed number of points was chosen because there was no time to implement any functionality for calculating the lengths of lines or curves accurately.
 This will result in shorter lines and curves appearing brighter on the oscilloscope.
 
-The actual calculation of the points is done by using the equations described in \ref{Background}.
+The actual calculation of the points is done by using the equations described in section \ref{sec:bezier}.
 However since there was no floating point unit, a number between 0 and 1023 was used instead of a number between 0 and 1, that was then left shifted by 5.
 t then becomes \(t = i \ll 5\) (\(0 \geq i < 1024\)). 
 After every multiplication the result is then right shifted by 15.
 This results in a limit of 1024 different points for a given primitive.
 
 The calculation for points for every type of primitive is largely the same, however the different number of points per primitive needs to multiplied by a different factor. 
-The equation for these can be found in section\ref{Bezier}
+The equation for these can be found in section \ref{sec:bezier}
 
 \section{Raster output}
 
