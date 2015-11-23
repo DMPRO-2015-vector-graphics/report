@@ -4,9 +4,10 @@ Modern oscilloscopes often use thin film transistor (TFT) displays and rasterize
 However, older models include a CRT vector display.
 
 To draw on such an oscilloscope, the device must support at least two input channels, and the ability to draw in X-Y mode.
-This means that two of the input channels (usually Ch1 and Ch2) governs the electron ray deflectors, which are controlled through electrostatics.
-If the channels are provided with a constant voltage, a dot will be displayed on the screen - in contrast to normal mode, where a line would be drawn. // TODO: What is 'normal' mode? Varying voltage?
+In this mode, two of the input channels (usually Ch1 and Ch2) governs the electron ray deflectors, which are controlled through electrostatics. 
+This is different from the normal mode where the beam moves to the right with a constant speed \( t \) and one of the channels determine the amplitude.
 
 The voltage on channel one will normally decide the beam's horizontal X position, and channel two its vertical Y position.
-To draw a line on the oscilloscope, frequent changes to the voltage of one or both channels is necessary to make the image remain on the screen. // For our osc this is true, but other types may be different
-Changing the voltage on only one channel will produce a horizontal or vertical line.
+If the channels are provided a constant voltage, a dot will be displayed on the screen - in contrast to normal mode, where a line would be drawn.
+To draw a line on the oscilloscope in X-Y mode, frequent changes to the voltage of one or both channels is necessary to make the image remain on the screen. // For our osc this is true, but other types may be different
+Alternating the voltage on one channel only, will produce a horizontal or vertical line.
