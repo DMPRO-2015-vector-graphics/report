@@ -1,7 +1,7 @@
 \section{Vector Graphics in Hardware}
 
 This section gives an overview of how vector graphics is represented in the \vthreek architecture.
-Later sections describe how the architecture processes and produces output based on this representation, 
+Later sections describe how the architecture processes and produces output based on this representation.
 
 \subsection{Primitives}
 
@@ -40,7 +40,8 @@ A square can be represented as four lines, a circle as multiple Bézier curves, 
 
 \subsection{Vector Images}
 
-A vector image, or a scene, is a 2D canvas of fixed width and height on which primitives are places.
+A vector image, or a scene, is a 2D canvas of fixed width and height on which primitives are placed.
 The \vthreek architecture represents a scene conceptually as a collection of primitives.
 Since primitives are represented with 16-bit integer coordinate-components, scene dimension is $65535 * 65535$.
 This conceptual representation maps to a 1024 word deep, 136 bit wide, dual port scene memory module implemented using block RAM \cite{xilinx-block-ram} on the FPGA.
+Since the size of the scene memory is static, the architecture maintains a primitive counter, indicating how many primitives are actually in the scene at any given time.
