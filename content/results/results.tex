@@ -1,7 +1,7 @@
 \chapter{Results}
 //TODO: Write better intro to chapter, maybe put video link in introduction?
 
-This chapter will present the results of the project. The physical result is depicted i Figure \ref{fig:board}.
+This chapter will present the results of the project. The physical result is depicted i Figure \ref{fig:board-top}.
 A video clip of the tunnel program in Appendix \ref{app:tunnel} is available at \href{https://vid.me/JEZv}{https://vid.me/JEZv} \cite{tunnel-demo}.
 
 \begin{figure}[h!]
@@ -34,7 +34,7 @@ In other words all shapes are drawn without "lifting the hand."
 If one take a closer look at figure~\ref{fig:artefact}, the drawing artefacts are visible.
 There are solutions to avoid the drawing artefacts, which is explained in section \ref{discussion:artefacts}.
 
-\begin{figure}[h]
+\begin{figure}[h!]
 	    \includegraphics[width=\linewidth]{images/artefacts.jpg}
 	    \caption{Drawing V3K with artefacts}
 	    \label{fig:artifact}
@@ -45,10 +45,33 @@ By zooming in on the oscilloscope this becomes more visible, and can be seen in 
 The digital nature of \vthreek implies a discrete increments when drawing.
 The electron ray moves faster then the DACs are able to feed it with new data.
 As a result, the ray will wait at one spot, until it receives new values.
-This results in dotted lines.
+This results in dotted lines, shown in Figure \ref{fig:dotx4} and \ref{fig:dotx8}
 
-\begin{figure}[h]
-	    %\includegraphics[width=\linewidth]{images/artifacts_dots.jpg}
-	    \caption{The dots is more visible when zooming in on the oscilloscope}
-	    \label{fig:artifact-dots}
+\begin{figure}[h!]
+   	\centering
+    \begin{subfigure}[b]{\textwidth}
+   		\centering
+       	\includegraphics[height=0.4\textheight]{images/dots_x1.jpg}
+       	\caption{Dot artefact close to invisible.}
+       	\label{fig:dotx1}
+    \end{subfigure}
+\end{figure}
+
+\begin{figure}[h!]
+	\ContinuedFloat
+    \begin{subfigure}[b]{\textwidth}
+		\centering        
+        \includegraphics[height=0.4\textheight]{images/dots_x4.jpg}
+        \caption{Dot artefact becomes more visible when zoomed in four times.}
+        \label{fig:dotx4}
+    \end{subfigure}
+    
+    \begin{subfigure}[b]{\textwidth}
+		\centering        
+        \includegraphics[height=0.4\textheight]{images/dots_x8.jpg}
+        \caption{Zooming in eight times, we can also observe that the electron ray do not move in a straight line from point to point.}
+        \label{fig:dotx8}
+    \end{subfigure}
+    \caption{A diagonal line with different levels of zoom}
+    \label{fig:artefact-dots}
 \end{figure}

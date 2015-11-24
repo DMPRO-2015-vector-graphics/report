@@ -19,7 +19,9 @@
 \definecolor{lightgray}{rgb}{0.9,0.9,0.9}
 \usepackage{amsmath}
 \usepackage{caption}
+\usepackage{subcaption}
 \usepackage{pdfpages}
+
 
 \DeclareCaptionType{cequation}[][List of equations]
 \captionsetup[cequation]{labelformat=empty}
@@ -28,7 +30,7 @@
 \setlength{\parskip}{1em}
 
 % Glossary
-\input{content/appendix/glossary.tex}
+\input{glossary.tex}
 
 \lstset{
     basicstyle=\footnotesize\ttfamily,
@@ -120,7 +122,6 @@
 % Part IV
 \part{Appendices}
 \begin{appendices}
-//TODO:Move part numbers from BOME to BOM?
 \input{content/appendix/bom.tex}
 \input{content/appendix/material-cost.tex}
 \input{content/appendix/isa.tex}

@@ -50,6 +50,7 @@ The group decided on a set of functional requirements based on initial research,
 Non-functional requirements given in the assignment text are listed in list \ref{lst:non_func_req}.
 
 \begin{table}[h!]
+\resizebox{\textwidth}{!}{
     \begin{tabular}{|l|l|}
         \hline
         \textbf{Requirement}                                                    & \textbf{Priority} \\ \hline
@@ -61,20 +62,27 @@ Non-functional requirements given in the assignment text are listed in list \ref
         The system should rasterize primitives and support HDMI as an output    & Medium   \\ \hline
         A toolchain supporting the system should be available                   & Low      \\ \hline
     \end{tabular}
+}
     \caption{Functional requirements.}
     \label{tbl:func_req}
 \end{table}
 
 
-\begin{figure}[h!]
-    \begin{itemize}
-        \item The processor should be implemented on a Xilinx FPGA.
-        \item The unit must utilize a Silicon Labs EFM32 microcontroller as an I/O processor.
-        \item The budget of 10 000 NOK should cover components and PCB production.
-    \end{itemize}
-    \caption{Non-functional requirements. //TODO: Convert to table, and update reference}
+\begin{table}[h!]
+\resizebox{\textwidth}{!}{
+    \begin{tabular}{|l|l|}
+     	\hline															    	
+        \textbf{Requirement}    												& \textbf{Priority} \\ \hline
+        The processor should be implemented on a Xilinx FPGA								& High 	\\ \hline
+        The unit must utilize a Silicon Labs EFM32 microcontroller to act as an				& High 	\\ 
+        I/O processor 																		&   	\\ \hline
+        The budget of 10 000 NOK should cover components and PCB production					& High 	\\ \hline
+    
+    \end{tabular}
+}
+    \caption{Non-functional requirements.}
     \label{lst:non_func_req}
-\end{figure}
+\end{table}
 
 
 \section{A Vector Graphics Computer Architecture}
@@ -89,7 +97,7 @@ Based on the requirements, the group chose to make a general purpose computer wi
 The computer would read instructions from memory, execute them on a processor core and render vector based scenes to different outputs.
 To showcase the nature of vector graphics, a vector display in the form of an oscilloscope was chosen as the primary output device.
 HDMI was included as secondary output to a raster display.
-As a whole, the system should be assembled on a custom PCB, with the microcontroller serving as an I/O-unit while the main processor architecture and output-modules should be implemented on the FPGA.
+As a whole, the system should be assembled on a custom PCB, with the microcontroller serving as an I/O-unit while the main processor architecture and output-modules should be implemented on the \gls{fpga}.
 
 \section{Lab Environment}
 The NTNU Computer Design Lab was used frequently for this project.
