@@ -1,6 +1,5 @@
 \chapter{Physical Implementation}
 
-// TODO: add diagram of physical components and their connections
 This chapter describes our choosing of physical components, and the implementation of the \gls{pcb}.
 
 \section{Architecture}
@@ -32,26 +31,26 @@ This information was found by inspecting the various component's datasheets.
 Critical components in the design are described in the following subsections.
 
 \subsection{MCU}
-The \gls{mcu} was the EFM32GG microcontroller described earlier. 
+The \gls{mcu} was the EFM32GG microcontroller described earlier.
 
 \subsection{FPGA}
-The \gls{fpga} was a Xilinx XC6SLX45-2CSG324I, with 401 kb block \gls{ram}. 
+The \gls{fpga} was a Xilinx XC6SLX45-2CSG324I, with 401 kb block \gls{ram}.
 It served as the main processor in the design, fetching and executing instructions from instruction memory.
 
 A \gls{jtag} header was connected to the \gls{fpga} for good accessibility to \gls{fpga} debugging and programming.
 //TODO : elaborate
 
 \subsection{SRAM}
-Two \gls{sram}s were put on the \gls{pcb}. 
-One of them worked as an instruction memory for the \gls{fpga}, while the other was a dedicated frame buffer for our output signals. 
-The instructions executed in the \gls{fpga} would update the frame buffer, and data from the frame buffer could be read and transferred to the output units. 
-Both \gls{sram}s had an address space of 512k 16-bit words. 
+Two \gls{sram}s were put on the \gls{pcb}.
+One of them worked as an instruction memory for the \gls{fpga}, while the other was a dedicated frame buffer for our output signals.
+The instructions executed in the \gls{fpga} would update the frame buffer, and data from the frame buffer could be read and transferred to the output units.
+Both \gls{sram}s had an address space of 512k 16-bit words.
 
 \subsection{DACs and BNCs}
 As the purpose of the computer was to output vector graphics on an analogue vector screen, \gls{dac}s were essential.
 They would convert digital signals from the \gls{fpga} destined for the output screen, to corresponding analogue signals.
 
-It was important that the \gls{dac}s could output signals fast enough, to minimize flickering. 
+It was important that the \gls{dac}s could output signals fast enough, to minimize flickering.
 Therefore, \gls{dac}s that could support clock rates up to 30MHz was chosen.
 
 The \gls{bnc}s connectors would receive the analogue signals and send them to the oscilloscope.
@@ -91,18 +90,18 @@ As opposed to the \gls{ebi} bus, \gls{spi} is a serial bus, transferring one bit
 \subsection{Buttons and LEDS}
 All buttons included a resistor for current limitation (to avoid short circuits) and pull-up (to avoid logical floating state).
 The exception was the button connected to the \gls{mcu}, where the pin had an internal pull-up.
-All \gls{led}s also included a current limiting resistor. 
+All \gls{led}s also included a current limiting resistor.
 Ohms law was used to calculate the required resistance\cite{ohm}.
 
-\gls{led}s were handy for giving an indication that something was turned on. 
+\gls{led}s were handy for giving an indication that something was turned on.
 For instance, the design included a \gls{led} which would light up when the \gls{fpga} was configured.
 Buttons were used for triggering events, e.g. reset.
 
 \subsection{Power Supply}
-The \gls{pcb} would receive power from a micro-\gls{usb} connector. 
-A voltage level of 5V was sufficient, since no components required more than this. 
-However, plenty of components required less than 5V, specifically 3.3V. 
-To lower the voltage to a specific level, voltage regulators were used. 
+The \gls{pcb} would receive power from a micro-\gls{usb} connector.
+A voltage level of 5V was sufficient, since no components required more than this.
+However, plenty of components required less than 5V, specifically 3.3V.
+To lower the voltage to a specific level, voltage regulators were used.
 Power is discussed in more detail in section \ref{Power}.
 
 \subsection{Decoupling Capacitors}
@@ -114,18 +113,18 @@ With a capacitor decoupling network, the component could pull power from the cap
 
 \section{PCB Design}
 The architecture was realized on a \gls{pcb} designed using Altium Designer 15.1.
-Having never used this program before, the group had to overcome challenges and difficulties related to not only learning new software, but also learning concepts of creating a \gls{pcb} from scratch. 
+Having never used this program before, the group had to overcome challenges and difficulties related to not only learning new software, but also learning concepts of creating a \gls{pcb} from scratch.
 
 \subsection{Schematics}
-The entire logic on the \gls{pcb} was designed with schematics. 
-Altium was used to map the components together, pin by pin. 
-Making the right connections and pin mappings was the only thing that mattered in the schematics. 
+The entire logic on the \gls{pcb} was designed with schematics.
+Altium was used to map the components together, pin by pin.
+Making the right connections and pin mappings was the only thing that mattered in the schematics.
 There was no focus on physical \gls{pcb}-specific things, e.g. routing and component placement.
 
 When the schematics were completed, the team moved on to design the physical \gls{pcb}.
 
 \subsection{Component Placement}
-The goal was to place the components on the \gls{pcb}, so that they preferably were in close range of all other components they had to connect with. 
+The goal was to place the components on the \gls{pcb}, so that they preferably were in close range of all other components they had to connect with.
 This would shorten the routing, which was desirable in terms of mitigating signal delay and maintaining signal integrity.
 
 The \gls{fpga}, \gls{sram}s and \gls{mcu} were the most important components with a lot of different connections, and were therefore placed central on the \gls{pcb}.
@@ -169,33 +168,33 @@ Most components were supplied by the 3.3V regulator, except for some internal pa
 
 Since 3.3V was used by most components, and since only a few connectors required 1.2V, a dedicated power plane for 3.3V was added.
 A dedicated ground plane was also added.
-This prevented more unnecessary routing, since everything connected to 3.3V or ground could go straight to a via by dogboning, and automatically be connected to the corresponding plane. 
-The 1.2V traces had to be routed through all the connectors like any other signal. 
+This prevented more unnecessary routing, since everything connected to 3.3V or ground could go straight to a via by dogboning, and automatically be connected to the corresponding plane.
+The 1.2V traces had to be routed through all the connectors like any other signal.
 
 \subsubsection{Split planes}
-The story of analogue 5V is a little different. 
-The reason for an analogue 5V was to avoid noise from digital signals. 
-The analogue components are sensitive to noise from the digital circuitry, and it was crucial to have as little noise as possible on the signal going to the oscilloscope. 
-To avoid noise, the analogue and digital circuitry had to be separated completely. 
+The story of analogue 5V is a little different.
+The reason for an analogue 5V was to avoid noise from digital signals.
+The analogue components are sensitive to noise from the digital circuitry, and it was crucial to have as little noise as possible on the signal going to the oscilloscope.
+To avoid noise, the analogue and digital circuitry had to be separated completely.
 Analogue components could not use the same voltage supply as the digital ones, and the same mattered for ground.
 
-The solution was to split the power and ground plane, shown in figure \ref{fig:Split planes}. 
+The solution was to split the power and ground plane, shown in figure \ref{fig:Split planes}.
 \begin{itemize}
-\item 5AV: Analogue 5V for components on the analogue plane. 
-The reason for 5V was based on insecurity about how much voltage the oscilloscope required to properly display the vector graphics from the program. 
-3.3V could be too low, so 5V was chosen. 
+\item 5AV: Analogue 5V for components on the analogue plane.
+The reason for 5V was based on insecurity about how much voltage the oscilloscope required to properly display the vector graphics from the program.
+3.3V could be too low, so 5V was chosen.
 A high signal voltage could also potentially help reduce noise.
-\item AGND: Analogue components are connected to this ground instead of digital ground. 
+\item AGND: Analogue components are connected to this ground instead of digital ground.
 This is to stop the analogue signal from getting disturbed by the digital signals on the ground plane.
 \item 3.3V: Digital voltage for digital components.
 \item GND: Digital ground.
 \end{itemize}
 
-All analogue components were placed in the analogue plane, and the opposite with digital components. 
-The exception was the \gls{dac}s, which acts as a bridge between the digital part and the analogue part. 
+All analogue components were placed in the analogue plane, and the opposite with digital components.
+The exception was the \gls{dac}s, which acts as a bridge between the digital part and the analogue part.
 These were placed on the actual split, with the affected pins on the correct side.
 
-To remove any digital noise that could potentially accumulate on the analog ground plane, a diode was placed between the two ground planes. 
+To remove any digital noise that could potentially accumulate on the analog ground plane, a diode was placed between the two ground planes.
 This let the current flow from the analogue ground to the digital ground, but not vice versa.
 
 \begin{figure}[h!]
@@ -207,23 +206,23 @@ This let the current flow from the analogue ground to the digital ground, but no
 
 \section{Routing}
 The components had to be physically connected according to the schematics.
-Connections could be manually routed, or Altium's auto router could be used. 
-The auto router would automatically route as many connections as possible.  
+Connections could be manually routed, or Altium's auto router could be used.
+The auto router would automatically route as many connections as possible.
 
-Routing was a much more time-consuming process than the team expected. 
-Too much trust was put into Altium's auto router. 
-The router did not, as the team naively thought, magically solve the routing. 
+Routing was a much more time-consuming process than the team expected.
+Too much trust was put into Altium's auto router.
+The router did not, as the team naively thought, magically solve the routing.
 
 \subsection{Design Rules}
-Before routing, necessary rules had to be defined to make sure the \gls{pcb} was routed properly. 
+Before routing, necessary rules had to be defined to make sure the \gls{pcb} was routed properly.
 The following listing explains the most important rules for the design.
 \begin{itemize}
-\item Clearance: 0.1mm. 
+\item Clearance: 0.1mm.
 \newline
 Minimum clearance between different traces
 \item Width: 0.127mm, Power Width 0.203mm.
 \newline
-Minimum width for traces. 
+Minimum width for traces.
 Power traces had bigger minimum widths, than signal traces.
 \item Via Diameter: 0.4mm, Via Hole Size: 0.2mm
 \newline
@@ -231,37 +230,37 @@ Minimum diameter and hole size for multi-layer vias.
 \item Short-circuits and net antennas not allowed
 \end{itemize}
 
-The rules were set like this to make sure there wouldn't be any interference between traces, while the traces were still wide enough to not be damaged by the signal itself. 
+The rules were set like this to make sure there wouldn't be any interference between traces, while the traces were still wide enough to not be damaged by the signal itself.
 Power traces were wider to make sure they could handle the voltage.
-Net antennas were traces that lead to dead-ends. 
+Net antennas were traces that lead to dead-ends.
 This could harm the design, since these dead-ends could work as unwanted signal receivers from nearby sources.
 
 \subsubsection{Design Rule Check}
-Altium had it's own tool for testing how many violations our current design created, called Design Rule Check. 
-It displayed the amount of errors occurred from each type, and the coordinates on the \gls{pcb} for every error. 
+Altium had it's own tool for testing how many violations our current design created, called Design Rule Check.
+It displayed the amount of errors occurred from each type, and the coordinates on the \gls{pcb} for every error.
 Typical errors during our design procedure were short-circuits, net antennas and clearance constraint violations.
 
 \subsection{Routing Procedure}
-The task of routing the \gls{pcb} was started by routing some components manually. 
-The team quickly discovered that doing this for the entire board would take a very long time, and so began to check out Altium's built-in auto router. 
+The task of routing the \gls{pcb} was started by routing some components manually.
+The team quickly discovered that doing this for the entire board would take a very long time, and so began to check out Altium's built-in auto router.
 //TODO: Add source
 
 The team ran into many different routing problems, which is discussed in detail in section \ref{Routing Problems}
 
 \section{Fault Handling}
-The team were all inexperienced with \gls{pcb} design and often uncertain if actions or decisions could cause problems down the line. 
-The top priority was to make something that worked properly. 
-A failing component was deemed probable, and forgetting something was guaranteed to happen, considering the vast amount of factors involved. 
+The team were all inexperienced with \gls{pcb} design and often uncertain if actions or decisions could cause problems down the line.
+The top priority was to make something that worked properly.
+A failing component was deemed probable, and forgetting something was guaranteed to happen, considering the vast amount of factors involved.
 Hence, the team decided that having back-up features on the \gls{pcb} was critical.
 
 \subsection{Headers}
-The primary strategy of handling faults was redundancy, mostly in the form of header pins. 
-The final amount of headers ended up at 34, including the \gls{jtag} and the ARM programming header. 
-Using this huge amount of headers made it possible to measure most signals with a multimeter and verify them. 
-The team got this idea from reading the Demolicious report \cite{demolicious-report}, from last years computer design project. 
+The primary strategy of handling faults was redundancy, mostly in the form of header pins.
+The final amount of headers ended up at 34, including the \gls{jtag} and the ARM programming header.
+Using this huge amount of headers made it possible to measure most signals with a multimeter and verify them.
+The team got this idea from reading the Demolicious report \cite{demolicious-report}, from last years computer design project.
 
-Most headers were placed between components. 
-If wrong connections existed, or a connection didn't work, the connection could hopefully be corrected by connecting wires. 
+Most headers were placed between components.
+If wrong connections existed, or a connection didn't work, the connection could hopefully be corrected by connecting wires.
 Not only could errors more easily be detected - it would also be easier to fix them.
 
 \begin{figure}[h!]
@@ -271,18 +270,18 @@ Not only could errors more easily be detected - it would also be easier to fix t
 \label{fig:Header fix}
 \end{figure}
 
-Headers was also useful as switches. 
-By manually connecting header pins with jumpers, certain parts of the \gls{pcb} could be activated and deactivated. 
-This would be useful when focusing on lesser parts of the circuit. 
-For instance, 3-pin headers were used to manually turn on and off different voltage levels. 
+Headers was also useful as switches.
+By manually connecting header pins with jumpers, certain parts of the \gls{pcb} could be activated and deactivated.
+This would be useful when focusing on lesser parts of the circuit.
+For instance, 3-pin headers were used to manually turn on and off different voltage levels.
 Power could also be delivered to the components directly through the headers, if any issue with the power supply should occur.
 
 \subsection{DACs}
-Even though separate \gls{dac}s for outputting analog voltage out to the \gls{bnc} plug was included, there was still a risk that the group could not get them to work. 
-A back-up solution by connecting the internal \gls{dac}s in the \gls{mcu} to the \gls{bnc}s was implemented. 
-One 2x2 header for each \gls{bnc} input was used to manually control whether the main \gls{dac}s or the \gls{mcu} \gls{dac}s were to be used. 
-This process is shown in figure \ref{fig:DAC headers}. 
-There's one header each for the X and the Y signal to the oscilloscope. 
+Even though separate \gls{dac}s for outputting analog voltage out to the \gls{bnc} plug was included, there was still a risk that the group could not get them to work.
+A back-up solution by connecting the internal \gls{dac}s in the \gls{mcu} to the \gls{bnc}s was implemented.
+One 2x2 header for each \gls{bnc} input was used to manually control whether the main \gls{dac}s or the \gls{mcu} \gls{dac}s were to be used.
+This process is shown in figure \ref{fig:DAC headers}.
+There's one header each for the X and the Y signal to the oscilloscope.
 
 \begin{figure}[h!]
 \centering
@@ -290,4 +289,3 @@ There's one header each for the X and the Y signal to the oscilloscope.
 \caption{Left: Jumpers connecting \gls{mcu} \gls{dac} to \gls{bnc} and normal \gls{dac} to ground. Right: The opposite}
 \label{fig:DAC headers}
 \end{figure}
-
