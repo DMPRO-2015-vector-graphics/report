@@ -8,7 +8,7 @@ During testing the group gained valuable experience about all the subcomponents 
 
 The DAC was tested prior to PCB arrival, to ensure correct operation from an FPGA.
 Eight wires were soldered onto the DAC, and connected to a breadboard.
-The FPGA was flashed with and simple architecture, which repeatedly read the status of 14? general I/O pins, and shifted each bit out sequentially on another pin.
+The FPGA was flashed with and simple architecture, which repeatedly read the status of 14 general I/O pins, and shifted each bit out sequentially on another pin.
 Both the DAC and FPGA clock input was driven by an external frequency generator, producing 3.3VPP at 10MHz.
 
 To validate the signal output from the FPGA a logical analyser was used.
@@ -20,8 +20,6 @@ With VRef and VDD at 5.0V, the analogue DAC output was measured to 0.69V when no
 Once the the PCB arrived we were able to test the DACs soldered onto the PCB as well as with actual data from the FPGA.
 
 Clocking data from the FPGA to the DACs on our PCB presented some issues as we hit a limit in the Spartan 6 architecture regarding clock routing. This was resolved by using an ODDR\cite[pp. 61--65]{fpga-io} in order to forward the clock signal to the desired output pin.
-
-Once we had the data input to the DACs working we could test the outputs. In does this we found some issues with out ground planes as well as the maximum output voltages from the DACs. The maximum voltage we were able to get was 1.6V, a little under half of our reference voltage of 3.3V. //TODO: Update this when the problem is fixed.
 
 
 \subsection{Oscilloscope}
