@@ -63,7 +63,7 @@ We discovered that our buttons were wired wrong, since they caused short-circuit
 \end{figure}
 
 \subsubsection{No Output from Oscillators}
-When testing the oscillators, they did not seem to work. The datasheet for these components clearly stated that connecting the E/D pin to either 'No Connect' or '1' equaled active, so we did not connect it. We tried to remedy by connecting E/D to /(V_{CC}/), and the problem was solved.
+When testing the oscillators, they did not seem to work. The datasheet for these components clearly stated that connecting the E/D pin to either 'No Connect' or '1' equaled active, so we did not connect it. We tried to remedy by connecting E/D to \(V_{CC}\), and the problem was solved.
 
 \subsubsection{Incorrect Power Supply to Vref and DACs}
 The Vref chip was supplied with 3.3V, but should have been supplied with analogue 5V instead. This could be remedied by cutting on the 3.3V power trace, since the trace is located on the top layer and no other traces are beneath it. Then we could connect analogue 5V via header from the voltage regulator to the input pin on the Vref chip.
@@ -75,7 +75,7 @@ The \gls{bnc} connections were faulty wired. Each \gls{bnc} had two connections 
 
 \subsubsection{FPGA Configuration Issue}
 When the \gls{fpga} would complete configuration it was supposed to set a signal high, which was connected to the \gls{mcu}, saying it was ready. However, the \gls{mcu} seemed to ignore this signal, because it never changed. What caused this problem was too hasty study of the manual describing configuration of the \gls{fpga}.
-An unnecessary connection to /(V_{CC}/), forced the Done signal into the \gls{mcu} to always be high, even when the \gls{fpga} was not configured. We couldn't remove the /(V_{CC}/) connection, so we had to figure out a workaround.
+An unnecessary connection to \(V_{CC}\), forced the Done signal into the \gls{mcu} to always be high, even when the \gls{fpga} was not configured. We couldn't remove the \(V_{CC}\) connection, so we had to figure out a workaround.
 
 By introducing a transistor, and making the signal active low on the \gls{mcu} side, we managed to make the \gls{mcu} notice when configuration was complete.
 The problem and solution is shown in detail in figure \ref{fig:Done Issue}.
@@ -92,7 +92,7 @@ This solution was possible because the wire went through the \gls{jtag} header.
 \label{fig:Done Issue}
 \end{figure}
 
-After further studying of the \gls{fpga} configuration manual, we saw that this guide was different from what we intended in our design, so there was need for this extra /(V_{CC}/) connection. The guide we studied is on page 42 in \cite{\gls{jtag}-configuration}
+After further studying of the \gls{fpga} configuration manual, we saw that this guide was different from what we intended in our design, so there was need for this extra \(V_{CC}\) connection. The guide we studied is on page 42 in \cite{\gls{jtag}-configuration}
 
 \subsubsection{Noise Reduction}
 The diode which we intended to reduce noise in the analogue plane, had no noticable effect. The reason was probably that we only thought about current leakage and not noise itself. To solve this problem, the team got the idea of using a ferrite bead instead of the diode. A ferrite bead is a component designed to suppress high-frequency noise. 
