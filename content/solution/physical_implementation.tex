@@ -59,9 +59,6 @@ Crystals, on the other hand, required load capacitors, whose values weren't prop
 Another reason was that our FPGA explicitly needed an external oscillator, as a crystal was incompatible with the design.
 Hence, the team chose oscillators for both the FPGA and MCU for simplicity.
 
-The FPGA oscillator had a frequency of 100MHz.
-Even though this is a high frequency, this signal could be scaled inside the FPGA to desirable frequencies. // TODO: Elaborate?
-
 \subsection{Buses}
 The system used one parallel bus (EBI), and one serial bus (SPI).
 The MCU acted as bus master for both of them, since it supplied the bus technologies.
@@ -240,18 +237,7 @@ Typical errors during our design procedure were short-circuits, net antennas and
 \subsection{Routing Procedure}
 The task of routing the PCB was started by routing some components manually. 
 The team quickly discovered that doing this for the entire board would take a very long time, and so began to check out Altium's built-in auto router. 
-//TODO: Remove this list?
-Roughly, this routing procedure was followed:
-\begin{enumerate}
-\item Run the auto router.
-\item Run Design Rule Check, and observe how many errors that occurred. 
-\item If there are too many errors (e.g. more than 200), there is most likely something wrong with the design rules or the auto router settings. If not, go to step 6.
-\item Check and modify settings and rules.
-\item Go back to step 1.
-\item Go through the remaining errors and fix them. 
-\item ...
-\item PROFIT!
-\end{enumerate}
+//TODO: Add source
 
 The team ran into many different routing problems, which is discussed in detail in section \ref{Routing Problems}
 

@@ -4,20 +4,6 @@
 
 When we had received the PCB and the components, we had to make sure that every component worked properly independent of the PCB, then testing if they worked on the PCB. Many major components were impossible to test without soldering on the PCB though. Examples were the FPGA and MCU, because of their tiny ball grid pins.
 
-\subsection{Soldering}
-There were different ways of soldering components on the PCB. It depended on components being through hole, surface mounted, pin size, etc.
-\subsubsection{Ball Grid Arrays (BGA)}
-Both the FPGA and MCU were ball grid arrays.
-Therefore, they were soldered on the PCB,//TODO: No paste were smeard by smearing paste over the corresponding area, putting them carefully on, and putting the PCB in a heater. The heater made the components stick properly to the paste. This was the only way, since soldering pins directly under the component by hand, isn't practically possible.
-
-\subsubsection{Surface Mounted Components}
-Most surface mounted components where the pins weren't too small and crowded, were soldered by hand. Paste were used before hand, just like with BGAs, but after that the pins could be soldered by hand, since the pins were within physical reach. 
-\newline
-If pins were too small and tight, the same technique was used as for the BGAs.
-
-\subsubsection{Through Hole Components}
-Through Hole components were the easiest to solder, since the pin size and the space between them was relatively large. Additionally they were on the bottom side of the board. No paste was needed, each individual pin could be soldered with tin wires.
-
 \subsection{Testing of Physical PCB}
 We had to find and fix all errors and faults with our PCB design and components, that were a hazard to our desired resulting system.  
 We had some direct initial tests of the PCB itself, but afterwards it was indirectly tested, when testing the FPGA, MCU, DACs etc. It was in these indirect tests, most errors were discovered.
