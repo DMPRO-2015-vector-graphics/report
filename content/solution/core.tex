@@ -38,11 +38,25 @@ Each component is described in detail in their respective section below, the fol
 \section{Instruction Format}
 
 Instructions in the \vthreek architecture are 32 bits wide.
-As opposed to the MIPS architecture they can't all be grouped into categories based on their format.
+As opposed to the MIPS architecture, they can't all be grouped into categories based on their format.
 They do however share some common traits.
 All instructions start with an 6-bit opcode, a unique identifier for each instruction.
-The remaining bits are used either to address registers or as immediate values.
+The remaining bits are used either to address registers, to encode immediate values or as a combination.
+Some instructions also have don't care bits, parts of the instruction that can be either 1 or 0 without influencing the outcome of execution.
+For instructions that address one or more registers, a general convention of using the five bits directly after the opcode for the destination register and addressing source registers in successive five bit chunks.
+Figure \ref{fig:instruction-format} shows how various parts of an instruction word is utilized.
+
+\begin{figure}[h!]
+    \includegraphics[width=\linewidth]{images/instruction-format.png}
+    \caption{\vthreek instruction format.}
+    \label{fig:instruction-format}
+\end{figure}
+
 As an example, the \texttt{jmp} instruction is encoded with the opcode \texttt{000001}, seven don't care bits followed by the 19-bit jump target.
+The \texttt{bezcube} instruction initializes a cubic Bézier primitive into the primitive register, reading the coordinates of the four control points from four general purpose registers.
+With 32 general purpose registers, five bits are needed to address them.
+That means that the \texttt{bezcube} instruction is encoded with its six bit opcode, \texttt{000111}, followed by five don't care bits, then four 5-bit chunks, one for each register.
+The final bit is also don't care.
 
 \section{Data Path}
 
