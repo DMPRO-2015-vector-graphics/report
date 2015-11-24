@@ -89,4 +89,7 @@ This solution was possible because the wire went through the JTAG header.
 
 After further studying of the FPGA configuration manual, we saw that this guide was different from what we intended in our design, so there was need for this extra VCC connection. The guide we studied is on page 42 in \cite{fpga-configuration}
 
-//TODO: Diode reduserte ikke støy, fikset ved å erstatte med ferrit og motstand
+\subsubsection{Noise Reduction}
+The diode which we intended to reduce noise in the analogue plane, had no noticable effect. The reason was probably that we only thought about current leakage and not noise itself. To solve this problem, the team got the idea of using a ferrite bead instead of the diode. A ferrite bead is a component designed to suppress high-frequency noise. 
+\newline
+Noise was reduced, but the ferrite bead itself worked also as a resistor, allowing only a small current flow through. By connecting a resistor with very low resistance (How many Ohms?) in parallell with the ferrite bead, current was able to flow freely through this connection.
