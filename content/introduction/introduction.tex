@@ -45,6 +45,7 @@ A vector based solution is inherently resolution independent, allowing for asset
 More information about vector and raster graphics is found in chapter \ref{sec:background}.
 
 \section{Requirements}
+\label{sec:requirements}
 The group decided on a set of functional requirements based on initial research, listed in table \ref{tbl:func_req}.
 Non-functional requirements given in the assignment text are listed in list \ref{lst:non_func_req}.
 
@@ -77,6 +78,13 @@ Non-functional requirements given in the assignment text are listed in list \ref
 
 
 \section{A Vector Graphics Computer Architecture}
+
+\begin{figure}[H]
+    \includegraphics[width=\linewidth]{images/high_level_io.png}
+    \caption{I/O overview.}
+    \label{fig:io-overview}
+\end{figure}
+
 Based on the requirements, the group chose to make a general purpose computer with support for producing and processing vector graphics.
 The computer would read instructions from memory, execute them on a processor core and render vector based scenes to different outputs.
 To showcase the nature of vector graphics, a vector display in the form of an oscilloscope was chosen as the primary output device.

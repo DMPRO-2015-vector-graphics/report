@@ -2,9 +2,9 @@
 
 \input{content/solution/primitives}
 
-\section{Architectual structure}
+\section{Architectural structure}
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \includegraphics[width=\linewidth]{images/system-overview.png}
     \caption{A logical overview of the \vthreek architecture}
     \label{fig:system-overview}
@@ -15,18 +15,52 @@ Separation of instruction and data memory makes it a Harvard-like architecture.
 The processor reads from instruction memory, executes instructions and adds/updates vector primitives in the scene memory.
 Preprocessing these primitives for output is done by the output modules.
 
-
 \section{Programming Model}
 
-The \vthreek architecture is fairly conventional and largely RISC-inspired.
-This makes its programming model similar to that of other modern computers.
+While the primary goal of the \vthreek architecture is to provide efficient means of working with vector graphics, it is also designed with approachability in mind.
+The parts of the programming model that are not directly related to vector operations, should be familiar to any developer used to other modern RISC-like architectures.
+
+From the programmers point of view, there are two separate memories available; the general data memory and the scene memory.
+The processor provides 32 general purpose 32-bit registers.
+A special purpose 136-bit primitive register is provided as the main interface through which primitives are created and modified.
+
+\subsection{Available Instructions}
+
+The \vthreek ISA, described in appendix \ref{app:isa}, defines instructions both for general computation and special purpose instructions for working with primitives and the scene.
+General purpose instructions are outlined briefly here, while vector instructions are elaborated on in greater detail.
+
+\subsubsection{General}
+
+As per the requirements \ref{sec:requirements}, the \vthreek processor is designed to be general.
+In other words, it supports integer arithmetic, reading from and writing to data memory and conditional branching.
+
+Working with the data memory is supported through the \texttt{ldr} and \texttt{str} instructions.
+They share the same syntax, namely \texttt{<op> <register> \#<address>}.
+For \texttt{ldr}, the register is the register in which the data at the address should be stored.
+Similarily, for \texttt{str}, the data in the register is stored at the address.
+
+Moving data into registers can also be done using the \texttt{mov}, \texttt{movl} and \texttt{movu} instructions.
+Since both registers and instructions are 32 bits, all values that are possible to store in registers can't be encoded into an instructions.
+Move instructions share the same syntax, \texttt{<op> <register> \#<16-bit immediate>}.
+\texttt{mov} sets the upper 16 bits of the specified register to zero and the lower 16 bits to the immediate value.
+\texttt{movl} sets the lower 16 bits of the register to the specified value, leaving the upper 16 bits unchanged, and \texttt{movu} vice versa.
+
+Branching is done conditionally with the \texttt{beq} instruction and unconditionally with \texttt{jmp}.
+\texttt{beq} compares the contents of two registers and jumps to an offset (specified in the instruction) from the current program counter value if the contents are equal.
+\texttt{jmp} jumps unconditionally to an address specified in the instruction.
+
+The processor implements two arithmetic instructions, \texttt{add} and \texttt{lsl}.
+In the context of arithmetic, operands are treated as signed values, so subtraction is also possible.
+\texttt{add}, with syntax \texttt{add Rd, Rs, Rt}, adds the contents of registers \texttt{Rs} and \texttt{Rt} and stores the result in register \texttt{Rd}.
+Logical shift left, with syntax \texttt{lsl Rd, Rs, <immediate>} shifts the contents of register \texttt{Rs} by a number of bits specified using a logical left shift.
+
+\subsubsection{Vector Instructions}
 
 A .v3k program is assembled on a host machine, transferred to the microcontroller which in turn loads it into instruction memory.
-As previously mentioned, the \vthreek architecture is general, and as such, offers support for integer arithmetic, load/store instructions and simple branching.
-Additionally, instructions for adding and processing vector primitives such as lines and curves are available.
-A complete description of the \vthreek ISA is available in appendix \ref{app:isa}.
 
 \subsection{A Simple \vthreek Program}
+
+// TODO: rewrite this to conform with reality
 
 \begin{lstlisting}[label=lst:simple-program]
 mov r1, #0
@@ -43,10 +77,6 @@ strp #0x00000001
 
 Listing \ref{lst:simple-program} shows a very simple \vthreek program.
 It simply draws a line across the scene, from bottom left corner to top right.
-
-Vector primitives consist of a varying number of integer numbers.
-In the case of a line, it consists of four 16-bit integers, \texttt{start\_x, start\_y, stop\_x, stop\_y}.
-To utilize registers efficiently, each 32-bit register is loaded with one x,y coordinate-pair.
 
 The first three lines put the coordinates $0,0$ in register \texttt{r1}, the next three puts $65535,65535$ in register \texttt{r2}.
 The values in the registers are then used to create a line starting at \texttt{r1} and ending at \texttt{r2}.
