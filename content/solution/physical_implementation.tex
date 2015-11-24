@@ -1,27 +1,27 @@
 \chapter{Physical Implementation}
 
 // TODO: add diagram of physical components and their connections
-This chapter describes our choosing of physical components, and the implementation of the PCB.
+This chapter describes our choosing of physical components, and the implementation of the \gls{pcb}.
 
 \section{Architecture}
 The main specification the group had to meet at all costs was to be able to take a program (a sequence of instructions) as input, and output vector graphics on a screen.
 
-Tracing the envisioned execution path of a program through the system gives insight into some of the considerations that had to be taken when designing the PCB and selecting components. An overview of the PCB architecture is displayed in \ref{fig:PCB_Overview}
+Tracing the envisioned execution path of a program through the system gives insight into some of the considerations that had to be taken when designing the \gls{pcb} and selecting components. An overview of the \gls{pcb} architecture is displayed in \ref{fig:PCB_Overview}
 
 \begin{enumerate}
 \item Assembled \vthreek programs are loaded into instruction memory via the EFM32 microcontroller.
-\item The FPGA reads instructions from memory and performs execution.
+\item The \gls{fpga} reads instructions from memory and performs execution.
 \item Data ready to be sent to output will be stored in a frame buffer.
-\item The FPGA sends data from the frame buffer to the output screens via two interfaces, two DACs and an HDMI port.
-\item The output from the DACs is displayed on an analogue oscilloscope and the output from the HDMI on a raster screen.
+\item The \gls{fpga} sends data from the frame buffer to the output screens via two interfaces, two \gls{dac}s and an \gls{hdmi} port.
+\item The output from the \gls{dac}s is displayed on an analogue oscilloscope and the output from the \gls{hdmi} on a raster screen.
 \end{enumerate}
 
-The plan with the flash memory was to be able to store the bit file, which would configure the FPGA. This would make us able to quickly get the system up and running after turning it on, since the flash would automatically be configured.
+The plan with the flash memory was to be able to store the bit file, which would configure the \gls{fpga}. This would make us able to quickly get the system up and running after turning it on, since the flash would automatically be configured.
 
 \begin{figure}[h!]
 \centering
 \includegraphics[scale = 0.4]{images/PCB_Overview.png}
-\caption{Overview of PCB architecture}
+\caption{Overview of \gls{pcb} architecture}
 \label{fig:PCB_Overview}
 \end{figure}
 
@@ -32,7 +32,7 @@ This information was found by inspecting the various component's datasheets.
 Critical components in the design are described in the following subsections.
 
 \subsection{MCU}
-The MCU was an EFM32GG microcontroller from Silicon Labs. 
+The \gls{mcu} was an EFM32GG microcontroller from Silicon Labs. 
 It served as an input processor for our system, handling input before and during run-time. 
 Some of the technologies included with it, were also exploited, for instance buses. 
 //TODO: This information is included in mcu.tex. Could be merged?
