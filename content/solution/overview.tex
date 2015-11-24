@@ -56,7 +56,41 @@ Logical shift left, with syntax \texttt{lsl Rd, Rs, <immediate>} shifts the cont
 
 \subsubsection{Vector Instructions}
 
-A .v3k program is assembled on a host machine, transferred to the microcontroller which in turn loads it into instruction memory.
+Several instructions for working with primitives and the scene are available.
+A new primitive is created by issuing a \texttt{line}, \texttt{bezquad} or \texttt{bezcube} instruction.
+Linear, quadratic and cubic Bézier curves are defined by, respectively, two, three and four control points.
+Each control point fits into a 32-bit register, with 16 bits per coordinate component.
+Primitive coordinates are initialized into the special purpose primitive register using the following syntax:
+
+\begin{lstlisting}[label=lst:primitive-initialization]
+line Rs, Rt
+bezquad Rs, Rt, Ru
+bezcube Rs, Rt, Ru, Rv
+\end{lstlisting}
+
+Figure \ref{fig:primitive-data-mapping} shows how coordinate components are aligned in general purpose registers, ready to be used as a control point for a primitive.
+
+\begin{figure}[H]
+    \includegraphics[width=\linewidth]{images/primitive-data-mapping.png}
+    \caption{Mapping from x,y coordinates to 32-bit registers.}
+    \label{fig:primitive-data-mapping}
+\end{figure}
+
+Once a primitive has been initialized it has to be written to the scene memory before it can be displayed.
+This is done with the store primitive instruction, \texttt{strp}.
+It takes a scene memory address as it's only argument.
+\texttt{strp} also increments the primitive counter.
+
+Once a primitive is in the scene memory, the output module will take care of producing display output.
+A primitive can be read back into the processor core with the \texttt{ldrp} instruction, which similarily to \texttt{strp} takes an address as its only argument.
+The instruction loads the primitive at the specified address in scene memory back into the primitive register in the processor core.
+
+The primitive currently in the primitive register can be modified using getter and setter instructions.
+\texttt{getpX Rd} copies the value of control point \texttt{X} into register \texttt{Rd}.
+Inversely, \texttt{setpX Rs} sets the value of control point \texttt{X} in the primitive register to the value stored in register \texttt{Rs}.
+When overwriting a primitive in scene memory, incrementing the primitive counter is often not desired.
+Since \texttt{strp} does this implicitly, a separate instruction, \texttt{updp}, is provided.
+It has the same syntax as \texttt{strp}, but does not increment the primitive counter.
 
 \subsection{A Simple \vthreek Program}
 
