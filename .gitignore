@@ -12,6 +12,16 @@
 *.fdb_latexmk
 main-blx.bib
 *run.xml
+*.lof
+*.lot
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.ist
+
 # Hidden files
 .*.swo
 .*.swp
