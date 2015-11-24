@@ -1,11 +1,12 @@
 \chapter{Physical Implementation}
 
 // TODO: add diagram of physical components and their connections
+This chapter describes our choosing of physical components, and the implementation of the PCB.
 
 \section{Architecture}
 The main specification the group had to meet at all costs was to be able to take a program (a sequence of instructions) as input, and output vector graphics on a screen.
 
-Tracing the envisioned execution path of a program through the system gives insight into some of the considerations that had to be taken when designing the PCB and selecting components.
+Tracing the envisioned execution path of a program through the system gives insight into some of the considerations that had to be taken when designing the PCB and selecting components. An overview of the PCB architecture is displayed in \ref{fig:PCB_Overview}
 
 \begin{enumerate}
 \item Assembled \vthreek programs are loaded into instruction memory via the EFM32 microcontroller.
@@ -13,6 +14,13 @@ Tracing the envisioned execution path of a program through the system gives insi
 \item The FPGA sends output via two interfaces, two DACs and an HDMI port.
 \item The output from the DACs is displayed on an analogue oscilloscope and the output from the HDMI on a raster screen.
 \end{enumerate}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale = 0.4]{images/PCB_Overview.png}
+\caption{Overview of PCB architecture}
+\label{fig:PCB_Overview}
+\end{figure}
 
 \section{Components}
 This section describes the team's choices of components.
