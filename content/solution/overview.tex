@@ -20,7 +20,7 @@ Preprocessing these primitives for output is done by the output modules.
 \label{sec:programming-model}
 
 While the primary goal of the \vthreek architecture is to provide efficient means of working with vector graphics, it is also designed with approachability in mind.
-The parts of the programming model that are not directly related to vector operations, should be familiar to any developer used to other modern RISC-like architectures.
+The parts of the programming model that are not directly related to vector operations, should be familiar to any developer used to other modern \gls{risc}-like architectures.
 
 From the programmers point of view, there are two separate memories available; the general data memory and the scene memory.
 The processor provides 32 general purpose 32-bit registers.
@@ -28,7 +28,7 @@ A special purpose 136-bit primitive register is provided as the main interface t
 
 \subsection{Available Instructions}
 
-The \vthreek ISA, described in appendix \ref{app:isa}, defines instructions both for general computation and special purpose instructions for working with primitives and the scene.
+The \vthreek \gls{isa}, described in appendix \ref{app:isa}, defines instructions both for general computation and special purpose instructions for working with primitives and the scene.
 General purpose instructions are outlined briefly here, while vector instructions are elaborated on in greater detail.
 
 \subsubsection{General}
