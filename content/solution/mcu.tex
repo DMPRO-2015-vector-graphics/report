@@ -1,6 +1,6 @@
 \chapter{Microcontroller}
 
-To handle I/O (not including output explained in Chapter \ref{chap:Output}), \vthreek is equipped with a microcontroller unit (MCU).
+To handle I/O (not including output explained in Chapter \ref{chap:Output}), \vthreek is equipped with a micro controller unit (MCU).
 This chapter will explain the reason for including this part, and its responsibilities. 
 
 \section{Silicon Labs EFM32 Giant Gecko}
@@ -12,7 +12,7 @@ The primary reason for choosing this variant of the EFM32 Gecko series, is that 
 It is the most powerful MCU in the series, and thus provides the most possibilities \cite{efm32}.
 
 \section{Responsibilities}
-The MCU does not have many responsibilities, and will in fact idle most of the time. The program flow is represented as a state diagram i Figure \ref{fig:mcu_state}.
+The MCU does not have many responsibilities, and will in fact idle most of the time. The program flow is represented as a state diagram in Figure \ref{fig:mcu_state}.
 Its primary tasks are: 
 \begin{itemize}
 \item Load program instructions into SRAM
@@ -28,9 +28,9 @@ This signal tells the MCU that JTAG has completed the FPGA flash process.
 It is important to wait for this signal, because the state of any signal connected to the FPGA is undefined prior to flashing.
 This could possibly interfere with the MCU writing to SRAM.
 
-Once the FPGA is flashed and ready, the MCU deasserts the Processor enable signal, to prevent it from start reading from SRAM prematurely.
-The MCU now write the program to SRAM, starting at address \texttt{0x0000}, writing 16 bits at a time.
-When complete, the Processor enable signal is asserted, and the processor will begin fetching instructions
+Once the FPGA is flashed and ready, the MCU de-asserts the processor enable signal, to prevent it from start reading from SRAM prematurely.
+The MCU then writes the program to SRAM, starting at address \texttt{0x0000}, writing 16 bits at a time.
+When complete, the processor enable signal is asserted, and the processor will begin fetching instructions
 
 \subsection{Buttons and joystick}
 The board is equipped with two push buttons and a 5-way joystick, connected to the MCU's general purpose input/output pins (GPIO).
