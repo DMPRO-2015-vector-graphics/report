@@ -36,6 +36,11 @@ We had to avoid power vias connected to dead copper, so we located every positio
 \label{fig:Dead copper}
 \end{figure}
 
+\subsection{Possible Routing Improvement}
+Since the auto router did the biggest part of the job, some wires took long detours, because of the complexity. Manual routing of some signals could've shortened these distance. However, the distance from a point to another wasn't critical for our design, since the signals travel very fast and we didn't have to keep a strict time schedule. Therefore, we decided it wasn't worth the time.
+
+Wires in the same parallell bus, should ideally have equal lengths, to make sure all signals in the same bus were synchronized. Some of our wires in the EBI bus and the bus between the FPGA and the frame buffer, had varying lengths. Again, the time differences would be so small that they wouldn't have a noticable effect on our design, but for a high-speed modern computer, it is critical to avoid these race conditions \cite{race-conditions}.
+
 \subsection{Bad Soldering}
 Some issues arised because of components not being properly soldered onto the PCB. Examples could be component pins having partial or no contact with the PCB, or pins touching several pads, when pads were tightly arranged.
 
