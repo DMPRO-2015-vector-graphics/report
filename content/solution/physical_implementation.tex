@@ -32,130 +32,126 @@ This information was found by inspecting the various component's datasheets.
 Critical components in the design are described in the following subsections.
 
 \subsection{MCU}
-The \gls{mcu} was an EFM32GG microcontroller from Silicon Labs. 
-It served as an input processor for our system, handling input before and during run-time. 
-Some of the technologies included with it, were also exploited, for instance buses. 
-//TODO: This information is included in mcu.tex. Could be merged?
+The \gls{mcu} was the EFM32GG microcontroller described earlier. 
 
 \subsection{FPGA}
-The FPGA was a Xilinx Spartan-6, with 401 kb block RAM. 
+The \gls{fpga} was a Xilinx XC6SLX45-2CSG324I, with 401 kb block \gls{ram}. 
 It served as the main processor in the design, fetching and executing instructions from instruction memory.
-//TODO: Should the FPGA be introduced somewhere else?
 
-A JTAG header was connected to the FPGA for good accessibility to FPGA debugging and programming.
+A \gls{jtag} header was connected to the \gls{fpga} for good accessibility to \gls{fpga} debugging and programming.
 //TODO : elaborate
 
 \subsection{SRAM}
-Two SRAMs were put on the PCB. 
-One of them worked as an instruction memory for the FPGA, while the other was a dedicated frame buffer for our output signals. 
-The instructions executed in the FPGA would update the frame buffer, and data from the frame buffer could be read and transferred to the output units. 
-Both SRAMs had an address space of 512k 16-bit words. 
+Two \gls{sram}s were put on the \gls{pcb}. 
+One of them worked as an instruction memory for the \gls{fpga}, while the other was a dedicated frame buffer for our output signals. 
+The instructions executed in the \gls{fpga} would update the frame buffer, and data from the frame buffer could be read and transferred to the output units. 
+Both \gls{sram}s had an address space of 512k 16-bit words. 
 
 \subsection{DACs and BNCs}
-As the purpose of the computer was to output vector graphics on an analogue vector screen, DACs were essential.
-They would convert digital signals from the FPGA destined for the output screen, to corresponding analogue signals.
+As the purpose of the computer was to output vector graphics on an analogue vector screen, \gls{dac}s were essential.
+They would convert digital signals from the \gls{fpga} destined for the output screen, to corresponding analogue signals.
 
-It was important that the DACs could output signals fast enough, to minimize flickering. 
-Therefore, DACs that could support clock rates up to 30MHz was chosen.
+It was important that the \gls{dac}s could output signals fast enough, to minimize flickering. 
+Therefore, \gls{dac}s that could support clock rates up to 30MHz was chosen.
 
-The BNCs connectors would receive the analogue signals and send them to the oscilloscope.
-There was one DAC and one BNC for both the x-coordinate and the y-coordinate on the oscilloscope.
+The \gls{bnc}s connectors would receive the analogue signals and send them to the oscilloscope.
+There was one \gls{dac} and one \gls{bnc} for both the x-coordinate and the y-coordinate on the oscilloscope.
 
 \subsection{Oscillators}
-Two external oscillators were connected to the MCU: one low frequency (32,768kHz), and one high frequency (48MHz).
-The MCU already contained internal RC-oscillators, but external oscillators were much more accurate and stable than the internal ones, which was important for avoiding more sources of errors.
+Two external oscillators were connected to the \gls{mcu}: one low frequency (32,768kHz), and one high frequency (48MHz).
+The \gls{mcu} already contained internal RC-oscillators, but external oscillators were much more accurate and stable than the internal ones, which was important for avoiding more sources of errors.
 Both crystals or full-fledged oscillators could be used, but in the end, the team decided to use oscillators.
 The reason behind this choice was that an oscillator was one fully built component with all the necessary circuitry inside, and the datasheet clearly specified how it should be connected.
 Crystals, on the other hand, required load capacitors, whose values weren't properly specified.
-Another reason was that our FPGA explicitly needed an external oscillator, as a crystal was incompatible with the design.
-Hence, the team chose oscillators for both the FPGA and MCU for simplicity.
+Another reason was that our \gls{fpga} explicitly needed an external oscillator, as a crystal was incompatible with the design.
+Hence, the team chose oscillators for both the \gls{fpga} and \gls{mcu} for simplicity.
 
 \subsection{Buses}
-The system used one parallel bus (EBI), and one serial bus (SPI).
-The MCU acted as bus master for both of them, since it supplied the bus technologies.
+The system used one parallel bus (\gls{ebi}), and one serial bus (\gls{spi}).
+The \gls{mcu} acted as bus master for both of them, since it supplied the bus technologies.
 
 \subsubsection{EBI}
-The FPGA, MCU and SRAM were all connected via the EBI bus.
-These connections were made properly by using the specified EBI-pins on the MCU. [citation to MCU datasheet]
-The EBI bus allowed high-speed communication to the SRAM.
-As the EBI bus is a parallel bus, the team included the following bus lines:
+The \gls{fpga}, \gls{mcu} and \gls{sram} were all connected via the \gls{ebi} bus.
+These connections were made properly by using the specified \gls{ebi}-pins on the \gls{cmu}. // TODO: citation to \gls{mcu} datasheet
+The \gls{ebi} bus allowed high-speed communication to the \gls{sram}.
+As the \gls{ebi} bus is a parallel bus, the team included the following bus lines:
 \begin{itemize}
 \item 23 Address bits. More than initially needed, but this was increased for good measure.
-\item 16 Data bits, since our SRAM consisted of 16-bit words.
-\item 2 Chip select bits, one for the FPGA and one for the SRAM.
+\item 16 Data bits, since our \gls{sram} consisted of 16-bit words.
+\item 2 Chip select bits, one for the \gls{fpga} and one for the \gls{sram}.
 \item 1 Write enable bit, active low.
 \item 1 Read enable bit, active low.
 \end{itemize}
 
 \subsubsection{SPI}
-The SPI served as a three-way communication between the MCU, FPGA and Flash memory.
-It's main purpose was to make the FPGA be configured from a bit-file stored in the flash memory.
-As opposed to the EBI bus, SPI is a serial bus, transferring one bit of data at a time.
+The \gls{spi} served as a three-way communication between the \gls{mcu}, \gls{fpga} and Flash memory.
+It's main purpose was to make the \gls{fpga} be configured from a bit-file stored in the flash memory.
+As opposed to the \gls{ebi} bus, \gls{spi} is a serial bus, transferring one bit of data at a time.
 
 \subsection{Buttons and LEDS}
 All buttons included a resistor for current limitation (to avoid short circuits) and pull-up (to avoid logical floating state).
-The exception was the button connected to the MCU, where the pin had an internal pull-up.
-All LEDs also included a current limiting resistor. 
+The exception was the button connected to the \gls{mcu}, where the pin had an internal pull-up.
+All \gls{led}s also included a current limiting resistor. 
 Ohms law was used to calculate the required resistance\cite{ohm}.
 
-LEDs were handy for giving an indication that something was turned on. 
-For instance, the design included a LED which would light up when the FPGA was configured.
+\gls{led}s were handy for giving an indication that something was turned on. 
+For instance, the design included a \gls{led} which would light up when the \gls{fpga} was configured.
 Buttons were used for triggering events, e.g. reset.
 
 \subsection{Power Supply}
-The PCB would receive power from a micro-USB connector. 
+The \gls{pcb} would receive power from a micro-\gls{usb} connector. 
 A voltage level of 5V was sufficient, since no components required more than this. 
 However, plenty of components required less than 5V, specifically 3.3V. 
 To lower the voltage to a specific level, voltage regulators were used. 
 Power is discussed in more detail in section \ref{Power}.
 
 \subsection{Decoupling Capacitors}
-Several major components required decoupling, e.g. the MCU, FPGA, voltage regulators and DACs.
+Several major components required decoupling, e.g. the \gls{mcu}, \gls{fpga}, voltage regulators and \gls{dac}s.
 Decoupling means connecting power supplies through a capacitor network to ground, where power moving to ground can be temporarily stored.
 This is necessary as it sometimes occurs situations where there is suddenly high need for power.
 The power supply alone would not always be able to support these 'bursts'.
 With a capacitor decoupling network, the component could pull power from the capacitors instead.
 
 \section{PCB Design}
-The architecture was realized on a printed circuit board (PCB) designed using Altium Designer 15.1.
-Having never used this program before, the group had to overcome challenges and difficulties related to not only learning new software, but also learning concepts of creating a PCB from scratch. 
+The architecture was realized on a \gls{pcb} designed using Altium Designer 15.1.
+Having never used this program before, the group had to overcome challenges and difficulties related to not only learning new software, but also learning concepts of creating a \gls{pcb} from scratch. 
 
 \subsection{Schematics}
-The entire logic on the PCB was designed with schematics. 
+The entire logic on the \gls{pcb} was designed with schematics. 
 Altium was used to map the components together, pin by pin. 
 Making the right connections and pin mappings was the only thing that mattered in the schematics. 
-There was no focus on physical PCB-specific things, e.g. routing and component placement.
+There was no focus on physical \gls{pcb}-specific things, e.g. routing and component placement.
 
-When the schematics were completed, the team moved on to design the physical PCB.
+When the schematics were completed, the team moved on to design the physical \gls{pcb}.
 
 \subsection{Component Placement}
-The goal was to place the components on the PCB, so that they preferably were in close range of all other components they had to connect with. 
+The goal was to place the components on the \gls{pcb}, so that they preferably were in close range of all other components they had to connect with. 
 This would shorten the routing, which was desirable in terms of mitigating signal delay and maintaining signal integrity.
 
-The FPGA, SRAMs and MCU were the most important components with a lot of different connections, and were therefore placed central on the PCB.
-I/O components, e.g. controller buttons, USB, HDMI and BNC receptacles, were placed along the edge, since these were typically connected to few other components.
-It would also be annoying to connect external peripheral plugs to sockets in the middle of the PCB.
+The \gls{fpga}, \gls{sram}s and \gls{mcu} were the most important components with a lot of different connections, and were therefore placed central on the \gls{pcb}.
+\gls{io} components, e.g. controller buttons, \gls{usb}, \gls{hdmi} and \gls{bnc} receptacles, were placed along the edge, since these were typically connected to few other components.
+It would also be annoying to connect external peripheral plugs to sockets in the middle of the \gls{pcb}.
 
 All decoupling capacitors involved in the decoupling network for a certain component, were placed in close proximity to that component.
 This minimized the risk of that the component wouldn't get the extra power supply it needed during bursts.
-All capacitors and resistors were placed on the bottom layer of the PCB to save space on an already crowded top layer.
+All capacitors and resistors were placed on the bottom layer of the \gls{pcb} to save space on an already crowded top layer.
 
 \subsubsection{Component Footprints}
-A component footprint is how the trace of a component looks like on the PCB.
+A component footprint is how the trace of a component looks like on the \gls{pcb}.
 In the beginning, component footprints from the standard Altium library were used.
 After previewing the board, it became clear that these footprints were in fact gigantic, and footprints of suitable size had to be found using Altium vaults.
 Smaller 0603 (1608 metric) footprints were used for most passive components, especially the capacitors and resistors.
-By standardizing footprint sizes, the bill of materials could easily be updated without changing the PCB design, as long as the new component could be found in the same package size.
+By standardizing footprint sizes, the bill of materials could easily be updated without changing the \gls{pcb} design, as long as the new component could be found in the same package size.
 While a trade-off by using this small size package is that the components might be trickier to solder onto the board, the gain in size reduction for the board as a whole were valued higher by the group.
 Some components could not be found in this footprint, but luckily there was no shortage of footprint sizes to choose from.
 
 \subsection{Layers}
-The PCB consisted of six signal layers: Top layer, bottom layer and four in between.
+The \gls{pcb} consisted of six signal layers: Top layer, bottom layer and four in between.
 Two power layers were utilized: \(V_{CC}\) and ground.
 Between every signal and power layer, a dielectric layer was added to ensure proper isolation between these conducting layers, such that they wouldn't interfere with each other.
 
 An overlay was added to both the top and bottom layers.
-The overlay was added to contain silk-screen for marking components, thus making it easier to navigate the PCB.
+The overlay was added to contain silk-screen for marking components, thus making it easier to navigate the \gls{pcb}.
 
 The complete layer stack is shown in figure \ref{fig:Layers}
 
@@ -168,8 +164,8 @@ The complete layer stack is shown in figure \ref{fig:Layers}
 
 \subsubsection{Power and ground}
 \label{Power}
-The PCB was designed with three power domains, each with their corresponding voltage regulator: 3.3V, 1.2V and a 5V reserved for analogue signals.
-Most components were supplied by the 3.3V regulator, except for some internal parts of the FPGA that required 1.2V.
+The \gls{pcb} was designed with three power domains, each with their corresponding voltage regulator: 3.3V, 1.2V and a 5V reserved for analogue signals.
+Most components were supplied by the 3.3V regulator, except for some internal parts of the \gls{fpga} that required 1.2V.
 
 Since 3.3V was used by most components, and since only a few connectors required 1.2V, a dedicated power plane for 3.3V was added.
 A dedicated ground plane was also added.
@@ -196,7 +192,7 @@ This is to stop the analogue signal from getting disturbed by the digital signal
 \end{itemize}
 
 All analogue components were placed in the analogue plane, and the opposite with digital components. 
-The exception was the DACs, which acts as a bridge between the digital part and the analogue part. 
+The exception was the \gls{dac}s, which acts as a bridge between the digital part and the analogue part. 
 These were placed on the actual split, with the affected pins on the correct side.
 
 To remove any digital noise that could potentially accumulate on the analog ground plane, a diode was placed between the two ground planes. 
@@ -219,7 +215,7 @@ Too much trust was put into Altium's auto router.
 The router did not, as the team naively thought, magically solve the routing. 
 
 \subsection{Design Rules}
-Before routing, necessary rules had to be defined to make sure the PCB was routed properly. 
+Before routing, necessary rules had to be defined to make sure the \gls{pcb} was routed properly. 
 The following listing explains the most important rules for the design.
 \begin{itemize}
 \item Clearance: 0.1mm. 
@@ -242,25 +238,25 @@ This could harm the design, since these dead-ends could work as unwanted signal 
 
 \subsubsection{Design Rule Check}
 Altium had it's own tool for testing how many violations our current design created, called Design Rule Check. 
-It displayed the amount of errors occurred from each type, and the coordinates on the PCB for every error. 
+It displayed the amount of errors occurred from each type, and the coordinates on the \gls{pcb} for every error. 
 Typical errors during our design procedure were short-circuits, net antennas and clearance constraint violations.
 
 \subsection{Routing Procedure}
-The task of routing the PCB was started by routing some components manually. 
+The task of routing the \gls{pcb} was started by routing some components manually. 
 The team quickly discovered that doing this for the entire board would take a very long time, and so began to check out Altium's built-in auto router. 
 //TODO: Add source
 
 The team ran into many different routing problems, which is discussed in detail in section \ref{Routing Problems}
 
 \section{Fault Handling}
-The team were all inexperienced with PCB design and often uncertain if actions or decisions could cause problems down the line. 
+The team were all inexperienced with \gls{pcb} design and often uncertain if actions or decisions could cause problems down the line. 
 The top priority was to make something that worked properly. 
 A failing component was deemed probable, and forgetting something was guaranteed to happen, considering the vast amount of factors involved. 
-Hence, the team decided that having back-up features on the PCB was critical.
+Hence, the team decided that having back-up features on the \gls{pcb} was critical.
 
 \subsection{Headers}
 The primary strategy of handling faults was redundancy, mostly in the form of header pins. 
-The final amount of headers ended up at 34, including the JTAG and the ARM programming header. 
+The final amount of headers ended up at 34, including the \gls{jtag} and the ARM programming header. 
 Using this huge amount of headers made it possible to measure most signals with a multimeter and verify them. 
 The team got this idea from reading the Demolicious report \cite{demolicious-report}, from last years computer design project. 
 
@@ -276,23 +272,22 @@ Not only could errors more easily be detected - it would also be easier to fix t
 \end{figure}
 
 Headers was also useful as switches. 
-By manually connecting header pins with jumpers, certain parts of the PCB could be activated and deactivated. 
+By manually connecting header pins with jumpers, certain parts of the \gls{pcb} could be activated and deactivated. 
 This would be useful when focusing on lesser parts of the circuit. 
 For instance, 3-pin headers were used to manually turn on and off different voltage levels. 
 Power could also be delivered to the components directly through the headers, if any issue with the power supply should occur.
 
 \subsection{DACs}
-Even though separate DACs for outputting analog voltage out to the BNC plug was included, there was still a risk that the group could not get them to work. 
-A back-up solution by connecting the internal DACs in the MCU to the BNCs was implemented. 
-One 2x2 header for each BNC input was used to manually control whether the main DACs or the MCU DACs were to be used. 
+Even though separate \gls{dac}s for outputting analog voltage out to the \gls{bnc} plug was included, there was still a risk that the group could not get them to work. 
+A back-up solution by connecting the internal \gls{dac}s in the \gls{mcu} to the \gls{bnc}s was implemented. 
+One 2x2 header for each \gls{bnc} input was used to manually control whether the main \gls{dac}s or the \gls{mcu} \gls{dac}s were to be used. 
 This process is shown in figure \ref{fig:DAC headers}. 
 There's one header each for the X and the Y signal to the oscilloscope. 
 
 \begin{figure}[h!]
 \centering
 \includegraphics[scale = 0.6]{images/DAC_headers.png}
-\caption{Left: Jumpers connecting MCU DAC to BNC and normal DAC to ground.
-         Right: The opposite}
+\caption{Left: Jumpers connecting \gls{mcu} \gls{dac} to \gls{bnc} and normal \gls{dac} to ground. Right: The opposite}
 \label{fig:DAC headers}
 \end{figure}
 
