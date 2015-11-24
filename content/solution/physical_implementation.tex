@@ -11,7 +11,8 @@ Tracing the envisioned execution path of a program through the system gives insi
 \begin{enumerate}
 \item Assembled \vthreek programs are loaded into instruction memory via the EFM32 microcontroller.
 \item The FPGA reads instructions from memory and performs execution.
-\item The FPGA sends output via two interfaces, two DACs and an HDMI port.
+\item Data ready to be sent to output will be stored in a frame buffer.
+\item The FPGA sends data from the frame buffer to the output screens via two interfaces, two DACs and an HDMI port.
 \item The output from the DACs is displayed on an analogue oscilloscope and the output from the HDMI on a raster screen.
 \end{enumerate}
 
@@ -259,6 +260,7 @@ Hence, the team decided that having back-up features on the PCB was critical.
 The primary strategy of handling faults was redundancy, mostly in the form of header pins. 
 The final amount of headers ended up at 34, including the JTAG and the ARM programming header. 
 Using this huge amount of headers made it possible to measure most signals with a multimeter and verify them. 
+The team got this idea from reading the Demolicious report \cite{demolicious-report}, from last years computer design project. 
 
 Most headers were placed between components. 
 If wrong connections existed, or a connection didn't work, the connection could hopefully be corrected by connecting wires. 
