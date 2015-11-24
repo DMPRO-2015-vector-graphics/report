@@ -35,14 +35,24 @@ Each component is described in detail in their respective section below, the fol
         The primitive register is a special purpose register, containing the vector primitive that the core is currently processing.
 \end{description}
 
-\section{Data Path}
+\section{Instruction Format}
 
+Instructions in the \vthreek architecture are 32 bits wide.
+As opposed to the MIPS architecture they can't all be grouped into categories based on their format.
+They do however share some common traits.
+All instructions start with an 6-bit opcode, a unique identifier for each instruction.
+The remaining bits are used either to address registers or as immediate values.
+As an example, the \texttt{jmp} instruction is encoded with the opcode \texttt{000001}, seven don't care bits followed by the 19-bit jump target.
+
+\section{Data Path}
 
 \begin{figure}[h!]
     \includegraphics[width=\linewidth]{images/Data_path.png}
     \caption{RTL sketch of the data path.}
     \label{fig:datapath}
 \end{figure}
+
+The data path 
 
 \section{Control Path}
 
