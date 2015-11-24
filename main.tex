@@ -27,6 +27,9 @@
 \setlength{\parindent}{0em}
 \setlength{\parskip}{1em}
 
+% Glossary
+\input{content/appendix/glossary.tex}
+
 \lstset{
     basicstyle=\footnotesize\ttfamily,
     numbers=left,
@@ -100,6 +103,9 @@
 \input{content/results/testing.tex}
 \input{content/results/discussion.tex}
 \input{content/results/conclusion.tex}
+
+\glsaddall
+\printglossaries
 
 % List of figures
 \listoffigures
