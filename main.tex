@@ -19,13 +19,18 @@
 \definecolor{lightgray}{rgb}{0.9,0.9,0.9}
 \usepackage{amsmath}
 \usepackage{caption}
+\usepackage{subcaption}
 \usepackage{pdfpages}
+
 
 \DeclareCaptionType{cequation}[][List of equations]
 \captionsetup[cequation]{labelformat=empty}
 
 \setlength{\parindent}{0em}
 \setlength{\parskip}{1em}
+
+% Glossary
+\input{glossary.tex}
 
 \lstset{
     basicstyle=\footnotesize\ttfamily,
@@ -73,6 +78,12 @@
 
 \tableofcontents
 
+% List of figures
+\listoffigures
+
+% List of tables
+\listoftables
+
 \newpage
 
 \pagenumbering{arabic}
@@ -96,10 +107,14 @@
 
 % Part III
 \part{Results}
-\input{content/results/results.tex}
 \input{content/results/testing.tex}
+\input{content/results/results.tex}
 \input{content/results/discussion.tex}
 \input{content/results/conclusion.tex}
+
+% Glossary
+\glsaddall
+\printglossaries
 
 % Bibliography - edit references.bib and use the \cite command in text
 \printbibliography
@@ -107,7 +122,6 @@
 % Part IV
 \part{Appendices}
 \begin{appendices}
-//TODO:Move part numbers from BOME to BOM?
 \input{content/appendix/bom.tex}
 \input{content/appendix/material-cost.tex}
 \input{content/appendix/isa.tex}

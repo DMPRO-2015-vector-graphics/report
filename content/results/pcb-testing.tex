@@ -12,18 +12,3 @@ Testing was done by using a multimeter and oscilloscopes. Using a multimeter was
 
 Oscilloscopes were handy for testing our oscillators, to check the frequency and accuracy. Note that the oscilloscope which was used as our vector display was not part of this testing. These were modern oscilloscopes, which had raster screens and operating systems installed.
 
-\subsection{PCB Placement and Footprints}
-
-
-It would have been beneficial if we had placed the 3.3V voltage regulator closer to the JTAG debugging port, since the Xilinx JTAG platform cable required a 3.3V power supply.
-\newline
-\newline
-The micro USB footprint originally contained mounting holes, but were wrongly removed before manufacturing. Luckily, these did not act as connectors, and we could therefore solder the USB receptacle onto the PCB like a surface mount component.
-
-\subsection{Component Order Issues}
-The initial LEDs we ordered were reverse mounted, meaning that they required a hole in the board and had to be soldered on to the bottom layer. Because of this, we had to buy some new ones.
-\newline
-\newline
-
-\subsection{Component sizes}
-In hindsight, it would have been better to order bigger components. Since this is a prototype board where we mostly solder by hand, an increase in size would only be beneficial for us. If the project should go into large scale production, we could have tried to shrink the size.

@@ -6,7 +6,7 @@ It is a large, project-based subject in which students create a working computin
 This year saw high enough participation that two assignments were presented, and two groups formed around these.
 The report you're now reading details the work done and solution implemented by the vector graphics processor group.
 
-This chapter introduces the project, describes the requirements, outlines the solution and provides a fundamental understanding of vector graphics. It ends with 
+This chapter introduces the project, describes the requirements, outlines the solution and provides a fundamental understanding of vector graphics. It ends with
 
 \section{Assignment}
 
@@ -32,7 +32,7 @@ Figure \ref{fig:vector-display-network-analyzer} illustrates a vector display wh
 
 \section{Vector Graphics - A Short Introduction}
 Vector graphics expresses the contents of an image by using primitives, which are defined mathematically.
-Primitives can be objects like lines (defined by their endpoints), squares (defined as a bounding box of two points) or curves (defined by the position of control points). 
+Primitives can be objects like lines (defined by their endpoints), squares (defined as a bounding box of two points) or curves (defined by the position of control points).
 Special curves, called bézier curves, can be used to obtain complex, vectorized shapes.
 The points are relative to the coordinate system of a 'scene', which is an abstract representation of an image.
 Scenes are not tied to any specific physical screen resolution, but can be scaled to fit any resolution without loss of detail.
@@ -42,7 +42,7 @@ Modern computing devices come in many sizes and aspect ratios.
 With raster based solutions, graphics have to be regenerated for each new display size.
 A vector based solution is inherently resolution independent, allowing for asset reuse across devices.
 
-More information about vector and raster graphics is found in chapter \ref{sec:background}.
+More information about vector and raster graphics is found in chapter \ref{chp:background}.
 
 \section{Requirements}
 \label{sec:requirements}
@@ -50,6 +50,7 @@ The group decided on a set of functional requirements based on initial research,
 Non-functional requirements given in the assignment text are listed in list \ref{lst:non_func_req}.
 
 \begin{table}[h!]
+\resizebox{\textwidth}{!}{
     \begin{tabular}{|l|l|}
         \hline
         \textbf{Requirement}                                                    & \textbf{Priority} \\ \hline
@@ -61,27 +62,34 @@ Non-functional requirements given in the assignment text are listed in list \ref
         The system should rasterize primitives and support HDMI as an output    & Medium   \\ \hline
         A toolchain supporting the system should be available                   & Low      \\ \hline
     \end{tabular}
+}
     \caption{Functional requirements.}
     \label{tbl:func_req}
 \end{table}
 
 
-\begin{figure}[h!]
-    \begin{itemize}
-        \item The processor should be implemented on a Xilinx FPGA.
-        \item The unit must utilize a Silicon Labs EFM32 microcontroller as an I/O processor.
-        \item The budget of 10 000 NOK should cover components and PCB production.
-    \end{itemize}
-    \caption{Non-functional requirements. //TODO: Convert to table, and update reference}
-    \label{lst:non_func_req}
-\end{figure}
+\begin{table}[h!]
+\resizebox{\textwidth}{!}{
+    \begin{tabular}{|l|l|}
+     	\hline															    	
+        \textbf{Requirement}    												& \textbf{Priority} \\ \hline
+        The processor should be implemented on a Xilinx \gls{fpga}								& High 	\\ \hline
+        The unit must utilize a Silicon Labs EFM32 microcontroller to act as an				& High 	\\ 
+        \gls{io} processor 																		&   	\\ \hline
+        The budget of 10 000 NOK should cover components and \gls{pcb} production					& High 	\\ \hline
+    
+    \end{tabular}
+}
+    \caption{Non-functional requirements.}
+    \label{tbl:non_func_req}
+\end{table}
 
 
 \section{A Vector Graphics Computer Architecture}
 
 \begin{figure}[H]
     \includegraphics[width=\linewidth]{images/high_level_io.png}
-    \caption{I/O overview.}
+    \caption{\gls{io} overview.}
     \label{fig:io-overview}
 \end{figure}
 
@@ -89,12 +97,15 @@ Based on the requirements, the group chose to make a general purpose computer wi
 The computer would read instructions from memory, execute them on a processor core and render vector based scenes to different outputs.
 To showcase the nature of vector graphics, a vector display in the form of an oscilloscope was chosen as the primary output device.
 HDMI was included as secondary output to a raster display.
-As a whole, the system should be assembled on a custom PCB, with the microcontroller serving as an I/O-unit while the main processor architecture and output-modules should be implemented on the FPGA.
+As a whole, the system should be assembled on a custom PCB, with the microcontroller serving as an \gls{io}-unit while the main processor architecture and output-modules should be implemented on the \gls{fpga}.
 
 \section{Lab Environment}
-The NTNU Computer Design Lab was used frequently for this project. The lab contains a wide variety of oscillators, signal generators and logic analyzers, which was used to test different parts of the system. The lab also contains soldering equipment and aids - which was used extensively by the team when soldering the PCB - as well as loads of assorted electronic components.
+The NTNU Computer Design Lab was used frequently for this project.
+The lab contains a wide variety of oscillators, signal generators and logic analyzers, which was used to test different parts of the system.
+The lab also contains soldering equipment and aids - which was used extensively by the team when soldering the \gls{pcb} - as well as loads of assorted electronic components.
 
-Another lab at NTNU, ITV-458, was used by the team when programming the solution. This includes computers running Ubuntu, and has tools for working with FPGAs from Xilinx installed. This lab is also used in the Computer Design course.
+A second lab at NTNU, ITV-458, was used by the team when programming the solution.
+The lab contains computers running Ubuntu and tools for working with FPGAs.
 
 \section{About this report}
 This report is meant to give a thorough understanding of the system designed by the group.
@@ -109,5 +120,5 @@ Finally, part three presents performed tests, results, discussion and a conclusi
 This report should be read with the following considerations in mind:
 
 \begin{description}
-    \item[group and team] 'The group' refers to everyone working on this project. The main work loads (System architecture, I/O and PCB design), were split among smaller teams. 'The team' refers to the team responsible for this functionality.
+    \item[group and team] 'The group' refers to everyone working on this project. The main work loads (System architecture, \gls{io} and \gls{pcb} design), were split among smaller teams. 'The team' refers to the team responsible for this functionality.
 \end{description}

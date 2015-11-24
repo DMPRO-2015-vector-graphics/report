@@ -1,4 +1,4 @@
-\section{PCB Design Errors}
+\section{PCB Design Errors and Workarounds}
 No project would be complete without something going wrong. Our project was no exception. Both during PCB design and after receiving our manufactured PCB, we started to discover various complications. This section discusses the more serious ones in detail, and what we did to solve the problem.
 
 \subsection{Routing Problems}
@@ -39,7 +39,7 @@ We had to avoid power vias connected to dead copper, so we located every positio
 \subsection{Possible Routing Improvement}
 Since the auto router did the biggest part of the job, some wires took long detours, because of the complexity. Manual routing of some signals could've shortened these distance. However, the distance from a point to another wasn't critical for our design, since the signals travel very fast and we didn't have to keep a strict time schedule. Therefore, we decided it wasn't worth the time.
 
-Wires in the same parallell bus, should ideally have equal lengths, to make sure all signals in the same bus were synchronized. Some of our wires in the EBI bus and the bus between the FPGA and the frame buffer, had varying lengths. Again, the time differences would be so small that they wouldn't have a noticable effect on our design, but for a high-speed modern computer, it is critical to avoid these race conditions \cite{race-conditions}.
+Wires in the same parallell bus, should ideally have equal lengths, to make sure all signals in the same bus were synchronized. Some of our wires in the EBI bus and the bus between the FPGA and the frame buffer, had varying lengths, which could create race conditions. But we didn't experience any anomalies as a result of this, so we assumed it was not a problem for our design. However, for a modern general purpose computer, it is critical to avoid these race conditions \cite{race-conditions}.
 
 \subsection{Bad Soldering}
 Some issues arised because of components not being properly soldered onto the PCB. Examples could be component pins having partial or no contact with the PCB, or pins touching several pads, when pads were tightly arranged.
@@ -79,7 +79,7 @@ An unnecessary connection to VCC, forced the Done signal into the MCU to always 
 
 By introducing a transistor, and making the signal active low on the MCU side, we managed to make the MCU notice when configuration was complete.
 The problem and solution is shown in detail in figure \ref{fig:Done Issue}.
-This solution was possible because the wire went through the JTAG header. 
+This solution was possible because the wire went through the JTAG header.
 
 \begin{figure}[h!]
 \centering
@@ -98,3 +98,11 @@ After further studying of the FPGA configuration manual, we saw that this guide 
 The diode which we intended to reduce noise in the analogue plane, had no noticable effect. The reason was probably that we only thought about current leakage and not noise itself. To solve this problem, the team got the idea of using a ferrite bead instead of the diode. A ferrite bead is a component designed to suppress high-frequency noise. 
 \newline
 Noise was reduced, but the ferrite bead itself worked also as a resistor, allowing only a small current flow through. By connecting a resistor with very low resistance (How many Ohms?) in parallell with the ferrite bead, current was able to flow freely through this connection.
+
+\subsection{PCB Placement and Footprints}
+It would have been beneficial if we had placed the 3.3V voltage regulator closer to the JTAG debugging port, since the Xilinx JTAG platform cable required a 3.3V power supply.
+
+The micro USB footprint originally contained mounting holes, but were for some reason never drilled during manufacturing. Luckily, these did not act as connectors, and we could therefore solder the USB receptacle onto the PCB like a surface mounted component.
+
+\subsection{Component sizes}
+In hindsight, it would have been better to order bigger components. Since this is a prototype board where we mostly solder by hand, an increase in size would only be beneficial for us. If the project should go into large scale production, we could have tried to shrink the size.
