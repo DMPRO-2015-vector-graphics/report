@@ -1,10 +1,54 @@
 \chapter{Processor Core}
 
+Chapter \ref{chp:system-overview} describes how vector graphics are supported and integrated into the \vthreek architecture.
+This chapter elaborates on how the processor core is designed, focusing especially on features directly related to vector graphics.
+
 \section{The \vthreek processor}
 
+The processor core is the main processing and control unit in the \vthreek architecture.
+As depicted in figure \label{fig:system-overview}, the processor core reads instructions from the instruction memory, and writes/reads data to/from the data and scene memories.
+The processor core is designed as a multi-cycle, MIPS-inspired processor with extra features added to support processing of vector graphics.
+When planning which features to include and which techniques to utilize, the group considered features like pipelining and even multicore designs to improve performance.
+In the end, the decision was made to make the initial design simple, but keep efficiency and performance in mind.
+
+\begin{figure}[H]
+    \includegraphics[width=\linewidth]{images/core-components.png}
+    \caption{Overview of the main components in the processor core.}
+    \label{fig:core-components}
+\end{figure}
+
+Figure \ref{fig:core-components} shows how data flows through the subcomponents of the processor core.
+In addition to the components in the figure, the core includes a control unit.
+Each component is described in detail in their respective section below, the following is a short introduction to their responsibilities.
+
+\begin{description}
+    \item[Program counter] \hfill \\
+        The program counter keeps track of the address of the next instruction to be executed.
+        Depending on the instruction currently being executed, the program counter is either incremented or overwritten.
+    \item[Control] \hfill \\
+        The control unit keeps track of the state of the processor, namely fetch, execute and stall, and issues the appropriate control signals to the other components.
+    \item[Register] \hfill \\
+        The register bank is the short term memory of the core, feeding operands to the ALU, and recieving data which may be stored based on the control signals.
+    \item[ALU] \hfill \\
+        The ALU performs operations on the data it receives from the register unit and outputs the result.
+    \item[Primitive Register] \hfill \\
+        The primitive register is a special purpose register, containing the vector primitive that the core is currently processing.
+\end{description}
+
+\section{Data Path}
+
+
 \begin{figure}[h!]
-    \includegraphics[width=\linewidth]{images/processor-core.png}
-    \caption{RTL sketch of the \vthreek processor core.}
-    \label{fig:processor-core}
+    \includegraphics[width=\linewidth]{images/Data_path.png}
+    \caption{RTL sketch of the data path.}
+    \label{fig:datapath}
+\end{figure}
+
+\section{Control Path}
+
+\begin{figure}[h!]
+    \includegraphics[width=\linewidth]{images/Control_signals.png}
+    \caption{RTL sketch of the control path.}
+    \label{fig:controlpath}
 \end{figure}
 
