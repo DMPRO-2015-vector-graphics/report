@@ -23,10 +23,15 @@ With better component planning this could have been avoided.
 
 \input{content/results/oscillator}
 
-\section{Drawing Artifacts}
-\label{discussion:artifacts}
-The drawing artifacts explained in section \ref{results:artifacts} are possible to remove.
-A third value for intensity is required to remove the artifacts.
-When the electron beam is done drawing a primitive, the intensity can be turned off until the beam is above the next primitive.
+\section{Drawing Artefacts}
+\label{discussion:artefacts}
+The drawing artefacts explained in Section \ref{results:artefacts} are possible to remove.
+If a third input value for intensity were to be added, one could turn the electron beam off when moving the beam between primitive.
 
-If \vthreek were to support an intensity value in addition to x and y, the arcitechture and PCB require changes.
+The other artefact mentioned, is the dotted lines.
+This could be removed, by adding analogue circuitry between the DAC output and the BNC connectors.
+It is possible to slew the electron beam from one point to the next, by analogue integration, to archive a smooth transition between points.
+An example of such circuitry has been implemented in the 80's in a similar project \cite{vector-graphic-crt}.
+
+
+If \vthreek were to support an intensity value in addition to x and y, the architecture and PCB require changes.
