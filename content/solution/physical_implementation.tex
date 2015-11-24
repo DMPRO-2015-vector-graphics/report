@@ -70,13 +70,9 @@ Hence, the team chose oscillators for both the \gls{fpga} and \gls{mcu} for simp
 The system used one parallel bus (\gls{ebi}), and one serial bus (\gls{spi}).
 The \gls{mcu} acted as bus master for both of them, since it supplied the bus technologies.
 
-\subsubsection{\gls{ebi}}
+\subsubsection{EBI}
 The \gls{fpga}, \gls{mcu} and \gls{sram} were all connected via the \gls{ebi} bus.
-<<<<<<< HEAD
 These connections were made properly by using the specified \gls{ebi}-pins on the \gls{cmu} \cite{efm32-datasheet}.
-=======
-These connections were made properly by using the specified \gls{ebi}-pins on the \gls{mcu}. // TODO: citation to \gls{mcu} datasheet
->>>>>>> caae5fe58b08968913b47b30eb1b8fc4e9c6f3a1
 The \gls{ebi} bus allowed high-speed communication to the \gls{sram}.
 As the \gls{ebi} bus is a parallel bus, the team included the following bus lines:
 \begin{itemize}
