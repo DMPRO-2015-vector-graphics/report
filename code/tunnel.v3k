@@ -1,0 +1,171 @@
+# draw static perspective lines
+mov r1, #0
+movu r2, #-1
+movl r2, #-1
+line r1, r2
+strp #0
+
+movl r1, #-1
+movl r2, #1
+line r1, r2
+strp #1
+
+# permanent -1 register
+movu r5, #-1
+movl r5, #-1
+
+# permanent 16383, 16383 register
+movu r12, #16415
+movl r12, #16415
+
+# counter
+mov r6, #0
+mov r7, #10000
+# counter increment
+mov r13 #1
+
+# increments
+# add x
+movu r8, #32
+movl r8, #0
+# add y
+movu r9, #0
+movl r9, #32
+# sub x
+movu r10, #-32
+movl r10, #0
+# sub y
+movu r11, #-1
+movl r11, #-32
+
+# Inner sqaure
+# top
+line r2, r3
+strp #2
+# right
+line r3, r4
+strp #3
+# bottom
+line r4 r1
+strp #4
+# left
+line r1, r2
+strp #5
+
+# Outer Sqaure
+# top
+line r22, r23
+strp #6
+# right
+line r23, r24
+strp #7
+# bottom
+line r24 r21
+strp #8
+# left
+line r21, r22
+strp #9
+
+
+
+.reset
+# Inner sqare
+# lower left
+movu r1, #32767
+movl r1, #32767
+
+# upper left
+movu r2, #32767
+movl r2, #32767
+
+# upper right
+movu r3, #32767
+movl r3, #32767
+
+# lower right
+movu r4, #32767
+movl r4, #32767 
+
+
+# Outer sqare
+# lower left
+movu r21, #16383
+movl r21, #16383
+
+# upper left
+movu r22, #16383
+movl r22, #49150
+
+# upper right
+movu r23, #49150
+movl r23, #49150
+
+# lower right
+movu r24, #49150
+movl r24, #16383 
+
+
+# draw lines
+.drawloop
+add r6, r6, r13
+beq r6, r7, #2
+jmp drawloop
+mov r6, #0
+
+## Update squares
+# update inner lower left
+add r1, r1, r10
+add r1, r1, r11
+# update inner upper left
+add r2, r2, r10 
+add r2, r2, r9
+# update inner upper right
+add r3, r3, r8
+add r3, r3, r9
+# update inner lower right
+add r4, r4, r8
+add r4, r4, r11
+
+# update outer lower left
+add r21, r21, r10
+add r21, r21, r11
+# update outer upper left
+add r22, r22, r10 
+add r22, r22, r9
+# update outer upper right
+add r23, r23, r8
+add r23, r23, r9
+# update outer lower right
+add r24, r24, r8
+add r24, r24, r11
+
+
+#Update primitives
+line r2, r3
+updp #2
+# right
+line r3, r4
+updp #3
+# bottom
+line r4, r1
+updp #4
+# left
+line r1, r2
+updp #5
+
+line r22, r23
+updp #6
+# right
+line r23, r24
+updp #7
+# bottom
+line r24, r21
+updp #8
+# left
+line r21, r22
+updp #9
+
+
+beq r1, r12, #2
+jmp drawloop
+jmp reset
