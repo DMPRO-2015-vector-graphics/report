@@ -12,6 +12,9 @@
 *.fdb_latexmk
 main-blx.bib
 *run.xml
+*.lof
+*.lot
+
 # Hidden files
 .*.swo
 .*.swp
