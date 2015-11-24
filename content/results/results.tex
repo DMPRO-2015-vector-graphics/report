@@ -23,18 +23,32 @@ As a result the theoretical effective maximum output will be \(30 MHz \div 25 = 
 However during testing the group experience incorrect DAC values if the clock were set higher than 20 MHz.
 With a clock frequency of 20 MHz the maximum output is 800 KHz.
 
-\section{Drawing Artifacts}
-\label{results:artifacts}
-The oscillioscope used in this project supports x and y inputs.
-When the oscillioscope is done drawing one primitive and moves to the next the electron beam i still drawing,
-and weaker drawing lines may be visible.
-In other words all shapes are drawn without "litfing the hand."
-If one take a closer look at figure~\ref{fig:artifact}, the drawing artifacts are visible.
-There are solutions to avoid the drawing artifacts, which is exlained in section \ref{discussion:artifacts}.
+\section{Drawing Artefacts}
+\label{results:artefacts}
+When drawing to the oscilloscope, some artefacts were discovered.
 
+The oscilloscope used in this project supports X and Y inputs.
+When the oscilloscope is done drawing one primitive and moves to the next the electron beam i still drawing,
+and weaker drawing lines may be visible.
+In other words all shapes are drawn without "lifting the hand."
+If one take a closer look at figure~\ref{fig:artefact}, the drawing artefacts are visible.
+There are solutions to avoid the drawing artefacts, which is explained in section \ref{discussion:artefacts}.
 
 \begin{figure}[h]
-	    \includegraphics[width=\linewidth]{images/artifacts.jpg}
-	    \caption{Drawing v3k with artifacts}
+	    \includegraphics[width=\linewidth]{images/artefacts.jpg}
+	    \caption{Drawing V3K with artefacts}
 	    \label{fig:artifact}
+\end{figure}
+
+Another artefact, also barely visible, is the dots that each primitive is made of.
+By zooming in on the oscilloscope this becomes more visible, and can be seen in Figure \ref{fig:artefact-dot}.
+The digital nature of \vthreek implies a discrete increments when drawing.
+The electron ray moves faster then the DACs are able to feed it with new data.
+As a result, the ray will wait at one spot, until it receives new values.
+This results in dotted lines.
+
+\begin{figure}[h]
+	    %\includegraphics[width=\linewidth]{images/artifacts_dots.jpg}
+	    \caption{The dots is more visible when zooming in on the oscilloscope}
+	    \label{fig:artifact-dots}
 \end{figure}

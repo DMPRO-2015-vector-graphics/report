@@ -27,13 +27,13 @@ A square can be represented as four lines, a circle as multiple Bézier curves, 
 
 \begin{table}[h]
     \centering
-    \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+    \begin{tabularx}{\linewidth}{|l|X|X|X|X|X|X|X|X|X|}
     \hline
     Primitive type (8) & x (16) & y (16) & x (16) & y (16) & x (16) & y (16) & x (16) & y (16) & Total bits \\ \hline
     Linear Bézier    & \(p_0^x \) & \(p_0^y \) & \(p_1^x \) & \(p_1^y \) & ~   & ~   & ~   & ~   & 72    \\ \hline
     Quadratic Bézier & \(p_0^x \) & \(p_0^y \) & \(p_1^x \) & \(p_1^y \) & \(p_2^x \) & \(p_2^y \) & ~   & ~   & 104   \\ \hline
     Cubic Bézier     & \(p_0^x \) & \(p_0^y \) & \(p_1^x \) & \(p_1^y \) & \(p_2^x \) & \(p_2^y \) & \(p_3^x \) & \(p_3^y \) & 136   \\ \hline
-    \end{tabular}
+  \end{tabularx}
     \caption{Binary encoding of primitives. Bit size in parenthesis.}
 	\label{tbl:primitives}
 \end{table}
