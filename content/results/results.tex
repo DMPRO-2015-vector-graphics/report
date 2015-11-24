@@ -27,7 +27,7 @@ With a clock frequency of 20 MHz the maximum output is 800 KHz.
 \label{results:artefacts}
 When drawing to the oscilloscope, some artefacts were discovered.
 
-The oscilloscope used in this project supports x and y inputs.
+The oscilloscope used in this project supports X and Y inputs.
 When the oscilloscope is done drawing one primitive and moves to the next the electron beam i still drawing,
 and weaker drawing lines may be visible.
 In other words all shapes are drawn without "lifting the hand."
@@ -40,14 +40,15 @@ There are solutions to avoid the drawing artefacts, which is explained in sectio
 	    \label{fig:artifact}
 \end{figure}
 
-Another artefact, also barely visible, is the dots.
+Another artefact, also barely visible, is the dots that each primitive is made of.
+By zooming in on the oscilloscope this becomes more visible, and can be seen in Figure \ref{fig:artefact-dot}.
 The digital nature of \vthreek implies a discrete increments when drawing.
 The electron ray moves faster then the DACs are able to feed it with new data.
 As a result, the ray will wait at one spot, until it receives new values.
 This results in dotted lines.
 
 \begin{figure}[h]
-	    \includegraphics[width=\linewidth]{images/artifacts_dots.jpg}
+	    %\includegraphics[width=\linewidth]{images/artifacts_dots.jpg}
 	    \caption{The dots is more visible when zooming in on the oscilloscope}
-	    \label{fig:artifact}
+	    \label{fig:artifact-dots}
 \end{figure}
