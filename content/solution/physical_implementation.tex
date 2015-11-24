@@ -31,23 +31,23 @@ All components had to meet the team's technical demands, e.g. number of pins, vo
 This information was found by inspecting the various component's datasheets.
 Critical components in the design are described in the following subsections.
 
-\subsection{MCU}
-The \gls{mcu} was the EFM32GG microcontroller described earlier. 
+\subsection{\gls{mcu}}
+The \gls{mcu} was the EFM32GG microcontroller described in \ref{ch:mcu}.
 
-\subsection{FPGA}
-The \gls{fpga} was a Xilinx XC6SLX45-2CSG324I, with 401 kb block \gls{ram}. 
+\subsection{\gls{fpga}}
+The \gls{fpga} was a Xilinx XC6SLX45-2CSG324I, with 401 kb block \gls{ram}.
 It served as the main processor in the design, fetching and executing instructions from instruction memory.
 
 A \gls{jtag} header was connected to the \gls{fpga} for good accessibility to \gls{fpga} debugging and programming.
 //TODO : elaborate
 
-\subsection{SRAM}
+\subsection{\gls{sram}}
 Two \gls{sram}s were put on the \gls{pcb}. 
 One of them worked as an instruction memory for the \gls{fpga}, while the other was a dedicated frame buffer for our output signals. 
 The instructions executed in the \gls{fpga} would update the frame buffer, and data from the frame buffer could be read and transferred to the output units. 
-Both \gls{sram}s had an address space of 512k 16-bit words. 
+Both \gls{sram}s had an address space of 512k 16-bit words.
 
-\subsection{DACs and BNCs}
+\subsection{\gls{dac}s and \gls{bnc}s}
 As the purpose of the computer was to output vector graphics on an analogue vector screen, \gls{dac}s were essential.
 They would convert digital signals from the \gls{fpga} destined for the output screen, to corresponding analogue signals.
 
@@ -70,9 +70,9 @@ Hence, the team chose oscillators for both the \gls{fpga} and \gls{mcu} for simp
 The system used one parallel bus (\gls{ebi}), and one serial bus (\gls{spi}).
 The \gls{mcu} acted as bus master for both of them, since it supplied the bus technologies.
 
-\subsubsection{EBI}
+\subsubsection{\gls{ebi}}
 The \gls{fpga}, \gls{mcu} and \gls{sram} were all connected via the \gls{ebi} bus.
-These connections were made properly by using the specified \gls{ebi}-pins on the \gls{cmu}. // TODO: citation to \gls{mcu} datasheet
+These connections were made properly by using the specified \gls{ebi}-pins on the \gls{cmu} \cite{efm32-datasheet}.
 The \gls{ebi} bus allowed high-speed communication to the \gls{sram}.
 As the \gls{ebi} bus is a parallel bus, the team included the following bus lines:
 \begin{itemize}
@@ -83,12 +83,12 @@ As the \gls{ebi} bus is a parallel bus, the team included the following bus line
 \item 1 Read enable bit, active low.
 \end{itemize}
 
-\subsubsection{SPI}
+\subsubsection{\gls{spi}}
 The \gls{spi} served as a three-way communication between the \gls{mcu}, \gls{fpga} and Flash memory.
 It's main purpose was to make the \gls{fpga} be configured from a bit-file stored in the flash memory.
 As opposed to the \gls{ebi} bus, \gls{spi} is a serial bus, transferring one bit of data at a time.
 
-\subsection{Buttons and LEDS}
+\subsection{Buttons and \gls{led}s}
 All buttons included a resistor for current limitation (to avoid short circuits) and pull-up (to avoid logical floating state).
 The exception was the button connected to the \gls{mcu}, where the pin had an internal pull-up.
 All \gls{led}s also included a current limiting resistor. 
@@ -112,7 +112,7 @@ This is necessary as it sometimes occurs situations where there is suddenly high
 The power supply alone would not always be able to support these 'bursts'.
 With a capacitor decoupling network, the component could pull power from the capacitors instead.
 
-\section{PCB Design}
+\section{\gls{pcb} Design}
 The architecture was realized on a \gls{pcb} designed using Altium Designer 15.1.
 Having never used this program before, the group had to overcome challenges and difficulties related to not only learning new software, but also learning concepts of creating a \gls{pcb} from scratch. 
 
@@ -277,7 +277,7 @@ This would be useful when focusing on lesser parts of the circuit.
 For instance, 3-pin headers were used to manually turn on and off different voltage levels. 
 Power could also be delivered to the components directly through the headers, if any issue with the power supply should occur.
 
-\subsection{DACs}
+\subsection{\gls{dac}s}
 Even though separate \gls{dac}s for outputting analog voltage out to the \gls{bnc} plug was included, there was still a risk that the group could not get them to work. 
 A back-up solution by connecting the internal \gls{dac}s in the \gls{mcu} to the \gls{bnc}s was implemented. 
 One 2x2 header for each \gls{bnc} input was used to manually control whether the main \gls{dac}s or the \gls{mcu} \gls{dac}s were to be used. 
