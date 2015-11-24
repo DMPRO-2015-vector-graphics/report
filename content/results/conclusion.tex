@@ -1,11 +1,24 @@
 \chapter{Conclusion}
+The group have designed and implemented a multi cycle vector graphics processor.
+The graphics processor is realized on a custom made PCB, with an FPGA from Xilinx as the main processing unit.
+A program written in low level code using a self made ISA executes on the processor, generating the basis for vector graphics.
+The graphics are displayed on the vector display of an old Tektronix oscilloscope.
+
+The system meets the primary requirements defined by the group in the introductory phase. 
+Some advanced requirements were not met due to time constraints, but are possible to implement given enough time. 
+This is described in further detail in the following sections.
+
+The computer design project gave all group members valuable insight how to create a computer from start to finish.
+While a challenging project, the group have produced a working product and learned a great amount during the process.
+A lot of the 'magic' behind computer design has now been removed.
 
 \section{Improvements}
 The final implementation of the processor, is a multi-cycle mips inspired processor.
-In this design one instruction is executed each for second or third clock cycle.
+In this design, one instruction is executed each for second or third clock cycle.
 To increase the number of instructions per cycle, the processor could have been pipelined.
 But given the time constraint, the group never found the time to implement a pipelined processor.
 
-\section{Learning Process}
-The computer design project gave the group members valuable insight about how to create a computer from start to finish.
-A lot of the "magic" behind computer design is removed after completing this project.
+\section{The Times They Are A-Changin'}
+Working with the vector display, the group noticed that vector displays today are an outdated technology. 
+While raster displays have moved on to LCD and LED screens, all vector displays are still using outdated and potentially harmful CRT technology.
+Should vector graphics be efficient to use in this day and age, the group feels that a similar leap forward in vector display technology is a necessity.
