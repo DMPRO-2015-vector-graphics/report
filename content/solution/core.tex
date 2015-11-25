@@ -66,7 +66,50 @@ The final bit is also don't care.
     \label{fig:datapath}
 \end{figure}
 
-The data path 
+The data path of the \vthreek architecture consists of a registerfile encapsulating the 32 general purpose registers, a separate, special purpose, 136-bit vector primitive register, a functional unit, the ALU, and instruction, scene and data memories.
+To explain how these work together, each component will be explained in the order with which an instruction being executed interacts with them.
+
+\subsection{Instruction Memory}
+
+\begin{figure}[h!]
+    \includegraphics[width=\linewidth]{images/instruction-memory.png}
+    \caption{I/O for the instruction memory}
+    \label{fig:instruction-memory}
+\end{figure}
+
+Figure \ref{fig:instruction-memory} shows the signals going into and coming out of the instruction memory.
+The program counter value is the address of the desired instruction.
+Due to only being able to read 16 bits at a time from the SRAM, the group implemented a stateful instruction fetch module encapsulating the instruction memory.
+
+\subsection{Registers}
+
+\begin{figure}[h!]
+    \includegraphics[width=\linewidth]{images/registers.png}
+    \caption{I/O for the register module}
+    \label{fig:registers}
+\end{figure}
+
+The \vthreek architecture provides 32 32-bit general purpose registers.
+These are organised into a registerfile.
+As can be seen in Figure \ref{fig:registers}, this module receives five register addresses.
+The values in the addressed registers are continuously output on the \texttt{read\_data} signals.
+32-bit input values are taken as input from the ALU and the data memory, to potentially be written to into a register.
+There are four control signals, \texttt{reset, mem\_to\_reg, reg\_dest} and \texttt{reg\_write}.
+\texttt{reset} signals the module to clear all registers of their contents.
+\texttt{reg\_write} signals wether or not data should be written in the current cycle.
+\texttt{reg\_dest} indicates which of the \texttt{regX} registers should be used as the destination register.
+Similarily, \texttt{mem\_to\_reg} indicates wether the data from memory or the alu result should be written.
+
+The special purpose primitive register functions in much the same way, only with a single register.
+Its inputs, outputs and control signals can be seen in Figure \ref{fig:primitive-register}.
+Since there is only on primitve, there is no address input.
+Control signals only determine wether or the register contents should be overwritten and if yes, what data source should be used to overwrite.
+
+\begin{figure}[h!]
+    \includegraphics[width=\linewidth]{images/primitive-register.png}
+    \caption{I/O for the primitive register}
+    \label{fig:primitive-register}
+\end{figure}
 
 \section{Control Path}
 
