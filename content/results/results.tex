@@ -26,6 +26,18 @@ With a clock frequency of 20 MHz the maximum output is 800 KHz.
 The CPU can be clocked at as much as 140 MHz, but since the output module needs to be run at 20 MHz this was chosen for the CPU as well for simplicity.
 At 20 MHz the CPU is still more than fast enough to update primitives in order to achieve smooth animations, so busy loops was introduced in the primitive update procedures in order to slow the update rate down.
 
+\section{Noise}
+
+//TODO: Text
+
+\begin{figure}[h!]
+	    \includegraphics[width=\linewidth]{images/noise}
+	    \caption{The noise on the voltages from the DACs}
+	    \label{fig:noise}
+\end{figure}
+
+
+
 \section{Video Output}
 \vthreek was successful in drawing primitives to a a screen.
 Only one of the output modules, the analogue oscilloscope output, were realized.
