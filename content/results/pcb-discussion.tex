@@ -1,5 +1,6 @@
 \section{PCB Design Errors and Workarounds}
-No project would be complete without something going wrong. Our project was no exception. Both during \gls{pcb} design and after receiving our manufactured \gls{pcb}, we started to discover various complications. This section discusses the more serious ones in detail, and what we did to solve the problem.
+Design errors were discovered shortly after recieving the \gls{pcb} boards.
+This section discusses the more serious ones in detail, and how each problem were solved.
 
 \subsection{Routing Problems}
 \label{Routing Problems}
@@ -8,19 +9,18 @@ Most were a product of bad Altium settings, causing some extra time to locate.
 The most significant ones are described in detail in the following sections.
 
 \subsubsection{Bad Auto Router Settings}
-After auto routing the whole thing the first time, the result contained over 100 still unrouted connections, which meant that the auto router didn't manage to connect these.
+After auto routing the whole thing the first time, the result contained over 100 still unrouted connections,
+which meant that the auto router didn't manage to connect these.
 
 The team discovered that choosing different routing options for the auto router made a big difference.
-After making the auto-router focus more on switching layers for every signals, to avoid complex routing on fewer layers, it managed to route all the connections. This was achieved by changing routing strategy from \emph{Default 2 Layer Board} to \emph{Default Multi Layer Board} in Altium.
+After making the auto-router focus more on switching layers for every signals,
+to avoid complex routing on fewer layers, it managed to route all the connections.
+This was achieved by changing routing strategy from \emph{Default 2 Layer Board} to \emph{Default Multi Layer Board} in Altium.
 
 \subsubsection{Clearance Constraint Issue}
 After the first auto routing attempts, there was tons of short-circuits. We found out that our clearance constraint rule didn't apply for all components.
 Adding the general clearance constraint rule back again, we faced the same issue in another form - the auto router wouldn't route at all, and complained about clearance constraints violations.
-The settings said that Altium would check for clearance violation with \emph{Any Net}.
-With help from the course staff, the group discovered that \emph{Any Net} also included the net that it was currently comparing.
-
-Thus, it checked if the current trace meets the clearance constraint with itself, which of course it does not.
-By changing this setting to \emph{Different Nets Only}, the entire short-circuit problem was solved.
+The settings said that Altium would check for clearance violation with \emph{Any Net}. Thanks to some help from Odd Rune, we discovered that \emph{Any Net} also included the net that it was currently comparing. Thus, it checked if the current trace meets the clearance constraint with itself, which of course it does not. By changing this setting to \emph{Different Nets Only}, the entire short-circuit problem was solved.
 
 \subsubsection{Dead Copper}
 Dead copper is parts of the copper on a power plane that's isolated from the rest of the copper on that plane.
@@ -34,6 +34,13 @@ This had to be avoided due to potential heat build-up, so the team repositioned 
 \label{fig:Dead copper}
 \end{figure}
 
+\subsection{Possible Routing Improvement}
+The auto router caused some wires to make long detours.
+Manual routing of some signals could've shortened these distance, but was not critical to the design.
+Wires in the same parallell buses should ideally have equal lengths, to ensure all signals in are synchronized.
+Some wires in the \gls{ebi} bus, and the bus between the \gls{fpga} and the frame buffer, had varying lengths - potentially create race conditions.
+No anomalies were discovered, and the team assumed it was not a problem.
+However, modern general purpose computers should be careful to avoid these race conditions \cite{race-conditions}.
 
 \subsection{Bad Soldering}
 Some issues arised because of components not being properly soldered onto the \gls{pcb}. Examples are component pins with partial or no contact to the \gls{pcb}, and pins touching several footprint connectors.
@@ -123,7 +130,6 @@ The micro \gls{usb} footprint originally contained mounting holes, but were for 
 Luckily, these did not act as connectors, and the team could therefore solder the \gls{usb} receptacle onto the \gls{pcb} like a surface mounted component.
 
 \subsection{Component sizes}
-
 In hindsight, it would have been better to order bigger components.
 Since this was a prototype board with mostly hand-soldering, an increase in size would only be beneficial.
 Should the project should go into large scale production, the size could have been reduced.
