@@ -2,7 +2,7 @@
 
 The group faced some issues during the design process. 
 This chapter discusses the significant obstacles encountered, and how the group managed to fix or work around them. 
-Additionaly, possible improvements - which were not implemented due to time constraints - are addressed to give a better understanding of the system.
+Additionaly, possible improvements are addressed to give a better understanding of the system.
 
 \section{Architecture Design}
 Before any actual coding and soldering, the group spent some time planning the architecture.
@@ -34,3 +34,20 @@ It is possible to slew the electron beam from one point to the next, using analo
 An example of such circuitry has been implemented in the 80's in a similar project \cite{vector-graphic-crt}.
 
 If \vthreek were to support an intensity value in addition to x and y, the architecture and \gls{pcb} would require changes.
+
+\section{Improvements}
+Further improvements 
+The final implementation of the processor is a multi-cycle RISC/MIPS inspired processor.
+In this design, one instruction is executed each for second or third clock cycle.
+To increase the number of instructions per cycle, the processor could have been pipelined.
+But given the time constraint, the group never found the time to implement a pipelined processor.
+
+multi-core
+
+communication between output and mcu
+
+interactivity
+
+toolchain
+
+extend isa
