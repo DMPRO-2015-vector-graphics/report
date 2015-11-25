@@ -32,7 +32,7 @@ This will result in shorter lines and curves appearing brighter on the oscillosc
 
 The actual calculation of the points is done by using the equations described in section \ref{sec:bezier}.
 However since there was no floating point unit, a number between 0 and 1023 was used instead of a number between 0 and 1, that was then left shifted by 5.
-\(t\) then becomes \(t = i \ll 5\) (\(0 \leq i < 1024\)).
+\(t\) then becomes \(t = i \ll 5\), (\(0 \leq i < 1024\)).
 After every multiplication the result is then right shifted by 15.
 This results in a limit of 1024 different points for a given primitive.
 
