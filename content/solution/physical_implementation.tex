@@ -180,7 +180,8 @@ The solution is splitting of the power and ground plane, shown in Figure \ref{fi
 \item 5AV: Analogue 5V for components on the analogue plane.
 The reason for 5V is based on insecurity about how much voltage the oscilloscope requires to properly display vector graphics from the program.
 3.3V can be too low, so 5V has been chosen.
-A high signal voltage can also potentially help reduce noise. //TODO: What does this mean?
+A high signal voltage can also potentially help reduce noise as the step between bits in the DAC will result in a greater voltage change on the output.
+Noise will then be less apparent.
 \item AGND: Analogue components are connected to this ground instead of digital ground.
 This is to stop the analogue signal from getting disturbed by the digital signals on the ground plane.
 \item 3.3V: Digital voltage for digital components.

@@ -3,24 +3,28 @@ No project would be complete without something going wrong. Our project was no e
 
 \subsection{Routing Problems}
 \label{Routing Problems}
-Several complications during the routing procedure were encountered. 
+Several complications during the routing procedure were encountered.
 Most were a product of bad Altium settings, causing some extra time to locate.
 The most significant ones are described in detail in the following sections.
 
 \subsubsection{Bad Auto Router Settings}
 After auto routing the whole thing the first time, the result contained over 100 still unrouted connections, which meant that the auto router didn't manage to connect these.
 
-The team discovered that choosing different routing options for the auto router made a big difference. 
+The team discovered that choosing different routing options for the auto router made a big difference.
 After making the auto-router focus more on switching layers for every signals, to avoid complex routing on fewer layers, it managed to route all the connections. This was achieved by changing routing strategy from \emph{Default 2 Layer Board} to \emph{Default Multi Layer Board} in Altium.
 
 \subsubsection{Clearance Constraint Issue}
 After the first auto routing attempts, there was tons of short-circuits. We found out that our clearance constraint rule didn't apply for all components.
 Adding the general clearance constraint rule back again, we faced the same issue in another form - the auto router wouldn't route at all, and complained about clearance constraints violations.
-The settings said that Altium would check for clearance violation with \emph{Any Net}. Thanks to some help from Odd Rune, we discovered that \emph{Any Net} also included the net that it was currently comparing. Thus, it checked if the current trace meets the clearance constraint with itself, which of course it does not. By changing this setting to \emph{Different Nets Only}, the entire short-circuit problem was solved. 
+The settings said that Altium would check for clearance violation with \emph{Any Net}.
+With help from the course staff, the group discovered that \emph{Any Net} also included the net that it was currently comparing.
+
+Thus, it checked if the current trace meets the clearance constraint with itself, which of course it does not.
+By changing this setting to \emph{Different Nets Only}, the entire short-circuit problem was solved.
 
 \subsubsection{Dead Copper}
-Dead copper is parts of the copper on a power plane that's isolated from the rest of the copper on that plane. 
-This appeared several places on our \gls{pcb}. Normally a minimal problem, but some places a GND via or a 3.3V via was connected to dead copper on the corresponding power plane. 
+Dead copper is parts of the copper on a power plane that's isolated from the rest of the copper on that plane.
+This appeared several places on our \gls{pcb}. Normally a minimal problem, but some places a GND via or a 3.3V via was connected to dead copper on the corresponding power plane.
 This had to be avoided due to potential heat build-up, so the team repositioned neighboring vias to rejoin the copper area with the rest of the copper plane. The issue and solution are described in figure \ref{fig:Dead copper}.
 
 \begin{figure}[h!]
@@ -30,26 +34,27 @@ This had to be avoided due to potential heat build-up, so the team repositioned 
 \label{fig:Dead copper}
 \end{figure}
 
+
 \subsection{Bad Soldering}
 Some issues arised because of components not being properly soldered onto the \gls{pcb}. Examples are component pins with partial or no contact to the \gls{pcb}, and pins touching several footprint connectors.
 
-\subsubsection{Partially Soldered Voltage Regulator} 
+\subsubsection{Partially Soldered Voltage Regulator}
 It was critical to verify that the power planes worked, as the computer would be dead without power.
-Every necessary part that delivered power was soldered on, including power headers and the 3.3 voltage regulator. 
-External power was run through the power headers. 
-Measuring different places with a multimeter, anomalies were discovered. 
-The voltmeter showed only 2.3V, instead of 3.3V. 
-Further testing revealed that one of the voltage regulator pins hadn't been soldered properly, resulting in a loss of 1V. 
+Every necessary part that delivered power was soldered on, including power headers and the 3.3 voltage regulator.
+External power was run through the power headers.
+Measuring different places with a multimeter, anomalies were discovered.
+The voltmeter showed only 2.3V, instead of 3.3V.
+Further testing revealed that one of the voltage regulator pins hadn't been soldered properly, resulting in a loss of 1V.
 Fixing this, the digital \(V_{CC}\) plane contained the correct 3.3V.
 
 \subsection{Incorrect Wiring}
-Most \gls{pcb} problems were due to incorrect wiring. 
-Either signals were having unexpected values, short-circuits had occurred, or other unexpected behaviour. 
+Most \gls{pcb} problems were due to incorrect wiring.
+Either signals were having unexpected values, short-circuits had occurred, or other unexpected behaviour.
 In the next sections, the most significant wiring issues are addressed and how they were fixed.
 
 \subsubsection{Short-circuits in Buttons}
-The group discovered that the buttons were wired wrong, since they caused short-circuits. 
-The reason was sloppy study of the datasheet, as shown in figure \ref{fig:Button Issue}. 
+The group discovered that the buttons were wired wrong, since they caused short-circuits.
+The reason was sloppy study of the datasheet, as shown in figure \ref{fig:Button Issue}.
 Luckily, this could be remedied by rotating the button 90 degrees, if adjusting the physical connectors to fit the footprint.
 
 \begin{figure}[h!]
@@ -60,29 +65,29 @@ Luckily, this could be remedied by rotating the button 90 degrees, if adjusting 
 \end{figure}
 
 \subsubsection{No Output from Oscillators}
-Testing the oscillators, they did not seem to work. 
-The datasheet for these components clearly stated that connecting the E/D pin to either 'No Connect' or '1' equaled active, so the team did not connect it. 
+Testing the oscillators, they did not seem to work.
+The datasheet for these components clearly stated that connecting the E/D pin to either 'No Connect' or '1' equaled active, so the team did not connect it.
 When E/D was connected to \(V_{CC}\), the problem was solved.
 
 \subsubsection{Incorrect Power Supply to Vref and DACs}
-The Vref chip was supplied with 3.3V, but should have been supplied with analogue 5V instead. 
-This could be remedied by cutting on the 3.3V power trace, since the trace is located on the top layer and no other traces are beneath it. 
+The Vref chip was supplied with 3.3V, but should have been supplied with analogue 5V instead.
+This could be remedied by cutting on the 3.3V power trace, since the trace is located on the top layer and no other traces are beneath it.
 The analogue 5V could then be connected via header from the voltage regulator to the input pin on the Vref chip.
 \newline
-The DACs were supplied with analogue 5V, but should have been supplied with 3.3V; the analogue 5V should go to the Vref chip instead. 
+The DACs were supplied with analogue 5V, but should have been supplied with 3.3V; the analogue 5V should go to the Vref chip instead.
 This was solved by switching the two connections.
 
 \subsubsection{Faulty Connected BNCs}
-The \gls{bnc} connections were faulty wired. 
-Each \gls{bnc} had two connections, excluding the socket itself, connected to the \gls{bnc} cable. 
-One of these would go to ground, while the other would receive the signal destined for the oscilloscope, but these connections was switched. 
+The \gls{bnc} connections were faulty wired.
+Each \gls{bnc} had two connections, excluding the socket itself, connected to the \gls{bnc} cable.
+One of these would go to ground, while the other would receive the signal destined for the oscilloscope, but these connections was switched.
 The group fixed this by running wires to the correct connections.
 
 \subsubsection{FPGA Configuration Issue}
 When the \gls{fpga} would complete configuration, it was supposed to set a signal high, which was connected to the \gls{mcu}, saying it was ready. ¨
-However, the \gls{mcu} seemed to ignore this signal. 
+However, the \gls{mcu} seemed to ignore this signal.
 What caused this problem was too hasty study of the manual describing configuration of the \gls{fpga}.
-An unnecessary connection to \(V_{CC}\) forced the Done signal into the \gls{mcu} to always be high, even when the \gls{fpga} was not configured. 
+An unnecessary connection to \(V_{CC}\) forced the Done signal into the \gls{mcu} to always be high, even when the \gls{fpga} was not configured.
 Since the \(V_{CC}\) connection couldn't be removed, a workaround had to be devised.
 
 By introducing a transistor, and making the signal active low on the \gls{mcu} side, the group managed to make the \gls{mcu} notice when configuration was complete.
@@ -103,21 +108,27 @@ This solution was possible because the wire went through the \gls{jtag} header.
 After further studying of the \gls{fpga} configuration manual, it was discovered that this guide was different from what was intended in the group's design, so there was need for this extra \(V_{CC}\) connection. The guide we studied is on page 42 in \cite{fpga-configuration}.
 
 \subsubsection{Noise Reduction}
-The diode which was intended to reduce noise in the analogue plane, had no noticable effect. 
-The reason was probably focus on the current leakage, and not noise itself. 
-The team solved this using a ferrite bead instead of the diode. 
-A ferrite bead is a component designed to suppress high-frequency noise. 
+The diode which was intended to reduce noise in the analogue plane, had no noticable effect.
+The reason was probably focus on the current leakage, and not noise itself.
+The team solved this using a ferrite bead instead of the diode.
+A ferrite bead is a component designed to suppress high-frequency noise.
 
-Noise was reduced, but the ferrite bead itself worked also as a resistor, allowing only a small current flow through. 
+Noise was reduced, but the ferrite bead itself worked also as a resistor, allowing only a small current flow through.
 Connecting a resistor with very low resistance (15 Ohm) in parallell with the ferrite bead, current was able to flow freely through this connection.
 
 \subsection{PCB Placement and Footprints}
 It would have been beneficial to place the 3.3V voltage regulator closer to the \gls{jtag} debugging port, since the Xilinx \gls{jtag} platform cable required a 3.3V power supply.
 
-The micro \gls{usb} footprint originally contained mounting holes, but were for some reason never drilled during manufacturing. 
+The micro \gls{usb} footprint originally contained mounting holes, but were for some reason never drilled during manufacturing.
 Luckily, these did not act as connectors, and the team could therefore solder the \gls{usb} receptacle onto the \gls{pcb} like a surface mounted component.
 
 \subsection{Component sizes}
+<<<<<<< HEAD
 In hindsight, it would have been better to order bigger components. 
 Since this was a prototype board with mostly hand-soldering, an increase in size would only be beneficial, especially considering the \gls{dac}s, since they were so tiny. 
 Should the project should go into large scale production, the size could have been reduced.
+=======
+In hindsight, it would have been better to order bigger components.
+Since this was a prototype board with mostly hand-soldering, an increase in size would only be beneficial.
+Should the project should go into large scale production, the size could have been reduced.
+>>>>>>> 1627189d1f7fd9e0a3ba6463fc3dd7095b8bd9e6
