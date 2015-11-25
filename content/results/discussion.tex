@@ -6,12 +6,12 @@ During the design process, the group faced many issues. This chapter discusses a
 Before any actual coding and soldering the group spent time planning the architecture.
 TODO: Vi burde hatt floating point for å gjøre vektorutregninger.
 
-%\input{content/results/pcb-discussion}
+\input{content/results/pcb-discussion}
 
 \section{Component Ordering}
-When ordering components we could've been more thorough with datasheet inspection before sending the order. While we were waiting for our first order, we discovered that the LEDs we had found was reverse mounted. That means they were supposed to be soldered on the bottom of the PCB and light through a hole to the top, which was useless for our footprint. Hence, we had to order new LEDs with the correct footprint. It wasn't a big problem considering it was only a few cheap LEDs, but the same situation could occur with a much more important component, resulting in delays and unnecessary spending of money.
+When ordering components we could've been more thorough with datasheet inspection before sending the order. While we were waiting for our first order, we discovered that the \gls{led}s we had found was reverse mounted. That means they were supposed to be soldered on the bottom of the \gls{pcb} and light through a hole to the top, which was useless for our footprint. Hence, we had to order new \gls{led}s with the correct footprint. It wasn't a big problem considering it was only a few cheap \gls{led}s, but the same situation could occur with a much more important component, resulting in delays and unnecessary spending of money.
 
-Several DACs were fried, because of short-circuits during testing. The result of this was a shortage of DACs, and they were essential for making our design to work. We had ordered enough DACs to solder ten PCBs, but still we ran short, so we had to order more of them. This situation gives an indication that it was a good idea to order enough components for as much as ten boards.
+Several \gls{dac}s were fried, because of short-circuits during testing. The result of this was a shortage of \gls{dac}s, and they were essential for making our design to work. We had ordered enough \gls{dac}s to solder ten \gls{pcb}s, but still we ran short, so we had to order more of them. This situation gives an indication that it was a good idea to order enough components for as much as ten boards.
 
 \input{content/results/oscillator}
 
@@ -21,9 +21,9 @@ The drawing artefacts explained in Section \ref{results:artefacts} are possible 
 If a third input value for intensity were to be added, one could turn the electron beam off when moving the beam between primitive.
 
 The other artefact mentioned, is the dotted lines.
-This could be removed, by adding analogue circuitry between the DAC output and the BNC connectors.
+This could be removed, by adding analogue circuitry between the \gls{dac} output and the BNC connectors.
 It is possible to slew the electron beam from one point to the next, by analogue integration, to archive a smooth transition between points.
 An example of such circuitry has been implemented in the 80's in a similar project \cite{vector-graphic-crt}.
 
 
-If \vthreek were to support an intensity value in addition to x and y, the architecture and PCB require changes.
+If \vthreek were to support an intensity value in addition to x and y, the architecture and \gls{pcb} require changes.

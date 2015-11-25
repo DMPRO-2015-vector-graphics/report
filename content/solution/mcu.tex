@@ -2,10 +2,10 @@
 \label{ch:mcu}
 
 To handle \gls{io} (not including output explained in Chapter \ref{chap:Output}), \vthreek is equipped with a \gls{mcu}.
-This chapter will explain the reason for including this part, and its responsibilities. 
+This chapter will explain the reason for including this part, and its responsibilities.
 
 \section{Silicon Labs EFM32 Giant Gecko}
-A requirement for the assignment was to utilize a Silicon Labs EFM32 \gls{mcu} to act as an \gls{io} processor, listed in Figure \ref{lst:non_func_req}.
+A requirement for the assignment was to utilize a Silicon Labs EFM32 \gls{mcu} to act as an \gls{io} processor, listed in Table~\ref{tbl:non_func_req}.
 The EFM is a \gls{soc}, and contains a 32-bit ARM Cortex-M3 processor, 1024kB flash memory and 128kB RAM \cite{efm32referencemanual}.
 
 The Giant Gecko version was chosen for \vthreek.
@@ -14,7 +14,7 @@ It is the most powerful \gls{mcu} in the series, and thus provides the most poss
 
 \section{Responsibilities}
 The \gls{mcu} does not have many responsibilities, and will in fact idle most of the time. The program flow is represented as a state diagram in Figure \ref{fig:mcu_state}.
-Its primary tasks are: 
+Its primary tasks are:
 \begin{itemize}
 \item Load program instructions into \gls{sram}
 \item Wait for button or joystick presses and react to these.
@@ -22,10 +22,10 @@ Its primary tasks are:
 \end{itemize}
 
 \subsection{Loading program}
-In order for the processor to do anything useful, we of course need to tell it what to do.
+In order for the processor to do anything useful, a program is needed.
 The program is contained within a header file in the \gls{mcu} flash.
 After the MCU has booted and initialized the subsystems it utilizes, it will wait for a \texttt{Done} signal from the processor.
-This signal tells the \gls{mcu} that \gls{jtag} has completed the \gls{fpga} flash process. 
+This signal tells the \gls{mcu} that \gls{jtag} has completed the \gls{fpga} flash process.
 It is important to wait for this signal, because the state of any signal connected to the \gls{fpga} is undefined prior to flashing.
 This could possibly interfere with the \gls{mcu} writing to \gls{sram}.
 

@@ -6,7 +6,7 @@ It is a large, project-based subject in which students create a working computin
 This year saw high enough participation that two assignments were presented, and two groups formed around these.
 The report you're now reading details the work done and solution implemented by the vector graphics processor group.
 
-This chapter introduces the project, describes the requirements, outlines the solution and provides a fundamental understanding of vector graphics. It ends with
+This chapter introduces the project, describes the requirements, outlines the solution and provides a fundamental understanding of vector graphics. It ends with an introduction of the labs that were used and a general overview of the whole report.
 
 \section{Assignment}
 
@@ -47,7 +47,7 @@ More information about vector and raster graphics is found in chapter \ref{chp:b
 \section{Requirements}
 \label{sec:requirements}
 The group decided on a set of functional requirements based on initial research, listed in table \ref{tbl:func_req}.
-Non-functional requirements given in the assignment text are listed in list \ref{lst:non_func_req}.
+Non-functional requirements given in the assignment text are listed in Table \ref{tbl:non_func_req}.
 
 \begin{table}[h!]
 \resizebox{\textwidth}{!}{
@@ -71,13 +71,13 @@ Non-functional requirements given in the assignment text are listed in list \ref
 \begin{table}[h!]
 \resizebox{\textwidth}{!}{
     \begin{tabular}{|l|l|}
-     	\hline															    	
+     	\hline
         \textbf{Requirement}    												& \textbf{Priority} \\ \hline
         The processor should be implemented on a Xilinx \gls{fpga}								& High 	\\ \hline
-        The unit must utilize a Silicon Labs EFM32 microcontroller to act as an				& High 	\\ 
+        The unit must utilize a Silicon Labs EFM32 microcontroller to act as an				& High 	\\
         \gls{io} processor 																		&   	\\ \hline
         The budget of 10 000 NOK should cover components and \gls{pcb} production					& High 	\\ \hline
-    
+
     \end{tabular}
 }
     \caption{Non-functional requirements.}
@@ -115,10 +115,4 @@ Part two presents the designed architecture in detail, outlines the programming 
 
 Finally, part three presents performed tests, results, discussion and a conclusion.
 
-\section{Conventions}
-// TODO: Describe any conventions used in the report.
-This report should be read with the following considerations in mind:
-
-\begin{description}
-    \item[group and team] 'The group' refers to everyone working on this project. The main work loads (System architecture, \gls{io} and \gls{pcb} design), were split among smaller teams. 'The team' refers to the team responsible for this functionality.
-\end{description}
+It should be noted that in this report, 'the group' refers to everyone working on this project. The main work loads (System architecture, \gls{io} and \gls{pcb} design), were split among smaller teams. 'The team' refers to the team responsible for this functionality.
