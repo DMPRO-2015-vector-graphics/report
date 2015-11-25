@@ -92,7 +92,7 @@ This solution was possible because the wire went through the \gls{jtag} header.
 \label{fig:Done Issue}
 \end{figure}
 
-After further studying of the \gls{fpga} configuration manual, we saw that this guide was different from what we intended in our design, so there was need for this extra \(V_{CC}\) connection. The guide we studied is on page 42 in \cite{\gls{jtag}-configuration}
+After further studying of the \gls{fpga} configuration manual, we saw that this guide was different from what we intended in our design, so there was need for this extra \(V_{CC}\) connection. The guide we studied is on page 42 in \cite{fpga-configuration}
 
 \subsubsection{Noise Reduction}
 The diode which we intended to reduce noise in the analogue plane, had no noticable effect. The reason was probably that we only thought about current leakage and not noise itself. To solve this problem, the team got the idea of using a ferrite bead instead of the diode. A ferrite bead is a component designed to suppress high-frequency noise. 
