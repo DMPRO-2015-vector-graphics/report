@@ -1,6 +1,6 @@
 \chapter{Results}
-The group ended up with a computer that managed to produce vector graphics according to design. 
-This chapter presents the results of the project. 
+The group ended up with a computer that managed to produce vector graphics according to design.
+This chapter presents the results of the project.
 The physical result is depicted i Figure \ref{fig:board-top}.
 The advanced tunnel program that was produced (see Appendix \ref{app:tunnel}), can be seen in action here: \href{https://vid.me/JEZv}{https://vid.me/JEZv} \cite{tunnel-demo}.
 
@@ -17,17 +17,13 @@ The synthesis report from Xilinx ISE states that the \gls{fpga} still has more \
 However, the primitive storage space is not the limiting factor - the primitive drawing module is.
 
 \section{Performance}
-<<<<<<< Updated upstream
-Maximum clock frequency of the \gls{dac}s is 30MHz, according to the datasheet\cite{dac-datasheet}.
-To update the \gls{dac} value, a total of 25 clock cycles are required.
-=======
+
 //TODO: FPGA Results
 \subsection{FPGA}
 
 \subsection{DAC}
-The maximum clock frequency of the DACs is 30MHz according to the datasheet.
+The maximum clock frequency of the DACs is 30MHz according to the datasheet \cite{dac-datasheet}.
 To update the DAC value a total of 25 clock cycles are required.
->>>>>>> Stashed changes
 As a result the theoretical effective maximum output will be \(30 MHz \div 25 = 1.2 MHz \).
 However during testing the group experience incorrect \gls{dac} values if the clock were set higher than 20 MHz.
 With a clock frequency of 20 MHz the maximum output is 800 KHz.
@@ -69,7 +65,7 @@ When the oscilloscope is done drawing one primitive and moves to the next the el
 and weaker drawing lines may be visible.
 In other words all shapes are drawn without "lifting the pencil off the paper".
 If one take a closer look at Figure \ref{fig:artefact}, the drawing artefacts are visible.
-There are solutions to avoid the drawing artefacts, which is explained in section \ref{discussion:artefacts}.
+There are solutions to avoid the drawing artefacts, which is explained in Section \ref{discussion:artefacts}.
 
 \begin{figure}[h!]
 	    \includegraphics[width=\linewidth]{images/artefacts.jpg}
@@ -123,4 +119,3 @@ Moreover, this part was a medium priority requirement, listed in Table \ref{tbl:
 In the assignment text, the group was given a budget of 10,000 NOK.
 At the end of the project the total cost of materials was about 11,500 NOK (without shipping costs), which is somewhat above the proposed budget for the project.
 The full list of material expenses is listed in Appendix \ref{tbl:material-cost}.
-
