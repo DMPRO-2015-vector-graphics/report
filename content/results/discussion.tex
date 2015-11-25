@@ -35,6 +35,10 @@ Further improvements - which ultimately were not implemented due to time constra
 
 Before any actual coding and soldering, the group spent some time planning the architecture. It was argued that implementing floating point would better conform to the industry standards of vector calculation, and that it would offer more precise calculations.
 
+The auto router caused some wires to make long detours. 
+More manual routing of signals could've generally shortened these distances. 
+Wires in the same parallel buses should ideally have equal lengths, to ensure all signals in are synchronized. 
+
 The final implementation of the processor is a multi-cycle RISC/MIPS inspired processor.
 In this design, one instruction is executed each for second or third clock cycle.
 To increase the number of instructions per cycle, the processor could have been pipelined.
@@ -42,15 +46,9 @@ Given the time constraint, the group never found the time to implement a pipelin
 
 The processor could also have been made into a multi-core processor, which would further improve the performance. Ultimately, time constraints caused this project to come to a halt.
 
-communication between output module and cpu, cache for primitives, cpu tells output module that values in cache are invalid
-
 Interactivity between the user and the graphics could have been implemented, using the included buttons and joystick. A game was discussed as a possible demo, but was deemed to complex and time demanding, given that other parts of the system were more critical to implement.
 
 A toolchain to make it easier for programmers to program on the computer was not prioritised high enough to be done anything with.
 
 The \gls{isa} could have been extended, i.e. with convenient operations that would shorten the program length and solve unintuitive syntax.
 
-\subsection{Possible Routing Improvement}
-The auto router caused some wires to make long detours. 
-More manual routing of signals could've generally shortened these distances. 
-Wires in the same parallel buses should ideally have equal lengths, to ensure all signals in are synchronized. 
