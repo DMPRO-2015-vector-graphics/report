@@ -15,11 +15,12 @@ Tracing the envisioned execution path of a program through the system gives insi
 \item The output from the \gls{dac}s is displayed on an analogue oscilloscope and the output from the \gls{hdmi} on a raster screen.
 \end{enumerate}
 
-The plan with the flash memory was to be able to store the bit file, which would configure the \gls{fpga}. This would make us able to quickly get the system up and running after turning it on, since the flash would automatically be configured.
+The plan with the flash memory was to be able to store the bit file, which would configure the \gls{fpga}.
+This would make it possible to quickly get the system up and running after turning it on, as the flash would automatically configure the \gls{fpga}.
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale = 0.4]{images/PCB_Overview.png}
+\includegraphics[scale = 0.56]{images/PCB_Overview.png}
 \caption{Overview of \gls{pcb} architecture}
 \label{fig:PCB_Overview}
 \end{figure}
@@ -30,34 +31,20 @@ All components had to meet the team's technical demands, e.g. number of pins, vo
 This information was found by inspecting the various component's datasheets.
 Critical components in the design are described in the following subsections.
 
-<<<<<<< HEAD
-\subsection{\gls{mcu}}
-The \gls{mcu} was the EFM32GG microcontroller described in \ref{ch:mcu}.
-
-\subsection{\gls{fpga}}
-=======
 \subsection{MCU}
-The \gls{mcu} was the EFM32GG microcontroller described earlier.
+The \gls{mcu} was the EFM32GG microcontroller described in \ref{ch:mcu}
 
 \subsection{FPGA}
->>>>>>> 151338740f72e40affe688972e5f6ee24b1ceb6d
 The \gls{fpga} was a Xilinx XC6SLX45-2CSG324I, with 401 kb block \gls{ram}.
 It served as the main processor in the design, fetching and executing instructions from instruction memory.
 
 A \gls{jtag} header was connected to the \gls{fpga} for good accessibility to \gls{fpga} debugging and programming.
 //TODO : elaborate
 
-<<<<<<< HEAD
-\subsection{\gls{sram}}
-Two \gls{sram}s were put on the \gls{pcb}. 
-One of them worked as an instruction memory for the \gls{fpga}, while the other was a dedicated frame buffer for our output signals. 
-The instructions executed in the \gls{fpga} would update the frame buffer, and data from the frame buffer could be read and transferred to the output units. 
-=======
 \subsection{SRAM}
 Two \gls{sram}s were put on the \gls{pcb}.
 One of them worked as an instruction memory for the \gls{fpga}, while the other was a dedicated frame buffer for our output signals.
 The instructions executed in the \gls{fpga} would update the frame buffer, and data from the frame buffer could be read and transferred to the output units.
->>>>>>> 151338740f72e40affe688972e5f6ee24b1ceb6d
 Both \gls{sram}s had an address space of 512k 16-bit words.
 
 \subsection{\gls{dac}s and \gls{bnc}s}
@@ -290,21 +277,12 @@ This would be useful when focusing on lesser parts of the circuit.
 For instance, 3-pin headers were used to manually turn on and off different voltage levels.
 Power could also be delivered to the components directly through the headers, if any issue with the power supply should occur.
 
-<<<<<<< HEAD
-\subsection{\gls{dac}s}
-Even though separate \gls{dac}s for outputting analog voltage out to the \gls{bnc} plug was included, there was still a risk that the group could not get them to work. 
-A back-up solution by connecting the internal \gls{dac}s in the \gls{mcu} to the \gls{bnc}s was implemented. 
-One 2x2 header for each \gls{bnc} input was used to manually control whether the main \gls{dac}s or the \gls{mcu} \gls{dac}s were to be used. 
-This process is shown in figure \ref{fig:DAC headers}. 
-There's one header each for the X and the Y signal to the oscilloscope. 
-=======
 \subsection{DACs}
 Even though separate \gls{dac}s for outputting analog voltage out to the \gls{bnc} plug was included, there was still a risk that the group could not get them to work.
 A back-up solution by connecting the internal \gls{dac}s in the \gls{mcu} to the \gls{bnc}s was implemented.
 One 2x2 header for each \gls{bnc} input was used to manually control whether the main \gls{dac}s or the \gls{mcu} \gls{dac}s were to be used.
 This process is shown in figure \ref{fig:DAC headers}.
 There's one header each for the X and the Y signal to the oscilloscope.
->>>>>>> 151338740f72e40affe688972e5f6ee24b1ceb6d
 
 \begin{figure}[h!]
 \centering
