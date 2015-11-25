@@ -1,5 +1,5 @@
 \section{IO Tests}
-Before our \gls{pcb} board arrived we tested each subsystem separately.
+Before the \gls{pcb} board arrived, each subsystem were tested separately.
 During testing the group gained valuable experience about all the subcomponents and how they interacted with each others.
 
 \subsection{DAC}
@@ -17,7 +17,7 @@ With VRef and \(V_{DD}\) at 5.0V, the analogue \gls{dac} output was measured to 
 
 \subsubsection{With the PCB}
 
-Once the the \gls{pcb} arrived we were able to test the \gls{dac}s soldered onto the \gls{pcb} as well as with actual data from the \gls{fpga}.
+Once the the \gls{pcb} arrived, the \gls{dac}s were soldered onto the \gls{pcb} and tested with actual data from the \gls{fpga}.
 
 Clocking data from the \gls{fpga} to the \gls{dac}s on our \gls{pcb} presented some issues as we hit a limit in the Spartan-6 architecture regarding clock routing. This was resolved by using an ODDR\cite[pp. 61--65]{fpga-io} in order to forward the clock signal to the desired output pin.
 
