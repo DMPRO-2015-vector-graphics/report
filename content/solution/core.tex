@@ -72,8 +72,8 @@ To explain how these work together, each component will be explained in the orde
 \subsection{Instruction Memory}
 
 \begin{figure}[h!]
-    \includegraphics[width=\linewidth]{images/instruction-memory.png}
-    \caption{I/O for the instruction memory}
+    \includegraphics[width=0.6\linewidth]{images/instruction-memory.png}
+    \caption{I/O for the instruction memory.}
     \label{fig:instruction-memory}
 \end{figure}
 
@@ -84,10 +84,13 @@ Due to only being able to read 16 bits at a time from the SRAM, the group implem
 \subsection{Registers}
 
 \begin{figure}[h!]
-    \includegraphics[width=\linewidth]{images/registers.png}
-    \caption{I/O for the register module}
+    \centering
+    \includegraphics[width=0.6\linewidth]{images/registers.png}
+    \caption{I/O for the register module.}
     \label{fig:registers}
 \end{figure}
+
+After being read from the instruction memory, an instruction is decoded and wired as input to the register module.
 
 The \vthreek architecture provides 32 32-bit general purpose registers.
 These are organised into a registerfile.
@@ -102,16 +105,50 @@ Similarily, \texttt{mem\_to\_reg} indicates wether the data from memory or the a
 
 The special purpose primitive register functions in much the same way, only with a single register.
 Its inputs, outputs and control signals can be seen in Figure \ref{fig:primitive-register}.
-Since there is only on primitve, there is no address input.
-Control signals only determine wether or the register contents should be overwritten and if yes, what data source should be used to overwrite.
+Since there is only one register to address, the primitive register doesn't take any part of the instruction as input, but rather outputs its current value continuously.
+Control signals only determine wether or not the register contents should be overwritten and if yes, what data source should be used to overwrite.
 
 \begin{figure}[h!]
-    \includegraphics[width=\linewidth]{images/primitive-register.png}
-    \caption{I/O for the primitive register}
+    \includegraphics[width=0.6\linewidth]{images/primitive-register.png}
+    \caption{I/O for the primitive register.}
     \label{fig:primitive-register}
 \end{figure}
 
+\subsection{ALU}
+
+\begin{figure}[h!]
+    \includegraphics[width=0.8\linewidth]{images/ALU.png}
+    \caption{I/O for the ALU.}
+    \label{fig:ALU}
+\end{figure}
+
+The ALU is the main functional unit of the processor.
+It is responsible for performing arithmetic and logical operations on operands from the registers.
+Additionally, it supports a number of operations associated with vector primitives.
+For the initialization instructions, \texttt{line}, \texttt{bezquad} and \texttt{bezcube}, coordinates read from the general purpose registers are assembled into primitives.
+\texttt{getp\{1,2,3,4\}} and \texttt{setp\{1,2,3,4\}} work on individual parts of a primitive.
+
+As shown in figure \ref{fig:ALU}, the unit also receives an immediate value, taken straight from the decoded instruction, and a control signal, \texttt{op}, which determines the operation to be performed.
+
+\subsection{Data and Scene Memories}
+
+Scene and data memories have similar interfaces, see figure \ref{fig:data-scene-memories}, the major exception being data width and size.
+Data words in scene memory are 136 bits wide, with space for 1024 primitives.
+To allow for both the processor core and the output module to interface with the scene memory simultaneously, the scene memory was 
+Words in general data memory are 32 bits wide.
+Their input address bus determines either which address to read from or write to.
+The \texttt{write\_enable} control signal specifies wether a read or write should be performed.
+
+\begin{figure}[h!]
+    \includegraphics[width=0.8\linewidth]{images/data-scene-memories.png}
+    \caption{I/O for data and scene memory modules.}
+    \label{fig:ALU}
+\end{figure}
+
+
 \section{Control Path}
+
+Having examined how instruction, data words and primitives flow 
 
 \begin{figure}[h!]
     \includegraphics[width=\linewidth]{images/Control_signals.png}
