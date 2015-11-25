@@ -17,8 +17,17 @@ The synthesis report from Xilinx ISE states that the \gls{fpga} still has more \
 However, the primitive storage space is not the limiting factor - the primitive drawing module is.
 
 \section{Performance}
+<<<<<<< Updated upstream
 Maximum clock frequency of the \gls{dac}s is 30MHz, according to the datasheet\cite{dac-datasheet}.
 To update the \gls{dac} value, a total of 25 clock cycles are required.
+=======
+//TODO: FPGA Results
+\subsection{FPGA}
+
+\subsection{DAC}
+The maximum clock frequency of the DACs is 30MHz according to the datasheet.
+To update the DAC value a total of 25 clock cycles are required.
+>>>>>>> Stashed changes
 As a result the theoretical effective maximum output will be \(30 MHz \div 25 = 1.2 MHz \).
 However during testing the group experience incorrect \gls{dac} values if the clock were set higher than 20 MHz.
 With a clock frequency of 20 MHz the maximum output is 800 KHz.
