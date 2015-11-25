@@ -1,11 +1,11 @@
 \subsection{Display Comparison}
 The main difference between vector and raster displays, is that vector displays draws the image by scanning primitives, and a raster display draws the image by using scanlines.
 
-While a \gls{crt} raster display scans repeatedly in a fixed pattern, a vector display scans lines by gradually firing the electron beam to a point defined by two voltages: one defining the horizontal placement X and one defining the vertical Y.
+While a \gls{crt} raster display scans repeatedly in a fixed pattern, a vector display scans lines by gradually firing the electron beam to a point defined by two voltages: One defining the horizontal placement X, and one defining the vertical Y.
 Once a line is drawn, the electron emitter stops firing and moves to the starting point of the next line, thus leaving out dark areas.
 This process is shown in Figure \ref{fig:vectorscan}.
 
-Since vector displays are able to draw directly from one point to another, they do not suffer from artifacts such as aliasing and pixelation, which are present in raster displays \cite{vector-monitor}.
+Since vector displays are able to draw directly from one point to another, they do not suffer from artefacts such as aliasing and pixelation, which are present in raster displays \cite{vector-monitor}.
 However, graphic complexity on vector displays are very limited compared to raster screens.
 
 \begin{figure}[h!]
@@ -25,5 +25,5 @@ Screen flickering is an artifact caused by lower refresh rates than the human ey
 On vector displays, the entire screen does not have to be scanned every time, only the areas that the electron beam has to light up.
 However, the sometimes irregular electron beam motion is often slower than raster screens' predictable scanning \cite{vecvsras}.
 As a result, the refresh rate of a vector display is more easily prone to flickering, since it has no way of limiting the scene size.
-When more primitives need to be drawn, the display will start to flicker more frequently.
+When more primitives need to be drawn, the display flickering will be more visible.
 A raster display guarantees that all pixels will be updated within a specified refresh rate, since the number of pixels always stays the same.
