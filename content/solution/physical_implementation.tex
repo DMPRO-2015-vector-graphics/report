@@ -8,8 +8,7 @@ The envisioned execution path, shown in figure \ref{fig:PCB_Overview} gives a go
 \begin{enumerate}
 \item Assembled \vthreek programs are loaded into instruction memory via the EFM32 microcontroller.
 \item The \gls{fpga} reads instructions from memory and performs execution.
-\item Data ready to be sent to output will be stored in a frame buffer.
-\item The \gls{fpga} sends data from the frame buffer to the output screens via two interfaces, two \gls{dac}s and an \gls{hdmi} port.
+\item Data ready to be sent to the HDMI output will be stored in a frame buffer, while data to the DACs will be sent directly.
 \item The output from the \gls{dac}s is displayed on an analogue oscilloscope and the output from the \gls{hdmi} on a raster screen.
 \end{enumerate}
 
