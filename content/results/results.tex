@@ -23,8 +23,11 @@ As a result the theoretical effective maximum output will be \(30 MHz \div 25 = 
 However during testing the group experience incorrect \gls{dac} values if the clock were set higher than 20 MHz.
 With a clock frequency of 20 MHz the maximum output is 800 KHz.
 
+The CPU can be clocked at as much as 140 MHz, but since the output module needs to be run at 20 MHz this was chosen for the CPU as well for simplicity.
+At 20 MHz the CPU is still more than fast enough to update primitives in order to achieve smooth animations, so busy loops was introduced in the primitive update procedures in order to slow the update rate down.
+
 \section{Video Output}
-\vthreek was successful in drawing primitives to the a screen.
+\vthreek was successful in drawing primitives to a a screen.
 Only one of the output modules were realized; the analogue oscilloscope output.
 
 \subsection{Oscilloscope}
@@ -56,8 +59,8 @@ There are solutions to avoid the drawing artefacts, which is explained in sectio
 
 Another artefact, also barely visible, is the dots that each primitive is made of.
 By zooming in on the oscilloscope this becomes more visible, and can be seen in Figure \ref{fig:artefact-dots}.
-The digital nature of \vthreek implies a discrete increments when drawing.
-The electron ray moves faster then the \gls{dac}s are able to feed it with new data.
+The digital nature of \vthreek results in discrete increments when drawing.
+The electron ray moves faster than the \gls{dac}s are able to feed it with new data.
 As a result, the ray will wait at one spot, until it receives new values.
 This results in dotted lines, shown in Figure \ref{fig:dotx4} and \ref{fig:dotx8}
 
