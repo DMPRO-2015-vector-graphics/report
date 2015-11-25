@@ -32,7 +32,7 @@ This information was found by inspecting the various component's datasheets.
 Critical components in the design are described in the following subsections.
 
 \subsection{MCU}
-The \gls{mcu} was the EFM32GG microcontroller described in \ref{ch:mcu}
+The \gls{mcu} was the EFM32GG microcontroller described in Chapter~\ref{ch:mcu}.
 
 \subsection{FPGA}
 The \gls{fpga} was a Xilinx XC6SLX45-2CSG324I, with 401 kb block \gls{ram}.
@@ -75,9 +75,10 @@ The \gls{fpga}, \gls{mcu} and \gls{sram} were all connected via the \gls{ebi} bu
 These connections were made properly by using the specified \gls{ebi}-pins on the \gls{mcu} \cite[sec. 4.1]{efm32-datasheet}.
 The \gls{ebi} bus allowed high-speed communication to the \gls{sram}.
 As the \gls{ebi} bus is a parallel bus, the team included the following bus lines:
+
 \begin{itemize}
 \item 23 Address bits. More than initially needed, but this was increased for good measure.
-\item 16 Data bits, since our \gls{sram} consisted of 16-bit words.
+\item 16 Data bits, as our \gls{sram} consisted of 16-bit words.
 \item 2 Chip select bits, one for the \gls{fpga} and one for the \gls{sram}.
 \item 1 Write enable bit, active low.
 \item 1 Read enable bit, active low.
@@ -92,7 +93,7 @@ As opposed to the \gls{ebi} bus, \gls{spi} is a serial bus, transferring one bit
 All buttons included a resistor for current limitation (to avoid short circuits) and pull-up (to avoid logical floating state).
 The exception was the button connected to the \gls{mcu}, where the pin had an internal pull-up.
 All \gls{led}s also included a current limiting resistor.
-Ohms law was used to calculate the required resistance\cite{ohm}.
+Ohms law was used to calculate the required resistance \cite{ohm}.
 
 \gls{led}s were handy for giving an indication that something was turned on.
 For instance, the design included a \gls{led} which would light up when the \gls{fpga} was configured.
@@ -153,7 +154,7 @@ Between every signal and power layer, a dielectric layer was added to ensure pro
 An overlay was added to both the top and bottom layers.
 The overlay was added to contain silk-screen for marking components, thus making it easier to navigate the \gls{pcb}.
 
-The complete layer stack is shown in figure \ref{fig:Layers}
+The complete layer stack is shown in Figure \ref{fig:Layers}
 
 \begin{figure}[h!]
 \centering
@@ -179,7 +180,7 @@ The analogue components are sensitive to noise from the digital circuitry, and i
 To avoid noise, the analogue and digital circuitry had to be separated completely.
 Analogue components could not use the same voltage supply as the digital ones, and the same mattered for ground.
 
-The solution was to split the power and ground plane, shown in figure \ref{fig:Split planes}.
+The solution was to split the power and ground plane, shown in Figure \ref{fig:Split planes}.
 \begin{itemize}
 \item 5AV: Analogue 5V for components on the analogue plane.
 The reason for 5V was based on insecurity about how much voltage the oscilloscope required to properly display the vector graphics from the program.
@@ -246,7 +247,7 @@ The task of routing the \gls{pcb} was started by routing some components manuall
 The team quickly discovered that doing this for the entire board would take a very long time, and so began to check out Altium's built-in auto router.
 //TODO: Add source
 
-The team ran into many different routing problems, which is discussed in detail in section \ref{Routing Problems}
+The team ran into many different routing problems, which is discussed in detail in Section~\ref{Routing Problems}
 
 \section{Fault Handling}
 The team were all inexperienced with \gls{pcb} design and often uncertain if actions or decisions could cause problems down the line.
@@ -266,7 +267,7 @@ Not only could errors more easily be detected - it would also be easier to fix t
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale = 0.45]{images/Header_fix.png}
+\includegraphics[scale = 0.57]{images/Header_fix.png}
 \caption{Example Header fix}
 \label{fig:Header fix}
 \end{figure}
