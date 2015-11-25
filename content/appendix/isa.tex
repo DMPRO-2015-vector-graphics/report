@@ -1,23 +1,24 @@
 \chapter{Instruction Set Architecture (ISA)}
 \label{app:isa}
-//TODO: Include missing instructions, and reorder.
 \begin{table}[H]
     \begin{tabular}{|p{2.1cm}|p{4cm}|p{4cm}|p{3cm}|}
     \hline
     \textbf{Instruction} & \textbf{Description}        & \textbf{Syntax}        & \textbf{Expression}                                                 \\ \hline
     nop         & No operation                         & nop                    & ~                                                          \\ \hline
     jmp         & Jump to label                        & jmp label              & ~                                                          \\ \hline
+    beq         & Branch on equal                      & beq Rs, Rt, \# imm16   & if Rs == Rt: Pc = Pc + imm                            \\ \hline
     mov         & Move constant into register          & mov Rd, \#imm16        & Rd = imm16                                                 \\ \hline
     add         & Addition                             & add Rd, Rs, Rt         & Rd = Rs + Rt                                               \\ \hline
     lsl         & Logical shift left                   & lsl Rd, Rs, \#imm16    & Rd = Rs \verb|<<| imm16                                           \\ \hline
+    ldr         & Load word                            & ldr Rd, \#addr         & Rd = *addr                                                 \\ \hline
+    str         & Store word                           & str Rs, \#imm          & addr = [Rs]                                                \\ \hline
     line        & Create line primitive from registers & line Rs, Rt            & (x0, y0) = Rs, (x1, y1) = Rt                               \\ \hline
     bezquad     & Create quadratic Bezier curve        & bezquad Rs, Rt, Ru     & (x0, y0) = Rs, (x1, y1) = Rt, (x2, y2) = Ru                \\ \hline
     bezcube     & Create cubic Bezier curve            & bezcube Rs, Rt, Ru, Rv & (x0, y0) = Rs, (x1, y1) = Rt, (x2, y2) = Ru, (x3, y3) = Rv \\ \hline
-    ldr         & Load word                            & ldr Rd, \#addr         & Rd = *addr                                                 \\ \hline
-    str         & Store word                           & str Rs, \#imm          & addr = [Rs]                                                \\ \hline
     ldrp        & Load primitive into regiser          & ldrp \#addr            & Pa = *addr                                                 \\ \hline
     strp        & Store primitive to memory            & strp \#imm             & Pa = *imm                                                  \\ \hline
-    beq         & Branch on equal                      & beq Rs, Rt, \# imm16   & if Rs == Rt: Pc = Pc + imm                            \\ \hline
+    getp\{1,2,3,4\} & Load primitive control point into register & getp\{1,2,3,4\} Rd  & Rd = primitive.point\{1,2,3,4\}                           \\ \hline
+    setp\{1,2,3,4\} & Write register value to primitive control point & setp\{1,2,3,4\} Rs  & primitive.point\{1, 2, 3, 4\} = [Rs] \\ \hline
     \end{tabular}
     \caption{The complete ISA for the CPU}
 \end{table}
