@@ -14,7 +14,7 @@ These modules are completely separated from the main processor, and can read fro
 
 The primary output of the processor is the analogue output.
 This output is driven by two \gls{dac}s that converts digital data from the \gls{fpga} to voltages that represents x and y coordinates.
-The \gls{dac}s used are 16-bit which results in an effective resolution of 65536 by 65536 without taking into account the noise on the output voltage.
+The \gls{dac}s used are 16-bit which results in an effective resolution of 65536 by 65536 without taking into account the noise on the output voltage which is explained further in Section~\ref{sec:noise}.
 These \gls{dac}s have a serial interface and needs 3 signals each to operate; data, clock, and a sync signal.
 In order to set an output value on a \gls{dac} the sync signal needs to be pulled from high to low then it needs 8 control bits followed by 16 data bits.
 After this, the sync signal need to be pulled high again in order to set the output value.
@@ -37,7 +37,7 @@ After every multiplication the result is then right shifted by 15.
 This results in a limit of 1024 different points for a given primitive.
 
 The calculation for points for every type of primitive is largely the same, however the different number of points per primitive needs to multiplied by a different factor.
-The equations for these can be found in section \ref{sec:bezier}
+The equations for these can be found in Section \ref{sec:bezier}
 
 \section{Raster Output}
 
