@@ -14,7 +14,7 @@
 Figure \ref{fig:system-overview} shows how the major building blocks of the \vthreek architecture come together on a conceptual level.
 Separation of instruction and data memory makes it a Harvard-like architecture \cite{structured-computer-organization}.
 The processor reads from instruction memory, executes instructions and adds/updates vector primitives in the scene memory.
-Preprocessing these primitives for output is done by the output modules.
+Preprocessing these primitives for output is done by the output modules. The scene memory is implemented as a dual port block ram so the processor and output modules can read and write from this memory independently of each other. As a result of this the processor and output modules are completely seperate and new drop-in replacements for output can be added with minimal changes to the rest of the system.
 
 \section{Programming Model}
 \label{sec:programming-model}
@@ -127,6 +127,6 @@ The other two control points moves in the opposite direction, an the values is t
 \begin{figure}[h]
 	\centering
 	\includegraphics[]{images/tunnel.jpg}
-	\label{fig:tunnel}
 	\caption{Running the tunnel program.}
+	\label{fig:tunnel}
 \end{figure}
