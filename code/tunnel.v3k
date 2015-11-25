@@ -14,7 +14,7 @@ strp #1
 movu r5, #-1
 movl r5, #-1
 
-# permanent 16383, 16383 register
+# permanent 16415, 16415 register
 movu r12, #16415
 movl r12, #16415
 
