@@ -66,8 +66,6 @@ strp #8
 line r21, r22
 strp #9
 
-
-
 .reset
 # Inner sqare
 # lower left
@@ -86,7 +84,6 @@ movl r3, #32767
 movu r4, #32767
 movl r4, #32767 
 
-
 # Outer sqare
 # lower left
 movu r21, #16383
@@ -103,7 +100,6 @@ movl r23, #49150
 # lower right
 movu r24, #49150
 movl r24, #16383 
-
 
 # draw lines
 .drawloop
@@ -138,7 +134,6 @@ add r23, r23, r9
 # update outer lower right
 add r24, r24, r8
 add r24, r24, r11
-
 
 #Update primitives
 line r2, r3
