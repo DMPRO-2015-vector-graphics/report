@@ -115,6 +115,9 @@ The intention of this part was to demonstrate the difference between vector and 
 However, these parts of the system were no longer prioritized when the analogue counterpart proved to be a reliable source of output.
 Moreover, this part was a medium priority requirement, listed in Table \ref{tbl:non_func_req}, and thus not a critical part of \vthreek.
 
+\subsection{SRAM}
+Both the SRAM for containing instruction memory and the SRAM intended as a frame buffer were not used. Since we never implemented HDMI, there was no point using a frame buffer either. There were problems with the instruction memory SRAM. The FPGA didn't receive any data from the SRAM for some reason. Still, the internal block RAM in the FPGA was big enough to contain the scene. 
+
 \section{Budget}
 In the assignment text, the group was given a budget of 10,000 NOK.
 At the end of the project the total cost of materials was about 11,500 NOK (without shipping costs), which is somewhat above the proposed budget for the project.

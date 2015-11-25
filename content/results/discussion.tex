@@ -1,29 +1,36 @@
 \chapter{Discussion}
 
-During the design process, the group faced many issues. This chapter discusses all the significant obstacles on the way, and how the group managed to fix or work around them. Additionaly, possible improvements, which were not implemented due to time constraints, are also addressed to give a better understanding of the system.
+The group faced some issues during the design process. 
+This chapter discusses the significant obstacles encountered, and how the group managed to fix or work around them. 
+Additionaly, possible improvements - which were not implemented due to time constraints - are addressed to give a better understanding of the system.
 
 \section{Architecture Design}
-Before any actual coding and soldering the group spent time planning the architecture.
+Before any actual coding and soldering, the group spent some time planning the architecture.
+It was argued that implementing floating point would better conform to the industry standards of vector calculation, and that it would offer more precise calculations.
 TODO: Vi burde hatt floating point for å gjøre vektorutregninger.
 
 \input{content/results/pcb-discussion}
 
 \section{Component Ordering}
-When ordering components we could've been more thorough with datasheet inspection before sending the order. While we were waiting for our first order, we discovered that the \gls{led}s we had found was reverse mounted. That means they were supposed to be soldered on the bottom of the \gls{pcb} and light through a hole to the top, which was useless for our footprint. Hence, we had to order new \gls{led}s with the correct footprint. It wasn't a big problem considering it was only a few cheap \gls{led}s, but the same situation could occur with a much more important component, resulting in delays and unnecessary spending of money.
+The group feels they could've been more thorough with datasheet inspection before finalising component orders. 
+While waiting for the first delivery, it was discovered that the ordered \gls{led}s were reverse mounted, which was useless for our footprint. 
+Hence, the group had to order new \gls{led}s with the correct footprint. 
+While this was a cheap component, it could very well have been an important component, resulting in unnecessary delays and waste of money.
 
-Several \gls{dac}s were fried, because of short-circuits during testing. The result of this was a shortage of \gls{dac}s, and they were essential for making our design to work. We had ordered enough \gls{dac}s to solder ten \gls{pcb}s, but still we ran short, so we had to order more of them. This situation gives an indication that it was a good idea to order enough components for as much as ten boards.
+Several \gls{dac}s were fried, caused by short-circuits during testing. 
+This resulted in a shortage of \gls{dac}s, which were essential for our design to work.
+It was ordered enough \gls{dac}s to solder ten \gls{pcb}s, but it was not enough. 
+This situation gave an indication that some components should be ordered more of than others.
 
 \input{content/results/oscillator}
 
 \section{Drawing Artefacts}
 \label{discussion:artefacts}
 The drawing artefacts explained in Section \ref{results:artefacts} are possible to remove.
-If a third input value for intensity were to be added, one could turn the electron beam off when moving the beam between primitive.
+If a third input value for intensity were to be added, one could turn the electron beam off when moving the beam between primitives.
 
-The other artefact mentioned, is the dotted lines.
-This could be removed, by adding analogue circuitry between the \gls{dac} output and the BNC connectors.
-It is possible to slew the electron beam from one point to the next, by analogue integration, to archive a smooth transition between points.
+The other artefact mentioned, the dotted lines, could be removed by adding analogue circuitry between the \gls{dac} output and the BNC connectors.
+It is possible to slew the electron beam from one point to the next, using analogue integration, to archive a smooth transition between points.
 An example of such circuitry has been implemented in the 80's in a similar project \cite{vector-graphic-crt}.
 
-
-If \vthreek were to support an intensity value in addition to x and y, the architecture and \gls{pcb} require changes.
+If \vthreek were to support an intensity value in addition to x and y, the architecture and \gls{pcb} would require changes.

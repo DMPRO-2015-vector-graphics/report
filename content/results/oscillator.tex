@@ -1,8 +1,6 @@
 \section{Oscillator}
-To acheive a high clock frequency on the \gls{fpga} a 100 MHz oscillator was added to the board.
-However each time the 100 MHz oscillator was used as the main clock signal,
-the \gls{fpga} was not able to produce correct output.
+To acheive a high clock frequency on the \gls{fpga}, a 100 MHz oscillator was added to the board.
+Using it as the main clock signal, the \gls{fpga} was not able to produce correct output.
 An oscilloscope was used to measure the oscillator output on a header.
-If a hand was placed in close proximity of the board the oscillator signal was significantly affected.
-The measured signal was also too low peak to peak, for the \gls{fpga} to be used as a clock signal.
-Placing the 100 MHz oscillator closer to the \gls{fpga} would most likely have removed it's sensitivity to noise.
+If a hand was placed in close proximity of the board, the oscillator signal was significantly affected.
+This problem was solved by using the 48 MHz oscillator instead.
