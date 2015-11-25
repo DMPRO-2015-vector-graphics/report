@@ -35,7 +35,7 @@ The \gls{fpga} is a Xilinx XC6SLX45-2CSG324I, with 401 kb block \gls{ram}.
 It serves as the main processor in the design, fetching and executing instructions from instruction memory.
 
 A \gls{jtag} header is connected to the \gls{fpga} for good accessibility to \gls{fpga} debugging and programming.
-//TODO : elaborate
+\gls{jtag} is a standard for test logic and connection interface towards integrated circuits \cite{jtag}.
 
 \subsection{SRAM}
 Two \gls{sram}s are put on the \gls{pcb}.
@@ -137,7 +137,7 @@ All capacitors and resistors are placed on the bottom layer of the \gls{pcb} to 
 
 \subsubsection{Component Footprints}
 A component footprint is how the trace of a component looks like on the \gls{pcb}.
-Many fitting default footprints are already in the standard Altium library, so no customization was needed here. 
+Many fitting default footprints are already in the standard Altium library, so no customization was needed here.
 However, the capacitors and resistors have by default, gigantic footprints, which was not desirable, since the \gls{pcb} needed a large amount of them.
 Alternative footprints have been found using the Altium Vault, which the team used to change the capacitor footprint to much smaller one.
 

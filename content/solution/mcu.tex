@@ -25,7 +25,7 @@ Its primary tasks are:
 In order for the processor to do anything useful, a program is needed.
 The program is contained within a header file in the \gls{mcu} flash.
 After the MCU has booted and initialized the subsystems it utilizes, it will wait for a \texttt{Done} signal from the processor.
-This signal tells the \gls{mcu} that \gls{jtag} has completed the \gls{fpga} flash process.
+This signal tells the \gls{mcu} that the \gls{fpga} flash process has completed.
 It is important to wait for this signal, because the state of any signal connected to the \gls{fpga} is undefined prior to flashing.
 This could possibly interfere with the \gls{mcu} writing to \gls{sram}.
 
