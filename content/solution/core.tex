@@ -6,8 +6,8 @@ This chapter elaborates on how the processor core is designed, focusing especial
 \section{The \vthreek processor}
 
 The processor core is the main processing and control unit in the \vthreek architecture.
-As depicted in figure \ref{fig:system-overview}, the processor core reads instructions from the instruction memory, and writes/reads data to/from the data and scene memories.
-The processor core is designed as a multi-cycle, MIPS-inspired processor with features added to support processing of vector graphics.
+As depicted in Figure \label{fig:system-overview}, the processor core reads instructions from the instruction memory, and writes/reads data to/from the data and scene memories.
+The processor core is designed as a multi-cycle, MIPS-inspired processor with extra features added to support processing of vector graphics.
 When planning which features to include and which techniques to utilize, the group considered features like pipelining and even multicore designs to improve performance.
 In the end, the decision was made to make the initial design simple, but keep efficiency and performance in mind.
 
@@ -38,10 +38,10 @@ Each component is described in detail in their respective section below, the fol
 \section{Instruction Format}
 
 Instructions in the \vthreek architecture are 32 bits wide.
-As opposed to the MIPS architecture, they can't all be grouped into categories based on their format.
+As opposed to the MIPS architecture, they cant all be grouped into categories based on their format.
 They do however share some common traits.
-All instructions start with a 6-bit opcode, a unique identifier for each instruction.
-The remaining bits are used either to address registers, to encode immediate values or as a combination.
+All instructions start with an 6-bit opcode, a unique identifier for each instruction.
+The remaining bits are used either to address registers, to encode immediate values or a combination.
 Some instructions also have don't care bits, parts of the instruction that can be either 1 or 0 without influencing the outcome of execution.
 For instructions that address one or more registers, a general convention of using the five bits directly after the opcode for the destination register and addressing source registers in successive five bit chunks.
 Figure \ref{fig:instruction-format} shows how various parts of an instruction word is utilized.
@@ -72,7 +72,6 @@ To explain how these work together, each component will be explained in the orde
 \subsection{Instruction Memory}
 
 \begin{figure}[h!]
-    \centering
     \includegraphics[width=0.6\linewidth]{images/instruction-memory.png}
     \caption{I/O for the instruction memory.}
     \label{fig:instruction-memory}
@@ -110,7 +109,6 @@ Since there is only one register to address, the primitive register doesn't take
 Control signals only determine wether or not the register contents should be overwritten and if yes, what data source should be used to overwrite.
 
 \begin{figure}[h!]
-    \centering
     \includegraphics[width=0.6\linewidth]{images/primitive-register.png}
     \caption{I/O for the primitive register.}
     \label{fig:primitive-register}
@@ -119,7 +117,6 @@ Control signals only determine wether or not the register contents should be ove
 \subsection{ALU}
 
 \begin{figure}[h!]
-    \centering
     \includegraphics[width=0.8\linewidth]{images/ALU.png}
     \caption{I/O for the ALU.}
     \label{fig:ALU}
@@ -136,42 +133,22 @@ As shown in figure \ref{fig:ALU}, the unit also receives an immediate value, tak
 \subsection{Data and Scene Memories}
 
 Scene and data memories have similar interfaces, see Figure \ref{fig:data-scene-memories}, the major exception being data width and size.
-Data words in scene memory are 136 bits wide, with space for 1024 words.
-To allow for the rather unusual word size as well as allowing both the processor core and the output module to interface with the scene memory simultaneously, the scene memory was instantiated as a block RAM on the FPGA.
+Data words in scene memory are 136 bits wide, with space for 1024 primitives.
+To allow for both the processor core and the output module to interface with the scene memory simultaneously, the scene memory was 
 Words in general data memory are 32 bits wide.
 Their input address bus determines either which address to read from or write to.
 The \texttt{write\_enable} control signal specifies wether a read or write should be performed.
 
 \begin{figure}[h!]
-    \centering
     \includegraphics[width=0.8\linewidth]{images/data-scene-memories.png}
     \caption{I/O for data and scene memory modules.}
-    \label{fig:data-scene-memories}
+    \label{fig:ALU}
 \end{figure}
 
 
 \section{Control Path}
 
-Having examined how instruction, data words and primitives move through the system, this section elaborates on the how the various components involved in the data path are controlled, and what determines their behavior.
-
-Every time a new instruction is read, it is decoded and relevant parts fed into a control unit. 
-Depending on the instruction, the unit sets its output control signals so that the modules they control behave as desired.
-Figure \ref{fig:controlpath} shows how control signals are routed.
-Table \ref{tbl:control-signals} lists all control signals and their functionalities.
-
-The control unit maintains processor state.
-Since the prototype implemented by the group is non-pipelined, a simple state machine with three states is sufficient.
-These are fetch, execute and stall.
-Figure \ref{fig:state-machine} shows the states and the conditions for transitioning between them.
-
-While an instruction is being read, the processor is in the fetch state.
-To avoid modifying data in registers or in memory, control signals are set to values that disable any writing operations.
-In the execute state, control signals are determined by the instruction.
-In the case of a stall, the control signals are maintained until the word to be loaded has been written into its destination.
-
-The final functionality implemented in the control unit is a primitive counter.
-All instructions that either add new or remove existing instructions in the scene memory cause the counter to be incremented or decremented respecively.
-This signal is used in the output module.
+Having examined how instruction, data words and primitives flow 
 
 \begin{figure}[h!]
     \includegraphics[width=\linewidth]{images/Control_signals.png}
@@ -179,27 +156,3 @@ This signal is used in the output module.
     \label{fig:controlpath}
 \end{figure}
 
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.6\linewidth]{images/state-machine.png}
-    \caption{Processor core state machine.}
-    \label{fig:state-machine}
-\end{figure}
-
-\begin{table}
-    \begin{tabular}{|p{5cm}|p{7cm}|}
-        \hline
-        Signal             & Description                                                                                                                 \\ \hline
-        \texttt{reg\_dest}          & Signalizes which register register address from the instruction to use as a destination register.                           \\ \hline
-        \texttt{reg\_write}         & Boolean indicator for wether or not to write to the register file.                                                          \\ \hline
-        \texttt{prim\_reg\_write}   & Boolean indicator for wether or not to write to the primitive register.                                                     \\ \hline
-        \texttt{mem\_to\_reg}       & Determines wether the result from the ALU or a word read from data memory should be used when writing to the register file. \\ \hline
-        \texttt{prim\_mem\_to\_reg} & Determines which value should be used to overwrite the primitive register, from the ALU or from the scene memory.           \\ \hline
-        \texttt{mem\_write}         & Write enable for the data memory.                                                                                           \\ \hline
-        \texttt{prim\_mem\_write}   & Write enable for the scene memory.                                                                                          \\ \hline
-        \texttt{branch}             & Indicates that the current instruction is a branch instruction.                                                             \\ \hline
-        \texttt{jump}               & Indicates that the current instruction is a jump instruction.                                                               \\ \hline
-    \end{tabular}
-    \caption{An overview of control signals and their function.}
-    \label{tbl:control-signals}
-\end{table}
