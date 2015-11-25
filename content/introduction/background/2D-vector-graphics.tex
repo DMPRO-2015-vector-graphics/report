@@ -5,11 +5,11 @@ The image, or the 'scene', is made up of primitives that describe paths, lines a
 By relying on mathematical expressions instead of pixel values relative to screen resolution, vector graphics can be described as resolution independent.
 This is often conceptualized in the form of scaling:
 While scaling a rasterized image will result in a blurry image, scaling a vectorized image will result in the mathematical expressions being recalculated, and the image will remain sharp.
-The scaling process is visualized in figure \ref{fig:vectorscaling}.
+The scaling process is visualized in Figure \ref{fig:vectorscaling}.
 
 \begin{figure}[h!]
 \centering \includegraphics[width=0.5\linewidth]{images/bm_vs_svg.png}
-\caption{Scaling comparison between raster graphics (left) and vector graphics (right)\cite{svg}.}
+\caption{Scaling comparison between raster graphics (left) and vector graphics (right) \cite{svg}.}
 \label{fig:vectorscaling}
 \end{figure}
 
@@ -27,7 +27,7 @@ A popular type of curve in vector graphics is Bézier curves.
 Bézier curves can represent everything from a straight line to very complex paths with a lot of turns and changes in direction.
 A Bézier curve is defined by a series of control point ranging from \(P_0\) to \(P_n\).
 n is called the order of the curve and as such you end up with linear (n = 1), quadratic (n = 2), and cubic (n = 3) Bézier curves.
-Formulas for Bezier curves with n=1,2,3 are shown in equation \ref{equ:line} to \ref{equ:cube}.
+Formulas for Bezier curves with n=1,2,3 are shown in Equation \ref{equ:line} to \ref{equ:cube}.
 B(t) is the point on the curve at t.
 As t can be incremented as little or as much as wanted points on the curve can be calculated as granularly as desired.
 
@@ -57,7 +57,7 @@ As t can be incremented as little or as much as wanted points on the curve can b
 \subsection{Vector graphics in modern computing}
 
 Vector graphics is not in frequently use today as a display technology, however it is widely used to represent data internally in a computer.
-Two examples of vector technology in use today is: the SVG format and text in TrueType\cite{truetype}.
+Two examples of vector technology in use today is: the SVG format and text in TrueType \cite{truetype}.
 
-Apple Inc.\cite{apple} uses vector graphics in their drawing engine that is available to all iOS and OS X application developers.
-This drawing engine is called Quartz 2D\cite{quartz2d} and is widely used in order to make resolution independent user interfaces.
+Apple Inc. \cite{apple} uses vector graphics in their drawing engine that is available to all iOS and OS X application developers.
+This drawing engine is called Quartz 2D \cite{quartz2d} and is widely used in order to make resolution independent user interfaces.

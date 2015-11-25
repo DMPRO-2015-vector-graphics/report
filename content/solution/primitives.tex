@@ -16,7 +16,7 @@ Lines are represented as linear Bézier curves.
 \end{figure}
 
 Each primitives type is identified by the eight first bits.
-To store a position on the screen, 32 bits is required: 16 bit for X and 16 bit for Y. // TODO: Reference discussion/result on why this is a limiting factor.
+To store a position on the screen, 32 bits is required: 16 bit for X and 16 bit for Y.
 A line is represented by a start point and an end point.
 To represent a quadratic Bézier curve a total of three points are needed, a start point, a control point and an end point.
 The cubic Bézier curve includes one extra control point compared to the quadratic curve.

@@ -1,9 +1,8 @@
 \chapter{Output Modules}
 \label{chap:Output}
 
-The output modules of the system is completely decoupled from the main processor, this is achieved by the dual port scene memory.
-Each output module reads from this memory and displays the data.
-Only one output module can be active at a time.
+The output of the system consists of separate modules that handles different kind of output. This section will describe analogue and HDMI output.
+These modules are completely separated from the main processor, and can read from scene memory independently.
 
 \section{Analogue Output}
 
@@ -33,15 +32,15 @@ This will result in shorter lines and curves appearing brighter on the oscillosc
 
 The actual calculation of the points is done by using the equations described in section \ref{sec:bezier}.
 However since there was no floating point unit, a number between 0 and 1023 was used instead of a number between 0 and 1, that was then left shifted by 5.
-t then becomes \(t = i \ll 5\) (\(0 \leq i < 1024\)).
+\(t\) then becomes \(t = i \ll 5\) (\(0 \leq i < 1024\)).
 After every multiplication the result is then right shifted by 15.
 This results in a limit of 1024 different points for a given primitive.
 
 The calculation for points for every type of primitive is largely the same, however the different number of points per primitive needs to multiplied by a different factor.
-The equation for these can be found in section \ref{sec:bezier}
+The equations for these can be found in section \ref{sec:bezier}
 
 \section{Raster Output}
 
 This output uses \gls{hdmi} to output a rasterized image of the internal vector representation.
 In order to generate the rasterized frame the x and y output from the vector output described in the previous section would be written into a frame-buffer.
-This buffer can then be scaled to the desired output resolution and run through //TODO: TMDS acro? TMDS encoder and output via HDMI.
+This buffer can then be scaled to the desired output resolution and then sent over a regular HDMI connection.

@@ -25,13 +25,20 @@ Its primary tasks are:
 In order for the processor to do anything useful, a program is needed.
 The program is contained within a header file in the \gls{mcu} flash.
 After the MCU has booted and initialized the subsystems it utilizes, it will wait for a \texttt{Done} signal from the processor.
-This signal tells the \gls{mcu} that \gls{jtag} has completed the \gls{fpga} flash process.
+This signal tells the \gls{mcu} that the \gls{fpga} flash process has completed.
 It is important to wait for this signal, because the state of any signal connected to the \gls{fpga} is undefined prior to flashing.
 This could possibly interfere with the \gls{mcu} writing to \gls{sram}.
 
 Once the \gls{fpga} is flashed and ready, the \gls{mcu} de-asserts the processor enable signal, to prevent it from start reading from \gls{sram} prematurely.
-The \gls{mcu} then writes the program to \gls{sram}, starting at address \texttt{0x0000}, writing 16 bits at a time.
-When complete, the processor enable signal is asserted, and the processor will begin fetching instructions
+The \gls{mcu} then writes the program to \gls{sram}, starting at address \texttt{0x0000}, writing 16 bits at a time. The function responsible for this task is listed in \ref{fig:write_program}.
+When complete, the processor enable signal is asserted, and the processor will begin fetching instructions.
+
+\begin{figure}
+	\centering
+	\lstinputlisting[language=c, commentstyle=\color{blue}]{code/write_program.c}
+	\label{fig:write_program}
+	\caption{Function writing the program to SRAM.}
+\end{figure}
 
 \subsection{Buttons and joystick}
 The board is equipped with two push buttons and a 5-way joystick, connected to the \gls{mcu}'s \gls{gpio} pins.
