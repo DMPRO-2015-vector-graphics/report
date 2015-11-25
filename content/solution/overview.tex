@@ -16,6 +16,8 @@ Separation of instruction and data memory makes it a Harvard-like architecture \
 The processor reads from instruction memory, executes instructions and adds/updates vector primitives in the scene memory.
 Preprocessing these primitives for output is done by the output modules.
 
+The 
+
 \section{Programming Model}
 \label{sec:programming-model}
 
@@ -34,6 +36,7 @@ General purpose instructions are outlined briefly here, while vector instruction
 \subsubsection{General}
 
 As per the requirements \ref{sec:requirements}, the \vthreek processor is designed to be general.
+
 In other words, it supports integer arithmetic, reading from and writing to data memory and conditional branching.
 
 Working with the data memory is supported through the \texttt{ldr} and \texttt{str} instructions.
