@@ -30,7 +30,7 @@ The CPU can be clocked significantly faster than it is in the current design, bu
 At 20 MHz the CPU is still more than fast enough to update primitives in order to achieve smooth animations, so busy loops was introduced in the primitive update procedures in order to slow the update rate down.
 
 \section{Noise}
-
+\label{sec:noise}
 As the main output is analogue it is susceptible to electronic noise. This noise represents itself as unwanted changes in voltage. 
 The system was design to have as little noise as possible, and under operation the mean noise on the signal is around 40mV.
 A measure of this is shown in Figure~\ref{fig:noise}.
@@ -40,6 +40,31 @@ A measure of this is shown in Figure~\ref{fig:noise}.
 	    \caption{The noise on the voltages from the DACs}
 	    \label{fig:noise}
 \end{figure}
+
+A result of this noise, is reduced fidelity in the produced image. Equation \ref{equ:noise1} shows the minimum voltage increment with 3.3V VRef and 16-bit data. 
+Within the amplitude of the noise, captured on an oscilloscope, depicted in Figure \ref{fig:noise}, Equation \ref{equ:noise2} shows that there could be approximately 800 increments in voltage.
+In Equation \ref{equ:noise3} the number of "lost" increments is calculated to be about 9 bits.
+This is a significant loss.
+However this is barley visible on the small 8 by 10 cm monitor on the Tektronix 2230.
+
+\begin{cequation}[H]
+	\begin{equation}
+	\label{equ:noise1}
+		 \frac{3.3V}{2^{16}} = 0.05mV
+	\end{equation}
+\end{cequation}
+\begin{cequation}[H]
+	\begin{equation}
+	\label{equ:noise2}
+		 \frac{40mV}{0.05mV} = 800 \\ 
+	\end{equation}
+\end{cequation}
+\begin{cequation}[H]
+	\begin{equation}
+	\label{equ:noise3}
+		 log_2 ( 800 ) \approx 9 bit \\
+	\end{equation}
+\end{cequation}
 
 
 
@@ -79,7 +104,7 @@ The digital nature of \vthreek results in discrete increments when drawing.
 The electron ray moves faster than the \gls{dac}s are able to feed it with new data.
 As a result, the ray will wait at one spot, until it receives new values.
 This results in dotted lines, shown in Figure \ref{fig:dotx4} and \ref{fig:dotx8}
-
+	
 \begin{figure}[h!]
    	\centering
     \begin{subfigure}[b]{\textwidth}
