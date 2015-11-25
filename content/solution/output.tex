@@ -37,10 +37,10 @@ After every multiplication the result is then right shifted by 15.
 This results in a limit of 1024 different points for a given primitive.
 
 The calculation for points for every type of primitive is largely the same, however the different number of points per primitive needs to multiplied by a different factor.
-The equation for these can be found in section \ref{sec:bezier}
+The equations for these can be found in section \ref{sec:bezier}
 
 \section{Raster Output}
 
 This output uses \gls{hdmi} to output a rasterized image of the internal vector representation.
 In order to generate the rasterized frame the x and y output from the vector output described in the previous section would be written into a frame-buffer.
-This buffer can then be scaled to the desired output resolution and then sent through a regular HDMI output with \gls{tmds} encoding.
+This buffer can then be scaled to the desired output resolution and then sent over a regular HDMI connection.

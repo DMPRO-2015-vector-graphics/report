@@ -10,32 +10,32 @@ The advanced tunnel program that was produced (see Appendix \ref{app:tunnel}), c
 	    \label{fig:board-top}
 \end{figure}
 
-\section{Storage}
-The final implementation utilizes \gls{bram} to achieve highest possible clock frequency and avoid unnecessary \gls{sram} access delays.
-With the current implementation the \gls{bram} can hold a total of 1024 primitives.
-The synthesis report from Xilinx ISE states that the \gls{fpga} still has more \gls{bram} after.
-However, the primitive storage space is not the limiting factor - the primitive drawing module is.
+\section{Memory}
+
+The final implementation utilizes \gls{bram} not only to store the scene, but the instructions for the CPU as well.
+This was done because to group was unable to get the SRAM chip that was on the three-way EBI bus to work properly.
+Because of this the instructions for the CPU needs to be stored in the .bit file that programs the FPGA.
+
+The SRAM chip dedicated to frame-buffer was also left unused as the group did not find the time to implement a raster output module.
 
 \section{Performance}
 
-//TODO: FPGA Results
-\subsection{FPGA}
-
-\subsection{DAC}
 The maximum clock frequency of the DACs is 30MHz according to the datasheet \cite{dac-datasheet}.
 To update the DAC value a total of 25 clock cycles are required.
 As a result the theoretical effective maximum output will be \(30 MHz \div 25 = 1.2 MHz \).
 However during testing the group experience incorrect \gls{dac} values if the clock were set higher than 20 MHz.
 With a clock frequency of 20 MHz the maximum output is 800 KHz.
 
-The CPU can be clocked at as much as 140 MHz, but since the output module needs to be run at 20 MHz this was chosen for the CPU as well for simplicity.
+The CPU can be clocked significantly faster than it is in the current design, but since the output module needs to be run at 20 MHz this was chosen for the CPU as well for simplicity.
 At 20 MHz the CPU is still more than fast enough to update primitives in order to achieve smooth animations, so busy loops was introduced in the primitive update procedures in order to slow the update rate down.
 
 \section{Noise}
 
-//TODO: Text
+As the main output is analogue it is susceptible to electronic noise. This noise represents itself as unwanted changes in voltage. 
+The system was design to have as little noise as possible, and under operation the mean noise on the signal is around 40mV.
+A measure of this is shown in Figure~\ref{fig:noise}.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 	    \includegraphics[width=\linewidth]{images/noise}
 	    \caption{The noise on the voltages from the DACs}
 	    \label{fig:noise}
@@ -114,9 +114,6 @@ Rasterisation and \gls{hdmi} were not implemented.
 The intention of this part was to demonstrate the difference between vector and raster output in real-time.
 However, these parts of the system were no longer prioritized when the analogue counterpart proved to be a reliable source of output.
 Moreover, this part was a medium priority requirement, listed in Table \ref{tbl:non_func_req}, and thus not a critical part of \vthreek.
-
-\subsection{SRAM}
-Both the SRAM for containing instruction memory and the SRAM intended as a frame buffer were not used. Since we never implemented HDMI, there was no point using a frame buffer either. There were problems with the instruction memory SRAM. The FPGA didn't receive any data from the SRAM for some reason. However, the internal block RAM in the FPGA were large enough to hold the scene. 
 
 \section{Budget}
 In the assignment text, the group was given a budget of 10,000 NOK.
