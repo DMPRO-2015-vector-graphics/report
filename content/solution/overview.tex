@@ -114,6 +114,19 @@ Since values are treated as signed numbers in general purpose registers, but as 
 A line with start-/endpoints as specified in \texttt{r1} and \texttt{r2}, is initialized into the primitive register on line four, and written to the scene memory on the next.
 
 \subsection{More advanced programs}
+Two more advanced programs is listed in Appendix \ref{app:code}.
+The first code, listed in Appendix \ref{app:tunnel} draws an animated tunnel.
+The result is depicted in Figure \ref{fig:tunnel}.
+A video clip is also available at \cite{tunnel-demo}.
+In addition to drawing static lines, this program also showcases how animation can be performed using \texttt{beq} and \texttt{jmp}.
 
-A slightly more advanced program is listed in Appendix \ref{app:tunnel}.
-In addition to drawing static lines, it also showcases how animation can be performed using \texttt{beq} and \texttt{jmp}.
+The second program, listed in Appendix \ref{app:bez}, demonstrates the use of bezier in combination with animation.
+It simply defines four start points, creates a cubic bezier curve, and change the point in the Y-direction. It increments p0 and p2, with 32, on each iteration of the loop, seen on line 58 to 61.
+The other two control points moves in the opposite direction, an the values is thus decremented. This continues for 768 iterations, before the program branches to line 69, and the direction is swapped for all points.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[]{images/tunnel.jpg}
+	\label{fig:tunnel}
+	\caption{Running the tunnel program.}
+\end{figure}
