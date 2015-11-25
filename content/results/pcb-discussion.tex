@@ -17,15 +17,12 @@ After making the auto-router focus more on switching layers for every signals,
 to avoid complex routing on fewer layers, it managed to route all the connections.
 This was achieved by changing routing strategy from \emph{Default 2 Layer Board} to \emph{Default Multi Layer Board} in Altium.
 
-\subsubsection{Clearance Constraint Issue}
-After the first auto routing attempts, there was tons of short-circuits. We found out that our clearance constraint rule didn't apply for all components.
-Adding the general clearance constraint rule back again, we faced the same issue in another form - the auto router wouldn't route at all, and complained about clearance constraints violations.
-The settings said that Altium would check for clearance violation with \emph{Any Net}. Thanks to some help from Odd Rune, we discovered that \emph{Any Net} also included the net that it was currently comparing. Thus, it checked if the current trace meets the clearance constraint with itself, which of course it does not. By changing this setting to \emph{Different Nets Only}, the entire short-circuit problem was solved.
+Several auto routing attempts resulted in short-circuits caused by clearance constraint issues, but these were solved by setting the Altium clearance rule to \emph{Different Nets Only}.
 
 \subsubsection{Dead Copper}
 Dead copper is parts of the copper on a power plane that's isolated from the rest of the copper on that plane.
-This appeared several places on our \gls{pcb}. Normally a minimal problem, but some places a GND via or a 3.3V via was connected to dead copper on the corresponding power plane.
-This had to be avoided due to potential heat build-up, so the team repositioned neighboring vias to rejoin the copper area with the rest of the copper plane. The issue and solution are described in figure \ref{fig:Dead copper}.
+This appeared several places on the \gls{pcb}. Normally a minimal problem, but some places a GND via or a 3.3V via was connected to dead copper on the corresponding power plane.
+Such issues need to be avoided due to potential heat build-up, so the team repositioned neighboring vias to rejoin the copper area with the rest of the copper plane. The issue and solution are described in figure \ref{fig:Dead copper}.
 
 \begin{figure}[h!]
 \centering

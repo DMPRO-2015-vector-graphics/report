@@ -40,7 +40,7 @@ Each component is described in detail in their respective section below, the fol
 Instructions in the \vthreek architecture are 32 bits wide.
 As opposed to the MIPS architecture, they can't all be grouped into categories based on their format.
 They do however share some common traits.
-All instructions start with an 6-bit opcode, a unique identifier for each instruction.
+All instructions start with a 6-bit opcode, a unique identifier for each instruction.
 The remaining bits are used either to address registers, to encode immediate values or as a combination.
 Some instructions also have don't care bits, parts of the instruction that can be either 1 or 0 without influencing the outcome of execution.
 For instructions that address one or more registers, a general convention of using the five bits directly after the opcode for the destination register and addressing source registers in successive five bit chunks.
@@ -183,11 +183,8 @@ This signal is used in the output module.
     \centering
     \includegraphics[width=0.6\linewidth]{images/state-machine.png}
     \caption{Processor core state machine.}
-    \label{fig:controlpath}
+    \label{fig:state-machine}
 \end{figure}
-
-
-
 
 \begin{table}
     \begin{tabular}{|p{5cm}|p{7cm}|}
@@ -203,6 +200,6 @@ This signal is used in the output module.
         \texttt{branch}             & Indicates that the current instruction is a branch instruction.                                                             \\ \hline
         \texttt{jump}               & Indicates that the current instruction is a jump instruction.                                                               \\ \hline
     \end{tabular}
-    \label{tbl:control-signals}
     \caption{An overview of control signals and their function.}
+    \label{tbl:control-signals}
 \end{table}
