@@ -1,6 +1,6 @@
 \chapter{Physical Implementation}
 
-This chapter describes our choosing of physical components, and the implementation of the \gls{pcb}.
+This chapter describes the physical component and the implementation of the \gls{pcb}.
 
 \section{Architecture}
 The envisioned execution path, shown in figure \ref{fig:PCB_Overview} gives a good idea to what considerations had to be taken when designing the \gls{pcb} and selecting components.
@@ -39,9 +39,9 @@ A \gls{jtag} header is connected to the \gls{fpga} for good accessibility to \gl
 
 \subsection{SRAM}
 Two \gls{sram}s are put on the \gls{pcb}.
-One of them works as an instruction memory for the \gls{fpga}, while the other is a dedicated frame buffer for our output signals.
+One of them works as an instruction memory for the \gls{fpga}, while the other is a dedicated frame buffer for the output signals.
 The vector-specific instructions executed in the \gls{fpga} will update the frame buffer, and data from the frame buffer can be read and transferred to the output units.
-Both \gls{sram}s has an address space of 512k 16-bit words, which is plenty of space for our design.
+Both \gls{sram}s has an address space of 512k 16-bit words, which is plenty of space for the implemented design.
 
 \subsection{\gls{dac}s and \gls{bnc}s}
 As the purpose of the computer is to output vector graphics on an analogue vector screen, \gls{dac}s are essential.
@@ -59,7 +59,7 @@ The \gls{mcu} already contains internal RC-oscillators, but external oscillators
 Both crystals or full-fledged oscillators can be used. The team decided to use oscillators.
 The reason behind this choice was that an oscillator is one fully built component with all the necessary circuitry inside, and the datasheet clearly specified how it should be connected.
 Crystals, on the other hand, requires load capacitors, whose values weren't properly specified.
-Another reason is that our \gls{fpga} explicitly needed an external oscillator, as a crystal is incompatible with the design.
+Another reason is that the \gls{fpga} explicitly needed an external oscillator, as a crystal is incompatible with the design.
 Hence, the team chose oscillators for both the \gls{fpga} and \gls{mcu} for simplicity.
 A 100MHz oscillator was chosen for the \gls{fpga}, to make sure too low frequency wouldn't be an issue.
 
@@ -70,11 +70,11 @@ The \gls{mcu} acts as bus master for both of them, since it supplies the bus tec
 \subsubsection{\gls{ebi}}
 The \gls{fpga}, \gls{mcu} and \gls{sram} are all connected via the \gls{ebi} bus.
 These connections are made properly by using the specified \gls{ebi}-pins on the \gls{mcu} \cite[sec. 4.1]{efm32-datasheet}.
-The \gls{ebi} bus is a parallel bus that allows high-speed communication to the \gls{sram}, and the following bus lines are included in our implementation:
+The \gls{ebi} bus is a parallel bus that allows high-speed communication to the \gls{sram}, and the following bus lines are included in the implementation:
 
 \begin{itemize}
 \item 23 Address bits. More than initially needed, since SRAM have 19-bit addresses, but this is increased for good measure.
-\item 16 Data bits, as our \gls{sram} consisted of 16-bit words.
+\item 16 Data bits, as the \gls{sram} consisted of 16-bit words.
 \item 2 Chip select bits, one for the \gls{fpga} and one for the \gls{sram}.
 \item 1 Write enable bit, active low.
 \item 1 Read enable bit, active low.
@@ -229,7 +229,7 @@ Net antennas are traces that lead to dead-ends.
 Dead-ends could harm the design, since they can work as unwanted signal receivers from nearby sources.
 
 \subsubsection{Design Rule Check}
-Altium has it's own tool for testing how many design rule violations our current design created, called Design Rule Check.
+Altium contains a testing tool to mark violated design rules, the tool is called Design Rule Check.
 It displays the amount of errors occurred from each type, and the coordinates on the \gls{pcb} for every error.
 It has been frequently used during routing.
 
