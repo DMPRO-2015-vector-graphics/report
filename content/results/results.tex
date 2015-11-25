@@ -1,7 +1,7 @@
 \chapter{Results}
 The group ended up with a computer that managed to produce vector graphics according to design.
 This chapter presents the results of the project.
-The physical result is depicted i Figure \ref{fig:board-top}.
+The physical result is depicted in Figure \ref{fig:board-top}.
 The advanced tunnel program that was produced (see Appendix \ref{app:tunnel}), can be seen in action here: \href{https://vid.me/JEZv}{https://vid.me/JEZv} \cite{tunnel-demo}.
 
 \begin{figure}[h!]
@@ -13,7 +13,7 @@ The advanced tunnel program that was produced (see Appendix \ref{app:tunnel}), c
 \section{Memory}
 
 The final implementation utilizes \gls{bram} not only to store the scene, but the instructions for the CPU as well.
-This was done because to group was unable to get the SRAM chip that was on the three-way EBI bus to work properly.
+This was done because the group was unable to get the SRAM chip that was on the three-way EBI bus to work properly.
 Because of this the instructions for the CPU needs to be stored in the .bit file that programs the FPGA.
 
 The SRAM chip dedicated to frame-buffer was also left unused as the group did not find the time to implement a raster output module.
@@ -44,7 +44,7 @@ A measure of this is shown in Figure~\ref{fig:noise}.
 
 
 \section{Video Output}
-\vthreek was successful in drawing primitives to a a screen.
+\vthreek was successful in drawing primitives to a screen.
 Only one of the output modules, the analogue oscilloscope output, were realized.
 This section presents the results from this module.
 
@@ -61,7 +61,7 @@ In Figure \ref{fig:square}, one can see great improvement in the accuracy when d
 \subsubsection{Drawing Artefacts}
 \label{results:artefacts}
 Even though drawing to the oscilloscope looks nice, some artefacts were discovered.
-When the oscilloscope is done drawing one primitive and moves to the next the electron beam i still drawing,
+When the oscilloscope is done drawing one primitive and moves to the next the electron beam is still drawing,
 and weaker drawing lines may be visible.
 In other words all shapes are drawn without "lifting the pencil off the paper".
 If one take a closer look at Figure \ref{fig:artefact}, the drawing artefacts are visible.

@@ -30,14 +30,6 @@ This had to be avoided due to potential heat build-up, so the team repositioned 
 \label{fig:Dead copper}
 \end{figure}
 
-\subsection{Possible Routing Improvement}
-The auto router caused some wires to make long detours. 
-Manual routing of some signals could've shortened these distance, but was not critical to the design. 
-Wires in the same parallell buses should ideally have equal lengths, to ensure all signals in are synchronized. 
-Some wires in the \gls{ebi} bus, and the bus between the \gls{fpga} and the frame buffer, had varying lengths - potentially create race conditions. 
-No anomalies were discovered, and the team assumed it was not a problem. 
-However, modern general purpose computers should be careful to avoid these race conditions \cite{race-conditions}.
-
 \subsection{Bad Soldering}
 Some issues arised because of components not being properly soldered onto the \gls{pcb}. Examples are component pins with partial or no contact to the \gls{pcb}, and pins touching several footprint connectors.
 
@@ -127,5 +119,5 @@ Luckily, these did not act as connectors, and the team could therefore solder th
 
 \subsection{Component sizes}
 In hindsight, it would have been better to order bigger components. 
-Since this was a prototype board with mostly hand-soldering, an increase in size would only be beneficial. 
+Since this was a prototype board with mostly hand-soldering, an increase in size would only be beneficial, especially considering the \gls{dac}s, since they were so tiny. 
 Should the project should go into large scale production, the size could have been reduced.
