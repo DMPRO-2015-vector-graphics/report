@@ -1,9 +1,8 @@
 \chapter{Output Modules}
 \label{chap:Output}
 
-The output modules of the system is completely decoupled from the main processor, this is achieved by the dual port scene memory.
-Each output module reads from this memory and displays the data.
-Only one output module can be active at a time.
+The output of the system consistes of separate modules that handles different kind of output. This section will describe analogue and HDMI output.
+These modules are completely seperated from the main processor, and can read from scene memory independently.
 
 \section{Analogue Output}
 
@@ -44,4 +43,4 @@ The equation for these can be found in section \ref{sec:bezier}
 
 This output uses \gls{hdmi} to output a rasterized image of the internal vector representation.
 In order to generate the rasterized frame the x and y output from the vector output described in the previous section would be written into a frame-buffer.
-This buffer can then be scaled to the desired output resolution and run through //TODO: TMDS acro? TMDS encoder and output via HDMI.
+This buffer can then be scaled to the desired output resolution and then sent through a regular HDMI output with \gls{tmds} encoding.
