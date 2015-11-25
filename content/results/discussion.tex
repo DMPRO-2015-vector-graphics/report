@@ -35,6 +35,10 @@ Further improvements - which ultimately were not implemented due to time constra
 
 Before any actual coding and soldering, the group spent some time planning the architecture. It was argued that implementing floating point would better conform to the industry standards of vector calculation, and that it would offer more precise calculations.
 
+The auto router caused some wires to make long detours. 
+More manual routing of signals could've generally shortened these distances. 
+Wires in the same parallel buses should ideally have equal lengths, to ensure all signals in are synchronized. 
+
 The final implementation of the processor is a multi-cycle RISC/MIPS inspired processor.
 In this design, one instruction is executed each for second or third clock cycle.
 To increase the number of instructions per cycle, the processor could have been pipelined.
@@ -48,7 +52,3 @@ A toolchain to make it easier for programmers to program on the computer was not
 
 The \gls{isa} could have been extended, i.e. with convenient operations that would shorten the program length and solve unintuitive syntax.
 
-\subsection{Possible Routing Improvement}
-The auto router caused some wires to make long detours. 
-More manual routing of signals could've generally shortened these distances. 
-Wires in the same parallel buses should ideally have equal lengths, to ensure all signals in are synchronized. 
