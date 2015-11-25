@@ -1,7 +1,7 @@
 \chapter{Output Modules}
 \label{chap:Output}
 
-Generating visual output is an important requirement of the system \ref{sec:requirements}.
+Generating visual output is an important requirement of the system.
 This section will describe how analogue and HDMI output was realized.
 Output modules are almost completely separated from the main processor, and produce output by reading from the scene memory.
 
@@ -14,22 +14,26 @@ Output modules are almost completely separated from the main processor, and prod
 \end{figure}
 
 The primary output of the processor is the analogue output.
-This output is driven by two \gls{dac}s that converts digital data from the \gls{fpga} to voltages that represents x and y coordinates.
-The \gls{dac}s used are 16-bit which results in an effective resolution of 65536 by 65536 without taking into account the noise on the output voltage which is explained further in Section~\ref{sec:noise}.
+This output is driven by two \gls{dac}s that convert digital data stored in the scene memory to voltages that represent x and y coordinates.
+The \gls{dac}s used are 16-bit, which results in an effective resolution of 65536 by 65536 without taking into account the noise on the output voltage.
+This is elaborated on in Section~\ref{sec:noise}.
 These \gls{dac}s have a serial interface and needs 3 signals each to operate; data, clock, and a sync signal.
-In order to set an output value on a \gls{dac} the sync signal needs to be pulled from high to low then it needs 8 control bits followed by 16 data bits.
-After this, the sync signal need to be pulled high again in order to set the output value.
+In order to set an output value on a \gls{dac}, the sync signal needs to be pulled from high to low.
+Eight control bits are then transmitted followed by 16 data bits.
+After this, the sync signal needs to be pulled high again in order to set the output value.
 The sync signal can be pulled high before this in order to abort the operation.
-Clock and sync signal are shared between the \gls{dac}s in this system in order to make them change their output synchronously.
+Clock and sync signals are shared between the \gls{dac}s in order to make them change their output synchronously.
 
 \subsection{Operation}
 
-The output module send an address to the scene memory and gets a primitive back.
+The output module sends an address to the scene memory and gets a primitive back.
 There is also another input that keeps track of the number of primitives so the module can restart without reading unused primitives.
-It then decodes the primitive and forwards it to the appropriate module or reads a new primitive if no primitive was found and forwards the output of this module to the \gls{dac} serializer.
-The respective serializer will then calculate a fixed number of points along the line or curve.
+The primitive is then decoded and forwarded to the appropriate module.
+If a valid primitive is not able to be decoded, the read address is incremented and a new data is read from the scene memory.
+In the case where a valid primitive is found, it is forwarded to the serializer.
+The respective serializer will then calculate a fixed number of points along the line or curve described by the primitive data.
 A fixed number of points was chosen because there was no time to implement any functionality for calculating the lengths of lines or curves accurately.
-This will result in shorter lines and curves appearing brighter on the oscilloscope.
+This will cause shorter lines and curves to appear brighter on the oscilloscope.
 
 The actual calculation of the points is done by using the equations described in section \ref{sec:bezier}.
 However since there was no floating point unit, a number between 0 and 1023 was used instead of a number between 0 and 1, that was then left shifted by 5.
@@ -45,3 +49,6 @@ The equations for these can be found in Section \ref{sec:bezier}
 This output uses \gls{hdmi} to output a rasterized image of the internal vector representation.
 In order to generate the rasterized frame the x and y output from the vector output described in the previous section would be written into a frame-buffer.
 This buffer can then be scaled to the desired output resolution and then sent over a regular HDMI connection.
+
+Raster output was added as a medium priority requirement \ref{sec:requirements}, to be used as a backup solution if the group was unable to implement analogue output.
+Since the latter was implemented successfully, not much time was spent on implementing HDMI output.
