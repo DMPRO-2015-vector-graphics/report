@@ -22,7 +22,9 @@ Several auto routing attempts resulted in short-circuits caused by clearance con
 \subsubsection{Dead Copper}
 Dead copper is parts of the copper on a power plane that's isolated from the rest of the copper on that plane.
 This appeared several places on the \gls{pcb}. Normally a minimal problem, but some places a GND via or a 3.3V via was connected to dead copper on the corresponding power plane.
+
 Such issues need to be avoided due to potential heat build-up, so the team repositioned neighboring vias to rejoin the copper area with the rest of the copper plane. The issue and solution are described in figure \ref{fig:Dead copper}. The vias to the left creates unwanted dead copper. On the right side, the problem is solved by moving one via.
+
 
 \begin{figure}[h!]
 \centering
@@ -50,8 +52,13 @@ In the next sections, the most significant wiring issues are addressed and how t
 
 \subsubsection{Short-circuits in Buttons}
 The group discovered that the buttons were wired wrong, since they caused short-circuits.
+<<<<<<< HEAD
 The reason was sloppy study of the datasheet, as shown in figure \ref{fig:Button Issue}. The button to the left is wired correctly. The button to the right is wired wrong, causing a short-circuit.
 Luckily, this could be remedied by rotating the button 90 degrees, if adjusting the physical connectors to fit the footprint. 
+=======
+The reason was sloppy study of the datasheet, as shown in Figure \ref{fig:Button Issue}.
+Luckily, this could be remedied by rotating the button 90 degrees, if adjusting the physical connectors to fit the footprint.
+>>>>>>> 9f2f654c5eba881d150b98dce2f86f5be96680c0
 
 \begin{figure}[h!]
 \centering
@@ -87,7 +94,7 @@ An unnecessary connection to \(V_{CC}\) forced the Done signal into the \gls{mcu
 Since the \(V_{CC}\) connection couldn't be removed, a workaround had to be devised.
 
 By introducing a transistor, and making the signal active low on the \gls{mcu} side, the group managed to make the \gls{mcu} notice when configuration was complete.
-The problem and solution is shown in detail in figure \ref{fig:Done Issue}.
+The problem and solution is shown in detail in Figure \ref{fig:Done Issue}.
 This solution was possible because the wire went through the \gls{jtag} header.
 
 \begin{figure}[h!]

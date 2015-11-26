@@ -35,7 +35,7 @@ The respective serializer will then calculate a fixed number of points along the
 A fixed number of points was chosen because there was no time to implement any functionality for calculating the lengths of lines or curves accurately.
 This will cause shorter lines and curves to appear brighter on the oscilloscope.
 
-The actual calculation of the points is done by using the equations described in section \ref{sec:bezier}.
+The actual calculation of the points is done by using the equations described in Section \ref{sec:bezier}.
 However since there was no floating point unit, a number between 0 and 1023 was used instead of a number between 0 and 1, that was then left shifted by 5.
 \(t\) then becomes \(t = i \ll 5\), (\(0 \leq i < 1024\)).
 After every multiplication the result is then right shifted by 15.
@@ -50,5 +50,5 @@ This output uses \gls{hdmi} to output a rasterized image of the internal vector 
 In order to generate the rasterized frame the x and y output from the vector output described in the previous section would be written into a frame-buffer.
 This buffer can then be scaled to the desired output resolution and then sent over a regular HDMI connection.
 
-Raster output was added as a medium priority requirement \ref{sec:requirements}, to be used as a backup solution if the group was unable to implement analogue output.
+Raster output was added as a medium priority requirement, listed in Section \ref{sec:requirements}, to be used as a backup solution if the group was unable to implement analogue output.
 Since the latter was implemented successfully, not much time was spent on implementing HDMI output.
