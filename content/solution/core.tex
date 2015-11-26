@@ -6,7 +6,7 @@ This chapter elaborates on how the processor core is designed, focusing especial
 \section{The \vthreek processor}
 
 The processor core is the main processing and control unit in the \vthreek architecture.
-As depicted in figure \ref{fig:system-overview}, the processor core reads instructions from the instruction memory, and writes/reads data to/from the data and scene memories.
+As depicted in Figure \ref{fig:system-overview}, the processor core reads instructions from the instruction memory, and writes/reads data to/from the data and scene memories.
 The processor core is designed as a multi-cycle, MIPS-inspired processor with features added to support processing of vector graphics.
 When planning which features to include and which techniques to utilize, the group considered features like pipelining and even multicore designs to improve performance.
 In the end, the decision was made to make the initial design simple, but keep efficiency and performance in mind.
@@ -131,7 +131,7 @@ Additionally, it supports a number of operations associated with vector primitiv
 For the initialization instructions, \texttt{line}, \texttt{bezquad} and \texttt{bezcube}, coordinates read from the general purpose registers are assembled into primitives.
 \texttt{getp\{1,2,3,4\}} and \texttt{setp\{1,2,3,4\}} work on individual parts of a primitive.
 
-As shown in figure \ref{fig:ALU}, the unit also receives an immediate value, taken straight from the decoded instruction, and a control signal, \texttt{op}, which determines the operation to be performed.
+As shown in Figure \ref{fig:ALU}, the unit also receives an immediate value, taken straight from the decoded instruction, and a control signal, \texttt{op}, which determines the operation to be performed.
 
 \subsection{Data and Scene Memories}
 
@@ -140,7 +140,7 @@ Data words in scene memory are 136 bits wide, with space for 1024 words.
 To allow for the rather unusual word size as well as allowing both the processor core and the output module to interface with the scene memory simultaneously, the scene memory was instantiated as a block RAM on the FPGA.
 Words in general data memory are 32 bits wide.
 Their input address bus determines either which address to read from or write to.
-The \texttt{write\_enable} control signal specifies wether a read or write should be performed.
+The \texttt{write\_enable} control signal specifies whether a read or write should be performed.
 
 \begin{figure}[h!]
     \centering

@@ -30,7 +30,7 @@ It is important to wait for this signal, because the state of any signal connect
 This could possibly interfere with the \gls{mcu} writing to \gls{sram}.
 
 Once the \gls{fpga} is flashed and ready, the \gls{mcu} de-asserts the processor enable signal, to prevent it from start reading from \gls{sram} prematurely.
-The \gls{mcu} then writes the program to \gls{sram}, starting at address \texttt{0x0000}, writing 16 bits at a time. The function responsible for this task is listed in \ref{fig:write_program}.
+The \gls{mcu} then writes the program to \gls{sram}, starting at address \texttt{0x0000}, writing 16 bits at a time. The function responsible for this task is listed in Listing \ref{fig:write_program}.
 When complete, the processor enable signal is asserted, and the processor will begin fetching instructions.
 
 \begin{figure}

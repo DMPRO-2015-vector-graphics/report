@@ -43,7 +43,7 @@ For \texttt{ldr}, the register is the register in which the data at the address 
 Similarily, for \texttt{str}, the data in the register is stored at the address.
 
 Moving data into registers can also be done using the \texttt{mov}, \texttt{movl} and \texttt{movu} instructions.
-Since both registers and instructions are 32 bits, all values that are possible to store in registers can't be encoded into an instructions.
+Since both registers and instructions are 32 bits, all values that are possible to store in registers can not be encoded into an instructions.
 Move instructions share the same syntax, \texttt{<op> <register> \#<16-bit immediate>}.
 \texttt{mov} sets the upper 16 bits of the specified register to zero and the lower 16 bits to the immediate value.
 \texttt{movl} sets the lower 16 bits of the register to the specified value, leaving the upper 16 bits unchanged, and \texttt{movu} vice versa.
