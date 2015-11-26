@@ -90,17 +90,13 @@ An unnecessary connection to \(V_{CC}\) forced the Done signal into the \gls{mcu
 Since the \(V_{CC}\) connection couldn't be removed, a workaround had to be devised.
 
 By introducing a transistor, and making the signal active low on the \gls{mcu} side, the group managed to make the \gls{mcu} notice when configuration was complete.
-The problem and solution is shown in detail in Figure \ref{fig:Done Issue}.
+The problem and solution is shown in detail in Figure \ref{fig:Done Issue}. The top drawing is the initial problem, and on the bottom the solutions is displayed.
 This solution was possible because the wire went through the \gls{jtag} header.
 
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=0.5]{images/Done_Signal_Issue.png}
-\caption{Problem and solution of Done signal
-         \newline
-         Top: Done signal into \gls{mcu} was always logical high
-         \newline
-         Bottom: Done signal into \gls{mcu} was now active low. The transistor was activated when the configuration was complete, forcing the 3.3V to ground.}
+\caption{Problem and Solution of Done signal.}
 \label{fig:Done Issue}
 \end{figure}
 
