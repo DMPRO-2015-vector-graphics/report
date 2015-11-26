@@ -3,7 +3,7 @@
 This chapter describes the physical component and the implementation of the \gls{pcb}.
 
 \section{Architecture}
-The envisioned execution path, shown in figure \ref{fig:PCB_Overview} gives a good idea to what considerations had to be taken when designing the \gls{pcb} and selecting components.
+The envisioned execution path, shown in Figure \ref{fig:PCB_Overview} gives a good idea to what considerations had to be taken when designing the \gls{pcb} and selecting components.
 
 \begin{enumerate}
 \item Assembled \vthreek programs are loaded into instruction memory via the EFM32 microcontroller.
@@ -31,7 +31,7 @@ Critical components in the design are described in the following subsections.
 The \gls{mcu} is the EFM32GG microcontroller described in Chapter~\ref{ch:mcu}.
 
 \subsection{FPGA}
-The \gls{fpga} is a Xilinx XC6SLX45-2CSG324I, with 401 kb block \gls{ram}.
+The \gls{fpga} is a Xilinx XC6SLX45-2CSG324I, with 401 kb \gls{bram}.
 It serves as the main processor in the design, fetching and executing instructions from instruction memory.
 
 A \gls{jtag} header is connected to the \gls{fpga} for good accessibility to \gls{fpga} debugging and programming.
@@ -55,8 +55,8 @@ There is one \gls{dac} and one \gls{bnc} for both the x-coordinate and the y-coo
 
 \subsection{Oscillators}
 Two external oscillators are connected to the \gls{mcu}: one low frequency (32,768kHz), and one high frequency (48MHz).
-The \gls{mcu} already contains internal RC-oscillators, but external oscillators are much more accurate and stable than the internal ones, which is important for avoiding more sources of errors.
-Both crystals or full-fledged oscillators can be used. The team decided to use oscillators.
+The \gls{mcu} already contains internal RC-oscillators, but crystals or ceramic oscillators are much more accurate than RC oscillators \cite{oscillators}, which is important for avoiding additional sources of errors.
+The team decided to use external ceramic oscillators.
 The reason behind this choice was that an oscillator is one fully built component with all the necessary circuitry inside, and the datasheet clearly specified how it should be connected.
 Crystals, on the other hand, requires load capacitors, whose values weren't properly specified.
 Another reason is that the \gls{fpga} explicitly needed an external oscillator, as a crystal is incompatible with the design.
@@ -100,7 +100,7 @@ The \gls{pcb} will receive power from a micro-\gls{usb} connector.
 A voltage level of 5V is sufficient, since no components require more than this.
 However, plenty of components require less than 5V, most of them 3.3V.
 To lower the voltage to a specific level, voltage regulators are used.
-Power is discussed in more detail in section \ref{Power}.
+Power is discussed in more detail in Section \ref{Power}.
 
 \subsection{Decoupling Capacitors}
 Several major components requires decoupling, e.g. the \gls{mcu}, \gls{fpga}, voltage regulators and \gls{dac}s.
@@ -120,7 +120,7 @@ Making the right connections and pin mappings is the only thing that matters in 
 That means there was no focus on physical \gls{pcb}-specific things, e.g. routing and component placement.
 
 When the schematics were completed, the team moved on to design the physical \gls{pcb}.
-The complete schematics are in appendix \ref{app:schematics}.
+The complete schematics are in Appendix \ref{app:schematics}.
 
 \subsection{Component Placement}
 Components are placed on the \gls{pcb}, so that they are in close range of all other components they have to connect with.
@@ -131,7 +131,7 @@ The \gls{fpga}, \gls{sram}s and \gls{mcu} are the most important components with
 It would also be annoying to connect external peripheral plugs to sockets in the middle of the \gls{pcb}.
 
 All decoupling capacitors involved in the decoupling network for a certain component, are placed in close proximity to that component.
-This minimizes the risk that the component won't get the extra power supply it needs during bursts.
+This minimizes the risk that the component will not get the extra power supply it needs during bursts.
 
 All capacitors and resistors are placed on the bottom layer of the \gls{pcb} to save space on an already crowded top layer.
 
@@ -144,7 +144,7 @@ Alternative footprints have been found using the Altium Vault, which the team us
 \subsection{Layers}
 The \gls{pcb} consist of six signal layers: Top layer, bottom layer and four in between.
 Two power layers are utilized: \(V_{CC}\) and ground.
-Between every signal and power layer, a dielectric layer are added to ensure proper isolation between these conducting layers, such that they won't interfere with each other.
+Between every signal and power layer, a dielectric layer are added to ensure proper isolation between these conducting layers, such that they will not interfere with each other.
 
 An overlay is added to both the top and bottom layers.
 Each overlay contains silk-screen for marking components, thus making it easier to navigate the \gls{pcb}.
@@ -262,9 +262,8 @@ For instance, 3-pin headers are used to manually turn on and off different volta
 Power can also be delivered to the components directly through the headers, if any issue with the power supply should occur.
 
 \subsection{DACs}
-Even though separate \gls{dac}s for outputting analog voltage out to the \gls{bnc} plug are included, there is still a risk that the group won't get them to work.
-A back-up solution by connecting the internal \gls{dac}s in the \gls{mcu} to the \gls{bnc}s is implemented.
-One 2x2 header for each \gls{bnc} input is used to manually control whether the main \gls{dac}s or the \gls{mcu} \gls{dac}s will to be used.
+A back-up solution is included for the DACs in case they do not work, which involves the MCU's internal DACs \cite[ch. 29]{efm32referencemanual}.
+One 2x2 header for each \gls{bnc} input is used to manually control whether the main \gls{dac}s or the \gls{mcu}'s internal \gls{dac}s will be used.
 This process is shown in figure \ref{fig:DAC headers}.
 There's one header each for the X and the Y signal to the oscilloscope.
 
