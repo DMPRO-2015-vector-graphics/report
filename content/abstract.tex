@@ -1,11 +1,11 @@
 \begin{abstract}
 
 \vthreek is a general purpose, vector graphics processor. 
-The processor is implemented on a Xilinx \gls{fpga} and the system as a whole realised on a custom made PCB.
+The architecture is implemented on a Xilinx \gls{fpga} using a Silicon Labs EFM32 series microcontroller as an I/O processor.
 Support for integer arithmetic, data movement, conditional execution and reading/writing from/to a data memory is implemented.
 \vthreek also has special purpose instructions for working with vector graphics as well as a separate memory representing a scene.
 The system produces an analogue two-coordinate output that can be shown on any display supporting X,Y input.
-\vthreek is realized on a \gls{pcb}, and was verified using both software simulations and physical testing.
+\vthreek is realized on a custom \gls{pcb}, and was verified using both software simulations and physical testing.
 
 A demo program was written for \vthreek in its custom made \gls{isa}.
 This program executed correctly and showed vector output on an analogue oscilloscope with a vector display.
