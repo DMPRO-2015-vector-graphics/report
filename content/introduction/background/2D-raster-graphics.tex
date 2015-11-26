@@ -3,12 +3,13 @@ Raster graphics are also known as bitmap graphics, and consist of a two-dimensio
 A bitmap image is often represented in the RGB color scheme - that is where you define different levels of red, green and blue for each pixel until you are able to render the correct color.
 
 To display a full image, the computer needs to store \( (width \times height) \times RGB \) bits.
-Today, \gls{rgb} usually contains 3 bytes, one byte for each color, and a resolution of \(1920 \times 1080\) pixels (Full HD) is becoming the standard.
-With Full HD resolution, a single image therefore requires about 6 MB to be stored.
+Today, \gls{rgb} usually contains 3 bytes, one byte for each color.
+Modern computer screens commonly have resolutions of \(1920 \times 1080\) pixels (Full HD) or higher.
+With Full HD resolution, a single image requires about 6 MB to be stored.
 There exists method to compress images, such as different file formats.
 However, raster images still use a significant amount of storage space.
 
-A benefit by using raster graphics is that it can be used to store any image, and still keep almost any level of detail intact.
-If a higher level of detail in an images is needed, the pixel count may be increased, but the original image has to be rasterized over again.
+A benefit of using raster graphics is that images of real life can be represented in great detail, given a high enough pixel count.
+If a higher level of detail in an image is needed, the image can be redrawn, regenerated or photographed again in a larger resolution.
 A common use case is storing photographs and images used on the web.
 In today's computing world, raster graphics is the dominating paradigm, and almost all digital 2D graphics you encounter are stored in a rasterized format, such as \texttt{.jpeg}, \texttt{.png} and \texttt{.gif}.
