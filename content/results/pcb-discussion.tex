@@ -22,12 +22,12 @@ Several auto routing attempts resulted in short-circuits caused by clearance con
 \subsubsection{Dead Copper}
 Dead copper is parts of the copper on a power plane that's isolated from the rest of the copper on that plane.
 This appeared several places on the \gls{pcb}. Normally a minimal problem, but some places a GND via or a 3.3V via was connected to dead copper on the corresponding power plane.
-Such issues need to be avoided due to potential heat build-up, so the team repositioned neighboring vias to rejoin the copper area with the rest of the copper plane. The issue and solution are described in figure \ref{fig:Dead copper}.
+Such issues need to be avoided due to potential heat build-up, so the team repositioned neighboring vias to rejoin the copper area with the rest of the copper plane. The issue and solution are described in figure \ref{fig:Dead copper}. The vias to the left creates unwanted dead copper. On the right side, the problem is solved by moving one via.
 
 \begin{figure}[h!]
 \centering
 \includegraphics[scale = 0.4]{images/Dead_Copper.png}
-\caption{Dead Copper. To the right, dead copper is avoided by moving one via.}
+\caption{Dead Copper.}
 \label{fig:Dead copper}
 \end{figure}
 
@@ -50,13 +50,13 @@ In the next sections, the most significant wiring issues are addressed and how t
 
 \subsubsection{Short-circuits in Buttons}
 The group discovered that the buttons were wired wrong, since they caused short-circuits.
-The reason was sloppy study of the datasheet, as shown in figure \ref{fig:Button Issue}.
-Luckily, this could be remedied by rotating the button 90 degrees, if adjusting the physical connectors to fit the footprint.
+The reason was sloppy study of the datasheet, as shown in figure \ref{fig:Button Issue}. The button to the left is wired correctly. The button to the right is wired wrong, causing a short-circuit.
+Luckily, this could be remedied by rotating the button 90 degrees, if adjusting the physical connectors to fit the footprint. 
 
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=0.5]{images/Button_Issue.png}
-\caption{Top figure shows the button as it looks like on the \gls{pcb}. On the left: Correct wiring according to datasheet. On the right: Incorrect wiring leading to short-circuit}
+\caption{Short-circuits in Buttons.}
 \label{fig:Button Issue}
 \end{figure}
 
