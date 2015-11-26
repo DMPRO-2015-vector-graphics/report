@@ -156,7 +156,6 @@ Having examined how instruction, data words and primitives move through the syst
 
 Every time a new instruction is read, it is decoded and relevant parts fed into a control unit.
 Depending on the instruction, the unit sets its output control signals so that the modules they control behave as desired.
-Figure \ref{fig:controlpath} shows how control signals are routed.
 Table \ref{tbl:control-signals} lists all control signals and their functionalities.
 
 The control unit maintains processor state.
@@ -172,12 +171,6 @@ In the case of a stall, the control signals are maintained until the word to be 
 The final functionality implemented in the control unit is a primitive counter.
 All instructions that either add new or remove existing instructions in the scene memory cause the counter to be incremented or decremented respecively.
 This signal is used in the output module.
-
-\begin{figure}[h!]
-    \includegraphics[width=\linewidth]{images/Control_signals.png}
-    \caption{RTL sketch of the control path.}
-    \label{fig:controlpath}
-\end{figure}
 
 \begin{figure}[h!]
     \centering
