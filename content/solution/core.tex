@@ -144,7 +144,7 @@ The \texttt{write\_enable} control signal specifies whether a read or write shou
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.8\linewidth]{images/data-scene-memories.png}
+    \includegraphics[width=0.9\linewidth]{images/data-scene-memories.png}
     \caption{I/O for data and scene memory modules.}
     \label{fig:data-scene-memories}
 \end{figure}
@@ -154,7 +154,7 @@ The \texttt{write\_enable} control signal specifies whether a read or write shou
 
 Having examined how instruction, data words and primitives move through the system, this section elaborates on the how the various components involved in the data path are controlled, and what determines their behavior.
 
-Every time a new instruction is read, it is decoded and relevant parts fed into a control unit. 
+Every time a new instruction is read, it is decoded and relevant parts fed into a control unit.
 Depending on the instruction, the unit sets its output control signals so that the modules they control behave as desired.
 Figure \ref{fig:controlpath} shows how control signals are routed.
 Table \ref{tbl:control-signals} lists all control signals and their functionalities.
@@ -181,12 +181,13 @@ This signal is used in the output module.
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.6\linewidth]{images/state-machine.png}
+    \includegraphics[width=0.7\linewidth]{images/state-machine.png}
     \caption{Processor core state machine.}
     \label{fig:state-machine}
 \end{figure}
 
 \begin{table}
+    \centering
     \begin{tabular}{|p{5cm}|p{7cm}|}
         \hline
         Signal             & Description                                                                                                                 \\ \hline
