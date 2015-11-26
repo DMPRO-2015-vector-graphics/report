@@ -36,7 +36,9 @@ Before any actual coding and soldering, the group spent some time planning the a
 
 The auto router caused some wires to make long detours.
 More manual routing of signals could've generally shortened these distances.
-Wires in the same parallel buses should ideally have equal lengths, to ensure all signals in are synchronized.
+Wires in the same parallel buses should ideally have equal lengths, to ensure all signals in it are synchronized. 
+Failure to do so could result in race conditions \cite{race-conditions}. 
+This was not critical, and was thus not implemented.
 
 The final implementation of the processor is a multi-cycle RISC/MIPS inspired processor.
 In this design, one instruction is executed each for second or third clock cycle.
