@@ -21,7 +21,7 @@ Its primary tasks are:
 \item Controlling the status of the processor
 \end{itemize}
 
-\subsection{Loading program}
+\subsection{Loading Program}
 In order for the processor to do anything useful, a program is needed.
 The program is contained within a header file in the \gls{mcu} flash.
 After the MCU has booted and initialized the subsystems it utilizes, it will wait for a \texttt{Done} signal from the processor.
@@ -40,7 +40,7 @@ When complete, the processor enable signal is asserted, and the processor will b
 	\label{fig:write_program}
 \end{figure}
 
-\subsection{Buttons and joystick}
+\subsection{Buttons and Joystick}
 The board is equipped with two push buttons and a 5-way joystick, connected to the \gls{mcu}'s \gls{gpio} pins.
 These inputs can be programmed to do anything, but was initially designed for controlling pan and zoom of the primitives.
 A more useful functionality for one button was discovered to be soft resetting the processor.
