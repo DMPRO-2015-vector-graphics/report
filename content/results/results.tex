@@ -3,7 +3,7 @@
 The group created a computer capable of vector graphics processing and display according to design.
 This chapter presents the results of the project.
 The physical result is depicted in Figure \ref{fig:board-top}.
-The advanced tunnel program that was produced (see Appendix \ref{app:tunnel}), can be seen in action here: \href{https://vid.me/JEZv}{https://vid.me/JEZv} \cite{tunnel-demo}.
+One of the demonstration programs that were produced (see Appendix \ref{app:tunnel}), can be seen in action here: \href{https://vid.me/JEZv}{https://vid.me/JEZv} \cite{tunnel-demo}.
 
 \begin{figure}[h!]
 	    \includegraphics[width=\linewidth]{images/board_top.jpg}
@@ -24,15 +24,15 @@ The SRAM chip dedicated to frame-buffer was also left unused as the group did no
 The maximum clock frequency of the DACs is 30MHz according to the datasheet \cite{dac-datasheet}.
 To update the DAC value a total of 25 clock cycles are required.
 As a result the theoretical effective maximum output will be \(30 MHz \div 25 = 1.2 MHz \).
-However during testing the group experience incorrect \gls{dac} values if the clock were set higher than 20 MHz.
-With a clock frequency of 20 MHz the maximum output is 800 KHz.
+However, during testing the group experienced incorrect \gls{dac} values if the clock was set higher than 20 MHz.
+With a clock frequency of 20 MHz the maximum output rate of the system is 800 KHz.
 
 The CPU can be clocked significantly faster than it is in the current design, but since the output module needs to be run at 20 MHz this was chosen for the CPU as well for simplicity.
 At 20 MHz the CPU is still more than fast enough to update primitives in order to achieve smooth animations, so busy loops was introduced in the primitive update procedures in order to slow the update rate down.
 
 \section{Noise}
 \label{sec:noise}
-As the main output is analogue it is susceptible to electronic noise. This noise represents itself as unwanted changes in voltage. 
+As the main output is analogue it is susceptible to electronic noise. This noise presents itself as unwanted changes in voltage. 
 The system was design to have as little noise as possible, and under operation the mean noise on the signal is around 40mV.
 A measure of this is shown in Figure~\ref{fig:noise}.
 
@@ -66,8 +66,6 @@ However this is barley visible on the small 8 by 10 cm monitor on the Tektronix 
 		 log_2 ( 800 ) \approx 9 bit \\
 	\end{equation}
 \end{cequation}
-
-
 
 \section{Video Output}
 \vthreek was successful in drawing primitives to a screen.
@@ -137,7 +135,7 @@ This results in dotted lines, shown in Figure \ref{fig:dotx4} and \ref{fig:dotx8
 
 \subsection{HDMI}
 Rasterisation and \gls{hdmi} were not implemented.
-The intention of this part was to demonstrate the difference between vector and raster output in real-time.
+The intention of this part was to be a backup solution for visual output as well as to demonstrate the difference between vector and raster output in real-time.
 However, these parts of the system were no longer prioritized when the analogue counterpart proved to be a reliable source of output.
 Moreover, this part was a medium priority requirement, listed in Table \ref{tbl:non_func_req}, and thus not a critical part of \vthreek.
 
