@@ -55,8 +55,8 @@ There is one \gls{dac} and one \gls{bnc} for both the x-coordinate and the y-coo
 
 \subsection{Oscillators}
 Two external oscillators are connected to the \gls{mcu}: one low frequency (32,768kHz), and one high frequency (48MHz).
-The \gls{mcu} already contains internal RC-oscillators, but external oscillators are much more accurate and stable than the internal ones, which is important for avoiding more sources of errors.
-Both crystals or full-fledged oscillators can be used. The team decided to use oscillators.
+The \gls{mcu} already contains internal RC-oscillators, but crystals or ceramic oscillators are much more accurate than RC oscillators \cite{oscillators}, which is important for avoiding additional sources of errors.
+The team decided to use external ceramic oscillators.
 The reason behind this choice was that an oscillator is one fully built component with all the necessary circuitry inside, and the datasheet clearly specified how it should be connected.
 Crystals, on the other hand, requires load capacitors, whose values weren't properly specified.
 Another reason is that the \gls{fpga} explicitly needed an external oscillator, as a crystal is incompatible with the design.
@@ -262,9 +262,8 @@ For instance, 3-pin headers are used to manually turn on and off different volta
 Power can also be delivered to the components directly through the headers, if any issue with the power supply should occur.
 
 \subsection{DACs}
-Even though separate \gls{dac}s for outputting analog voltage out to the \gls{bnc} plug are included, there is still a risk that the group won't get them to work.
-A back-up solution by connecting the internal \gls{dac}s in the \gls{mcu} to the \gls{bnc}s is implemented.
-One 2x2 header for each \gls{bnc} input is used to manually control whether the main \gls{dac}s or the \gls{mcu} \gls{dac}s will to be used.
+A back-up solution is included for the DACs in case they do not work, which involves the MCU's internal DACs \cite[ch. 29]{efm32referencemanual}.
+One 2x2 header for each \gls{bnc} input is used to manually control whether the main \gls{dac}s or the \gls{mcu}'s internal \gls{dac}s will be used.
 This process is shown in figure \ref{fig:DAC headers}.
 There's one header each for the X and the Y signal to the oscilloscope.
 
